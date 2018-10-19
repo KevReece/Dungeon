@@ -1,0 +1,8 @@
+<div>
+  <div *ngFor="let row of mapGrid.Rows">
+    <div *ngFor="let cell of row.cells">
+      {{showCell(cell)}}
+    </div>
+    <br/>
+  </div>
+</div>

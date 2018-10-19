@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserConsoleComponent } from './user-console/user-console.component';
 import { CharactorComponent } from './charactor/charactor.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserConsoleComponent,
-    CharactorComponent
+    CharactorComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
