@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserConsoleComponent } from './user-console/user-console.component';
+import { CharactorComponent } from './charactor/charactor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserConsoleComponent
+    UserConsoleComponent,
+    CharactorComponent
   ],
   imports: [
     BrowserModule,

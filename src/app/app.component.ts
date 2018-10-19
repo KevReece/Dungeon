@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Charactor } from './model/charactor.model';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Dungeon';
-  consoleLines = ['AppComponent started']
+  consoleLines = ['AppComponent started'];
+  charactor = new Charactor();
 
   constructor(){
     this.consoleLines.push('AppComponent constructor started')
