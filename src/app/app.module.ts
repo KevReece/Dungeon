@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { UserConsoleComponent } from './user-console/user-console.component';
 import { CharactorComponent } from './charactor/charactor.component';
 import { MapComponent } from './map/map.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MapBuilderService } from './map-builder.service';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,10 @@ import { MapComponent } from './map/map.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [MapBuilderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
