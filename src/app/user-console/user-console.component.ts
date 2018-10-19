@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-user-console',
@@ -7,13 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserConsoleComponent implements OnInit {
 
-  lines: string[] = []
+  @Input() lines: string[];
 
   constructor() { 
-    this.lines.push("constructor called")
   }
 
   ngOnInit() {
-    this.lines.push("ngOnInit called")
   }
 }

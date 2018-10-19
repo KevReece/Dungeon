@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Dungeon';
+  consoleLines = ['AppComponent started']
+
+  constructor(){
+    this.consoleLines.push('AppComponent constructor started')
+  }
 }
