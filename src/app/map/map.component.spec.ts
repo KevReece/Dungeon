@@ -2,6 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MapComponent } from './map.component';
 import { MapGrid } from '../model/map-grid.model';
+import { Row } from '../model/row.model';
+import { Wall } from '../model/wall.model';
+import { Floor } from '../model/floor.model';
 
 describe('MapComponent', () => {
   let component: MapComponent;
@@ -17,11 +20,39 @@ describe('MapComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MapComponent);
     component = fixture.componentInstance;
-    component.mapGrid = new MapGrid()
+    component.mapGrid = buildTestMapGrid();
     fixture.detectChanges();
   });
 
+  var buildTestMapGrid = function(){
+    let wallRow = new Row([new Wall()]);
+    let multipleWallRow = new Row([new Wall(), new Wall()]);
+    let floorRow = new Row([new Floor()]);
+    let mixedRow = new Row([new Floor(), new Wall(), new Floor(), new Wall()]);
+    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow]);
+  }
+
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render a wall cell', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('tr:nth-of-type(1)').querySelector('td').textContent).toBe('X');
+  });
+  
+  it('should render multiple wall cells in row', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('tr:nth-of-type(2)').textContent).toBe('XX');
+  });
+
+  it('should render an empty floor cell', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('tr:nth-of-type(3)').querySelector('td').textContent).toBe(' ');
+  });
+
+  it('should render a mixed cells row', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('tr:nth-of-type(4)').textContent).toBe(' X X');
   });
 });

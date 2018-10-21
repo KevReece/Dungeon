@@ -13,7 +13,7 @@ export class MapBuilderService {
   constructor(private httpClient: HttpClient) { }
 
   getMapGrid(){
-    let mapGrid = new MapGrid();
+    let mapGrid = new MapGrid([]);
     this.httpClient.get('assets/maps/1.map', {responseType: 'text'})
       .subscribe((response) => this.buildGridFromFile(response, mapGrid))
     return mapGrid;
@@ -21,15 +21,15 @@ export class MapBuilderService {
 
   buildGridFromFile(file, mapGrid){
     file.split('\n').forEach(rowString => {
-      let row = new Row();
+      let rowCells = [];
       rowString.split('').forEach(cellChar => {
         if (cellChar == 'X'){
-          row.cells.push(new Wall());
+          rowCells.push(new Wall());
         } else {
-          row.cells.push(new Floor());
+          rowCells.push(new Floor());
         }
       });
-      mapGrid.Rows.push(row);
+      mapGrid.rows.push(new Row(rowCells));
     });
   }
 }

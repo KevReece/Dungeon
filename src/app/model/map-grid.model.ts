@@ -1,5 +1,8 @@
 import { Row } from "./row.model";
 
 export class MapGrid {
-    Rows: Row[] = [];
+    constructor(rows: Row[]){
+        this.rows = rows;
+    }
+    rows: Row[];
 }

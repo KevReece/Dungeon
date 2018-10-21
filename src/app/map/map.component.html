@@ -1,7 +1,5 @@
 <table>
-  <tr *ngFor="let row of mapGrid.Rows">
-    <td *ngFor="let cell of row.cells">
-      {{showCell(cell)}}
-    </td>
+  <tr *ngFor="let row of mapGrid.rows">
+    <td *ngFor="let cell of row.cells">{{showCell(cell)}}</td>
   </tr>
 </table>
