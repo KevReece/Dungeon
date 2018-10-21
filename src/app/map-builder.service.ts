@@ -14,7 +14,7 @@ export class MapBuilderService {
 
   getMapGrid(){
     let mapGrid = new MapGrid();
-    this.httpClient.get('assets/maps/basic.map', {responseType: 'text'})
+    this.httpClient.get('assets/maps/1.map', {responseType: 'text'})
       .subscribe((response) => this.buildGridFromFile(response, mapGrid))
     return mapGrid;
   }
