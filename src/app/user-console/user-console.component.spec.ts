@@ -16,6 +16,7 @@ describe('UserConsoleComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UserConsoleComponent);
     component = fixture.componentInstance;
+    component.lines = []
     fixture.detectChanges();
   });
 

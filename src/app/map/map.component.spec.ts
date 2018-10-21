@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MapComponent } from './map.component';
+import { MapGrid } from '../model/map-grid.model';
 
 describe('MapComponent', () => {
   let component: MapComponent;
@@ -16,6 +17,7 @@ describe('MapComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MapComponent);
     component = fixture.componentInstance;
+    component.mapGrid = new MapGrid()
     fixture.detectChanges();
   });
 
