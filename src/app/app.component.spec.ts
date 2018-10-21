@@ -3,10 +3,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MapBuilderService } from './map-builder.service';
+import { MapGrid } from './model/map-grid.model';
 
 describe('AppComponent', () => {
+  let mockMapGrid = new MapGrid([]);
+  let mockMapBuilderService  = { getMapGrid: {} };
+  
   beforeEach(async(() => {
-    let mockMapBuilderService  = { getMapGrid: function(){} };
+    spyOn(mockMapBuilderService, 'getMapGrid').and.returnValue(mockMapGrid);
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
@@ -38,5 +42,25 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to Dungeon!');
+  });
+  
+  it('should have initial charactor', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    expect(fixture.componentInstance.charactor.attack).toBe(1);
+    expect(fixture.componentInstance.charactor.defence).toBe(1);
+    expect(fixture.componentInstance.charactor.experience).toBe(0);
+    expect(fixture.componentInstance.charactor.gold).toBe(0);
+    expect(fixture.componentInstance.charactor.health).toBe(10);
+    expect(fixture.componentInstance.charactor.level).toBe(1);
+  });
+  
+  it('should have initial console lines', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    expect(fixture.componentInstance.consoleLines[0]).toContain('Welcome');
+  });
+  
+  it('should have built map grid', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    expect(fixture.componentInstance.mapGrid).toBe(mockMapGrid);
   });
 });

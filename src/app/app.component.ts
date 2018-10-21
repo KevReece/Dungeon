@@ -10,12 +10,11 @@ import { MapBuilderService } from './map-builder.service';
 })
 export class AppComponent {
   title = 'Dungeon';
-  consoleLines = ['AppComponent started'];
+  consoleLines = ['Welcome to dungeon!'];
   charactor = new Charactor();
   mapGrid: MapGrid;
 
   constructor(private mapBuilderService: MapBuilderService){
-    this.consoleLines.push('AppComponent constructor started')
     this.mapGrid = mapBuilderService.getMapGrid();
   }
 }
