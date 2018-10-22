@@ -13,10 +13,10 @@ jobs:
           key: dungeon-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - "node_modules"
-      - run: ng lint
-      - run: ng test
-      - run: ng e2e
-      - run: ng build --prod
+      - run: npm lint
+      - run: npm test
+      - run: npm e2e
+      - run: npm build-prod
       - save_cache:
           key: dungeon-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
           paths:
