@@ -12,14 +12,17 @@ export class MapBuilderService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getMapGrid(){
+  getMapGrid(onCompleteFunction?: Function){
     let mapGrid = new MapGrid([]);
     this.httpClient.get('assets/maps/1.map', {responseType: 'text'})
-      .subscribe((response) => this.buildGridFromFile(response, mapGrid))
+      .subscribe((response) => {
+        this.buildGridFromFile(response, mapGrid);
+        if (onCompleteFunction) onCompleteFunction();
+      })
     return mapGrid;
   }
 
-  buildGridFromFile(file, mapGrid){
+  private buildGridFromFile(file, mapGrid){
     file.split('\n').forEach(rowString => {
       let rowCells = [];
       rowString.split('').forEach(cellChar => {
