@@ -10,6 +10,5 @@ export class Charactor implements ICellItem {
     defence = 1;
 
     act(direction: Direction) {
-        
     }
 }

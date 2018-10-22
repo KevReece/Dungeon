@@ -15,19 +15,19 @@ export class ControllerComponent implements OnInit {
   ngOnInit() {
   }
 
-  upClickHandler = function() {
+  upClickHandler() {
     this.actionEvent.emit(Direction.Up);
   }
 
-  rightClickHandler = function() {
+  rightClickHandler() {
     this.actionEvent.emit(Direction.Right);
   }
 
-  downClickHandler = function() {
+  downClickHandler() {
     this.actionEvent.emit(Direction.Down);
   }
 
-  leftClickHandler = function() {
+  leftClickHandler() {
     this.actionEvent.emit(Direction.Left);
   }
 }

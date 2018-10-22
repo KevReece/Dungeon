@@ -25,7 +25,7 @@ describe('ControllerComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  
+
   it('should raise up move event', done => {
     component.actionEvent.subscribe(direction => {
       expect(direction).toEqual(Direction.Up);
@@ -34,7 +34,7 @@ describe('ControllerComponent', () => {
     compiled.querySelector('#UpButton').click();
     fixture.detectChanges();
   });
-  
+
   it('should raise right move event', done => {
     component.actionEvent.subscribe(direction => {
       expect(direction).toEqual(Direction.Right);
@@ -43,7 +43,7 @@ describe('ControllerComponent', () => {
     compiled.querySelector('#RightButton').click();
     fixture.detectChanges();
   });
-  
+
   it('should raise down move event', done => {
     component.actionEvent.subscribe(direction => {
       expect(direction).toEqual(Direction.Down);
@@ -52,7 +52,7 @@ describe('ControllerComponent', () => {
     compiled.querySelector('#DownButton').click();
     fixture.detectChanges();
   });
-  
+
   it('should raise left move event', done => {
     component.actionEvent.subscribe(direction => {
       expect(direction).toEqual(Direction.Left);

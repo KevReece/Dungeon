@@ -10,7 +10,7 @@ describe('AppComponent', () => {
   const mockMapGrid = new MapGrid([]);
   const mockMapBuilderService  = { getMapGrid: {} };
   let fixture: ComponentFixture<AppComponent>;
-  let component : AppComponent;
+  let component: AppComponent;
 
   beforeEach(async(() => {
     spyOn(mockMapBuilderService, 'getMapGrid').and.returnValue(mockMapGrid);
@@ -63,7 +63,7 @@ describe('AppComponent', () => {
   });
 
   it('should move charactor', () => {
-    spyOn(component.charactor, 'act')
+    spyOn(component.charactor, 'act');
     component.actionHandler(Direction.Left);
     expect(component.charactor.act).toHaveBeenCalledWith(Direction.Left);
   });
