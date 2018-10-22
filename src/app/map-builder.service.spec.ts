@@ -64,13 +64,10 @@ describe('MapBuilderService', () => {
     it('should import 1.map', (done) => {
       const service: MapBuilderService = TestBed.get(MapBuilderService);
       let assertionFunction = function(){
-        console.log('expect');
         expect(mapGrid.rows[0].cells[0]).toEqual(jasmine.any(Wall));
         done()
       }
       let mapGrid = service.getMapGrid(assertionFunction);
-      
-      console.log('no expect');
     });
   });
 });
