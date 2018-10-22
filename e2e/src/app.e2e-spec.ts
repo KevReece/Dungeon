@@ -23,4 +23,8 @@ describe('workspace-project App', () => {
   it('should load user console component', () => {
     expect(page.getUserConsoleComponent().isPresent()).toBeTruthy();
   });
+
+  it('should load controller component', () => {
+    expect(page.getControllerComponent().isPresent()).toBeTruthy();
+  });
 });

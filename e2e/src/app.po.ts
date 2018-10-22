@@ -20,4 +20,8 @@ export class AppPage {
   getMapComponent() {
     return element(by.id('MapComponent'));
   }
+
+  getControllerComponent() {
+    return element(by.id('ControllerComponent'));
+  }
 }

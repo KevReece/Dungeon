@@ -1,4 +1,5 @@
 import { ICellItem } from './icell-item.model';
+import { Direction } from './direction.model';
 
 export class Charactor implements ICellItem {
     level = 1;
@@ -7,4 +8,8 @@ export class Charactor implements ICellItem {
     health = 10;
     attack = 1;
     defence = 1;
+
+    act(direction: Direction) {
+        
+    }
 }

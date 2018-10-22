@@ -8,13 +8,15 @@ import { CharactorComponent } from './charactor/charactor.component';
 import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MapBuilderService } from './map-builder.service';
+import { ControllerComponent } from './controller/controller.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserConsoleComponent,
     CharactorComponent,
-    MapComponent
+    MapComponent,
+    ControllerComponent
   ],
   imports: [
     BrowserModule,

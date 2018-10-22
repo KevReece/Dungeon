@@ -6,6 +6,7 @@
 </div>
 
 <app-charactor [charactor]="charactor"></app-charactor>
+<app-controller (actionEvent)="actionHandler($direction)"></app-controller>
 <app-map [mapGrid]="mapGrid"></app-map>
 <app-user-console [lines]="consoleLines"></app-user-console>
 <router-outlet></router-outlet>
