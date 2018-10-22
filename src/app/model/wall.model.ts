@@ -1,4 +1,4 @@
-import { ICell } from "./icell.model";
+import { ICell } from './icell.model';
 
 export class Wall implements ICell {
 

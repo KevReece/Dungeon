@@ -1,7 +1,7 @@
-import { Row } from "./row.model";
+import { Row } from './row.model';
 
 export class MapGrid {
-    constructor(rows: Row[]){
+    constructor(rows: Row[]) {
         this.rows = rows;
     }
     rows: Row[];

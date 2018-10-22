@@ -1,3 +1,2 @@
-export interface ICellItem{
-
+export class ICellItem {
 }

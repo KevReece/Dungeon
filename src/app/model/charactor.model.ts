@@ -1,8 +1,10 @@
-export class Charactor{
-    level: number = 1;
-    gold: number = 0;
-    experience: number = 0;
-    health: number = 10;
-    attack: number = 1;
-    defence: number = 1;
+import { ICellItem } from './icell-item.model';
+
+export class Charactor implements ICellItem {
+    level = 1;
+    gold = 0;
+    experience = 0;
+    health = 10;
+    attack = 1;
+    defence = 1;
 }

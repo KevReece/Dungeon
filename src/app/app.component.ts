@@ -14,7 +14,7 @@ export class AppComponent {
   charactor = new Charactor();
   mapGrid: MapGrid;
 
-  constructor(private mapBuilderService: MapBuilderService){
+  constructor(private mapBuilderService: MapBuilderService) {
     this.mapGrid = mapBuilderService.getMapGrid(this.charactor);
   }
 }

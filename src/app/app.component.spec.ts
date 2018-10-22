@@ -6,9 +6,9 @@ import { MapBuilderService } from './map-builder.service';
 import { MapGrid } from './model/map-grid.model';
 
 describe('AppComponent', () => {
-  let mockMapGrid = new MapGrid([]);
-  let mockMapBuilderService  = { getMapGrid: {} };
-  
+  const mockMapGrid = new MapGrid([]);
+  const mockMapBuilderService  = { getMapGrid: {} };
+
   beforeEach(async(() => {
     spyOn(mockMapBuilderService, 'getMapGrid').and.returnValue(mockMapGrid);
     TestBed.configureTestingModule({
@@ -43,7 +43,7 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to Dungeon!');
   });
-  
+
   it('should have initial charactor', () => {
     const fixture = TestBed.createComponent(AppComponent);
     expect(fixture.componentInstance.charactor.attack).toBe(1);
@@ -53,12 +53,12 @@ describe('AppComponent', () => {
     expect(fixture.componentInstance.charactor.health).toBe(10);
     expect(fixture.componentInstance.charactor.level).toBe(1);
   });
-  
+
   it('should have initial console lines', () => {
     const fixture = TestBed.createComponent(AppComponent);
     expect(fixture.componentInstance.consoleLines[0]).toContain('Welcome');
   });
-  
+
   it('should have built map grid', () => {
     const fixture = TestBed.createComponent(AppComponent);
     expect(fixture.componentInstance.mapGrid).toBe(mockMapGrid);

@@ -1,2 +1,2 @@
-export class ICell{
+export class ICell {
 }

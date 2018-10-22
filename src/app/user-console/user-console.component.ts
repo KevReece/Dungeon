@@ -9,7 +9,7 @@ export class UserConsoleComponent implements OnInit {
 
   @Input() lines: string[];
 
-  constructor() { 
+  constructor() {
   }
 
   ngOnInit() {

@@ -8,15 +8,15 @@ export class AppPage {
   getParagraphText() {
     return element(by.css('app-root h1')).getText();
   }
-  
+
   getCharactorComponent() {
     return element(by.id('CharactorComponent'));
   }
-  
+
   getUserConsoleComponent() {
     return element(by.id('UserConsoleComponent'));
   }
-  
+
   getMapComponent() {
     return element(by.id('MapComponent'));
   }

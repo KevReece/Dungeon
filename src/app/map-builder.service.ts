@@ -13,24 +13,26 @@ export class MapBuilderService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getMapGrid(charactor: Charactor, onCompleteFunction?: Function){
-    let mapGrid = new MapGrid([]);
+  getMapGrid(charactor: Charactor, onCompleteFunction?: (mapGrid) => any) {
+    const mapGrid = new MapGrid([]);
     this.httpClient.get('assets/maps/1.map', {responseType: 'text'})
       .subscribe((response) => {
         this.buildGridFromFile(response, mapGrid, charactor);
-        if (onCompleteFunction) onCompleteFunction();
-      })
+        if (onCompleteFunction) {
+          onCompleteFunction(mapGrid);
+        }
+      });
     return mapGrid;
   }
 
-  private buildGridFromFile(file: String, mapGrid: MapGrid, charactor: Charactor){
+  private buildGridFromFile(file: String, mapGrid: MapGrid, charactor: Charactor) {
     file.split('\n').forEach(rowString => {
-      let rowCells = [];
+      const rowCells = [];
       rowString.split('').forEach(cellChar => {
-        if (cellChar == 'X'){
+        if (cellChar === 'X') {
           rowCells.push(new Wall());
         } else {
-          if (cellChar == 'B'){
+          if (cellChar === 'B') {
             rowCells.push(new Floor(charactor));
           } else {
             rowCells.push(new Floor());

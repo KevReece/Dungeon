@@ -18,15 +18,15 @@ export class MapComponent implements OnInit {
   ngOnInit() {
   }
 
-  showCell(cell: ICell){
-    if (cell instanceof Floor){
-      if (cell.cellItem){
-        return "B";
+  showCell(cell: ICell) {
+    if (cell instanceof Floor) {
+      if (cell.cellItem) {
+        return 'B';
       } else {
-        return " ";
+        return ' ';
       }
     } else {
-      return "X";
-    } 
+      return 'X';
+    }
   }
 }

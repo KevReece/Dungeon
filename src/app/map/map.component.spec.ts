@@ -18,21 +18,21 @@ describe('MapComponent', () => {
     .compileComponents();
   }));
 
+  const buildTestMapGrid = function() {
+    const wallRow = new Row([new Wall()]);
+    const multipleWallRow = new Row([new Wall(), new Wall()]);
+    const floorRow = new Row([new Floor()]);
+    const mixedRow = new Row([new Floor(), new Wall(), new Floor(), new Wall()]);
+    const charactorRow = new Row([new Floor(new Charactor())]);
+    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, charactorRow]);
+  };
+
   beforeEach(() => {
     fixture = TestBed.createComponent(MapComponent);
     component = fixture.componentInstance;
     component.mapGrid = buildTestMapGrid();
     fixture.detectChanges();
   });
-
-  var buildTestMapGrid = function(){
-    let wallRow = new Row([new Wall()]);
-    let multipleWallRow = new Row([new Wall(), new Wall()]);
-    let floorRow = new Row([new Floor()]);
-    let mixedRow = new Row([new Floor(), new Wall(), new Floor(), new Wall()]);
-    let charactorRow = new Row([new Floor(new Charactor())]);
-    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, charactorRow]);
-  }
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -42,7 +42,7 @@ describe('MapComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('tr:nth-of-type(1)').querySelector('td').textContent).toBe('X');
   });
-  
+
   it('should render multiple wall cells in row', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('tr:nth-of-type(2)').textContent).toBe('XX');
