@@ -33,7 +33,7 @@ jobs:
           command: sudo pip install awscli
       - run:
           name: Deploy to S3
-          command: aws --region eu-central-1 s3 sync dist s3://welcometothedungeon/ --delete
+          command: aws --region eu-central-1 s3 sync dist/dungeon s3://welcometothedungeon/ --delete
 
 workflows:
   version: 2
