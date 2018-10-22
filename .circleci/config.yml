@@ -7,11 +7,41 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dungeon-{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: dungeon-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run: npm install
       - save_cache:
-          key: dungeon-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: dungeon-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - "node_modules"
-      - run: npm run test -- --single-run --no-progress --browser=ChromeHeadlessCI
-      - run: npm run e2e -- --no-progress --config=protractor-ci.conf.js
+      - run: ng test
+      - run: ng e2e
+      - run: ng build --prod
+      - save_cache:
+          key: dungeon-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - dist
+  deploy:
+    docker:
+      - image: circleci/python:2.7-jessie
+    working_directory: ~/dungeon
+    steps:
+      - restore_cache:
+          key: dungeon-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Deploy to S3
+          command: aws --region eu-central-1 s3 sync dist s3://welcometothedungeon/ --delete
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
