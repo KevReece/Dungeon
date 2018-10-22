@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MapGrid } from '../model/map-grid.model';
 import { ICell } from '../model/icell.model';
 import { Wall } from '../model/wall.model';
+import { Floor } from '../model/floor.model';
 
 @Component({
   selector: 'app-map',
@@ -18,10 +19,14 @@ export class MapComponent implements OnInit {
   }
 
   showCell(cell: ICell){
-    if (cell instanceof Wall){
-      return "X";
+    if (cell instanceof Floor){
+      if (cell.cellItem){
+        return "B";
+      } else {
+        return " ";
+      }
     } else {
-      return " ";
-    }
+      return "X";
+    } 
   }
 }
