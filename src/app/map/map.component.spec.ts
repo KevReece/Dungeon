@@ -7,6 +7,7 @@ import { Wall } from '../model/wall.model';
 import { Cell } from '../model/cell.model';
 import { Charactor } from '../model/charactor.model';
 import { TreasureChest } from '../model/treasure-chest.model';
+import { Gold } from '../model/gold.model';
 
 describe('MapComponent', () => {
   let component: MapComponent;
@@ -26,7 +27,9 @@ describe('MapComponent', () => {
     const mixedRow = new Row([new Cell(), new Cell(new Wall()), new Cell(), new Cell(new Wall())]);
     const charactorRow = new Row([new Cell(new Charactor())]);
     const treasureChestRow = new Row([new Cell(new TreasureChest())]);
-    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, charactorRow, treasureChestRow]);
+    const goldRow = new Row([new Cell()]);
+    goldRow.cells[0].items.push(new Gold());
+    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, charactorRow, treasureChestRow, goldRow]);
   };
 
   beforeEach(() => {
@@ -68,5 +71,10 @@ describe('MapComponent', () => {
   it('should render a treasure chest', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('tr:nth-of-type(6)').querySelector('td').textContent).toBe('T');
+  });
+
+  it('should render gold item', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('tr:nth-of-type(7)').querySelector('td').textContent).toBe('G');
   });
 });

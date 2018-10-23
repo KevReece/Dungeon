@@ -26,6 +26,8 @@ export class MapComponent implements OnInit {
       return 'X';
     } else if (cell.occupier instanceof TreasureChest) {
       return 'T';
+    } else if (cell.items.length > 0) {
+      return 'G';
     } else {
       return ' ';
     }
