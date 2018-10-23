@@ -1,4 +1,4 @@
-import { Gold } from "./gold.model";
+import { Gold } from './gold.model';
 
 describe('Gold', () => {
     describe('constructor', () => {
