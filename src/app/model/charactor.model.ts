@@ -1,6 +1,6 @@
 import { CellOccupier } from './cell-occupier.model';
 import { Direction } from './direction.model';
-import { Cell } from './cell.model';
+import { TreasureChest } from './treasure-chest.model';
 
 export class Charactor extends CellOccupier {
     level = 1;
@@ -12,8 +12,12 @@ export class Charactor extends CellOccupier {
 
     act(direction: Direction) {
         const adjacentCell = this.cell.getAdjacentCell(direction);
-        if (adjacentCell && !adjacentCell.isOccupied()) {
-            adjacentCell.setOccupier(this);
+        if (adjacentCell) {
+            if (!adjacentCell.isOccupied()) {
+                adjacentCell.setOccupier(this);
+            } else if (adjacentCell.occupier instanceof TreasureChest) {
+                (<TreasureChest>adjacentCell.occupier).open();
+            }
         }
     }
 }

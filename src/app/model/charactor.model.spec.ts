@@ -4,6 +4,7 @@ import { MapGrid } from './map-grid.model';
 import { Row } from './row.model';
 import { Cell } from './cell.model';
 import { Wall } from './wall.model';
+import { TreasureChest } from './treasure-chest.model';
 
 describe('Charactor', () => {
     let charactor: Charactor;
@@ -40,11 +41,21 @@ describe('Charactor', () => {
         });
 
         it('should not move the charactor into occupied cell', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(charactor)]), new Row([new Cell(new Wall())])]);
+            const mapGrid = new MapGrid([new Row([new Cell(charactor), new Cell(new Wall())])]);
 
-            charactor.act(Direction.Down);
+            charactor.act(Direction.Right);
 
             expect(charactor.getCell()).toBe(mapGrid.rows[0].cells[0]);
+        });
+
+        it('should open a treasure chest', () => {
+            const treasureChest = new TreasureChest();
+            const mapGrid = new MapGrid([new Row([new Cell(charactor), new Cell(treasureChest)])]);
+            spyOn(treasureChest, 'open');
+
+            charactor.act(Direction.Right);
+
+            expect(treasureChest.open).toHaveBeenCalled();
         });
     });
 });
