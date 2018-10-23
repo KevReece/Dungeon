@@ -1,6 +1,10 @@
 import { Cell } from '../cell.model';
+import { FactoryService } from 'src/app/factory.service';
 
 export class CellOccupier {
+
+    constructor(protected factoryService: FactoryService) { }
+
     cell: Cell;
 
     initializeToCell(cell: Cell): void {

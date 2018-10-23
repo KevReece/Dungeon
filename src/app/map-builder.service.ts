@@ -6,13 +6,14 @@ import { Wall } from './model/celloccupiers/wall.model';
 import { Cell } from './model/cell.model';
 import { Charactor } from './model/celloccupiers/charactor.model';
 import { TreasureChest } from './model/celloccupiers/treasure-chest.model';
+import { FactoryService } from './factory.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapBuilderService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private factoryService: FactoryService) { }
 
   getMapGrid(charactor: Charactor, onCompleteFunction?: (mapGrid) => any) {
     const mapGrid = new MapGrid([]);
@@ -39,10 +40,10 @@ export class MapBuilderService {
 
   private buildCell(cellChar: String, charactor: Charactor) {
     switch (cellChar) {
-      case 'X': return new Cell(new Wall());
-      case 'T': return new Cell(new TreasureChest());
-      case 'B': return new Cell(charactor);
-      default: return new Cell();
+      case 'X': return this.factoryService.createWallCell();
+      case 'T': return this.factoryService.createTreasureChestCell();
+      case 'B': return this.factoryService.createCellOccupiedBy(charactor);
+      default: return this.factoryService.createEmptyCell();
     }
   }
 }

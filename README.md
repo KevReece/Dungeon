@@ -33,8 +33,6 @@ Save the new user AWS key/secret into CircleCI project AWS permissions
 Ensure config.yml has correct bucket name
 
 ## Todo
-- open treasure
-- drop gold item ('G')(consider ahead that enemies can walk on top of these)
 - collect item
 - show goblins on map ('E')
 - add enemies panel (ordered)

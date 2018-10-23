@@ -1,17 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { UserConsoleService } from '../user-console.service';
 
 @Component({
   selector: 'app-user-console',
   templateUrl: './user-console.component.html',
   styleUrls: ['./user-console.component.sass']
 })
-export class UserConsoleComponent implements OnInit {
+export class UserConsoleComponent {
 
-  @Input() lines: string[];
+  lines: string[];
 
-  constructor() {
-  }
-
-  ngOnInit() {
+  constructor(private userConsoleService: UserConsoleService) {
+    this.lines = userConsoleService.lines;
   }
 }

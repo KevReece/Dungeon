@@ -17,7 +17,7 @@ describe('CharactorComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CharactorComponent);
     component = fixture.componentInstance;
-    component.charactor = new Charactor();
+    component.charactor = new Charactor(null);
     fixture.detectChanges();
   });
 

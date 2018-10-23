@@ -9,6 +9,8 @@ import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MapBuilderService } from './map-builder.service';
 import { ControllerComponent } from './controller/controller.component';
+import { FactoryService } from './factory.service';
+import { UserConsoleService } from './user-console.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,11 @@ import { ControllerComponent } from './controller/controller.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [MapBuilderService],
+  providers: [
+    MapBuilderService,
+    FactoryService,
+    UserConsoleService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

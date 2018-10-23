@@ -5,15 +5,18 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MapBuilderService } from './map-builder.service';
 import { MapGrid } from './model/map-grid.model';
 import { Direction } from './model/direction.model';
+import { UserConsoleService } from './user-console.service';
 
 describe('AppComponent', () => {
   const mockMapGrid = new MapGrid([]);
   const mockMapBuilderService  = { getMapGrid: {} };
+  const mockUserConsoleService  = { writeWelcome: {} };
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
 
   beforeEach(async(() => {
     spyOn(mockMapBuilderService, 'getMapGrid').and.returnValue(mockMapGrid);
+    spyOn(mockUserConsoleService, 'writeWelcome');
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
@@ -22,7 +25,8 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
-        {provide: MapBuilderService, useValue: mockMapBuilderService}
+        {provide: MapBuilderService, useValue: mockMapBuilderService},
+        {provide: UserConsoleService, useValue: mockUserConsoleService}
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -55,7 +59,7 @@ describe('AppComponent', () => {
   });
 
   it('should have initial console lines', () => {
-    expect(component.consoleLines[0]).toContain('Welcome');
+    expect(mockUserConsoleService.writeWelcome).toHaveBeenCalled();
   });
 
   it('should have built map grid', () => {

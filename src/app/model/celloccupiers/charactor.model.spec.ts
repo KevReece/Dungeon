@@ -10,7 +10,7 @@ describe('Charactor', () => {
     let charactor: Charactor;
 
     beforeEach(() => {
-        charactor = new Charactor();
+        charactor = new Charactor(null);
     });
 
     describe('initializeToCell', () => {
@@ -41,7 +41,7 @@ describe('Charactor', () => {
         });
 
         it('should not move the charactor into occupied cell', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(charactor), new Cell(new Wall())])]);
+            const mapGrid = new MapGrid([new Row([new Cell(charactor), new Cell(new Wall(null))])]);
 
             charactor.act(Direction.Right);
 
@@ -49,7 +49,7 @@ describe('Charactor', () => {
         });
 
         it('should open a treasure chest', () => {
-            const treasureChest = new TreasureChest();
+            const treasureChest = new TreasureChest(null, null);
             const mapGrid = new MapGrid([new Row([new Cell(charactor), new Cell(treasureChest)])]);
             spyOn(treasureChest, 'open');
 
