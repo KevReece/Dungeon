@@ -24,4 +24,8 @@ export class Cell {
         }
         occupier.initializeToCell(this);
     }
+
+    isOccupied() {
+        return !!this.occupier;
+    }
 }

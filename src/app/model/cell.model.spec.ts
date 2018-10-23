@@ -1,5 +1,6 @@
 import { Cell } from './cell.model';
 import { Charactor } from './charactor.model';
+import { Wall } from './wall.model';
 
 describe('Cell', () => {
     describe('constructor', () => {
@@ -42,6 +43,16 @@ describe('Cell', () => {
             const newCell = new Cell(charactor);
 
             expect(previousCell.occupier).toBeNull();
+        });
+    });
+
+    describe('isOccupied', () => {
+        it('should not be occupied', () => {
+            expect(new Cell().isOccupied()).toBeFalsy();
+        });
+
+        it('should be occupied', () => {
+            expect(new Cell(new Wall()).isOccupied()).toBeTruthy();
         });
     });
 });

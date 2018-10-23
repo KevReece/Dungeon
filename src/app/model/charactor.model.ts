@@ -21,7 +21,7 @@ export class Charactor implements ICellOccupier {
 
     act(direction: Direction) {
         const adjacentCell = this.cell.getAdjacentCell(direction);
-        if (adjacentCell) {
+        if (adjacentCell && !adjacentCell.isOccupied()) {
             adjacentCell.setOccupier(this);
         }
     }
