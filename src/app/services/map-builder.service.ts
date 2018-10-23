@@ -42,6 +42,7 @@ export class MapBuilderService {
     switch (cellChar) {
       case 'X': return this.factoryService.createWallCell();
       case 'T': return this.factoryService.createTreasureChestCell();
+      case 'E': return this.factoryService.createEnemyCell();
       case 'B': return this.factoryService.createCellOccupiedBy(charactor);
       default: return this.factoryService.createEmptyCell();
     }

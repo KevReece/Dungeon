@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Charactor } from '../model/celloccupiers/charactor.model';
 import { CellOccupier } from '../model/celloccupiers/cell-occupier.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
+import { Enemy } from '../model/celloccupiers/enemy.model';
 
 describe('MapBuilderService', () => {
 
@@ -35,11 +36,11 @@ describe('MapBuilderService', () => {
         const service: MapBuilderService = TestBed.get(MapBuilderService);
         mapGrid = service.getMapGrid(charactor);
         const mapRequest = httpMock.expectOne('assets/maps/1.map');
-        mapRequest.flush('  \nX \nB \nT ');
+        mapRequest.flush('  \nX \nB \nT \nE ');
       });
 
       it('should return all rows', () => {
-        expect(mapGrid.rows.length).toEqual(4);
+        expect(mapGrid.rows.length).toEqual(5);
       });
 
       it('should return all cells in a row', () => {
@@ -58,6 +59,11 @@ describe('MapBuilderService', () => {
       it('should return a treasure chest cell', () => {
         const cell = mapGrid.rows[3].cells[0];
         expect(cell.occupier).toEqual(jasmine.any(TreasureChest));
+      });
+
+      it('should return an enemy cell', () => {
+        const cell = mapGrid.rows[4].cells[0];
+        expect(cell.occupier).toEqual(jasmine.any(Enemy));
       });
 
       it('should assign the charactor to a cell', () => {

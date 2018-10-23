@@ -8,6 +8,7 @@ import { Cell } from '../model/cell.model';
 import { Charactor } from '../model/celloccupiers/charactor.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Gold } from '../model/cellitems/gold.model';
+import { Enemy } from '../model/celloccupiers/enemy.model';
 
 describe('MapComponent', () => {
   let component: MapComponent;
@@ -29,7 +30,8 @@ describe('MapComponent', () => {
     const treasureChestRow = new Row([new Cell(new TreasureChest(null, null))]);
     const goldRow = new Row([new Cell()]);
     goldRow.cells[0].items.push(new Gold());
-    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, charactorRow, treasureChestRow, goldRow]);
+    const enemyRow = new Row([new Cell(new Enemy(null))]);
+    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, charactorRow, treasureChestRow, goldRow, enemyRow]);
   };
 
   beforeEach(() => {
@@ -76,5 +78,10 @@ describe('MapComponent', () => {
   it('should render gold item', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('tr:nth-of-type(7)').querySelector('td').textContent).toBe('G');
+  });
+
+  it('should render an enemy', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('tr:nth-of-type(8)').querySelector('td').textContent).toBe('E');
   });
 });

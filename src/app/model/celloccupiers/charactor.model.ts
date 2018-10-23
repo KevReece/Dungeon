@@ -32,7 +32,7 @@ export class Charactor extends CellOccupier {
     }
 
     private collectItems(cell: Cell): void {
-        if (cell.items.length == 0) {
+        if (cell.items.length === 0) {
             return;
         }
         this.userConsoleService.writeItemsCollected(cell.items);

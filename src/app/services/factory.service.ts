@@ -5,6 +5,7 @@ import { Wall } from '../model/celloccupiers/wall.model';
 import { CellOccupier } from '../model/celloccupiers/cell-occupier.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { UserConsoleService } from './user-console.service';
+import { Enemy } from '../model/celloccupiers/enemy.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,9 @@ export class FactoryService {
   }
   createTreasureChestCell(): Cell {
     return this.createCellOccupiedBy(this.createTreasureChest());
+  }
+  createEnemyCell(): Cell {
+    return this.createCellOccupiedBy(this.createEnemy());
   }
   createWallCell(): Cell {
     return this.createCellOccupiedBy(this.createWall());
@@ -33,5 +37,8 @@ export class FactoryService {
   }
   createTreasureChest(): TreasureChest {
     return new TreasureChest(this, this.userConsoleService);
+  }
+  createEnemy(): Enemy {
+    return new Enemy(this);
   }
 }

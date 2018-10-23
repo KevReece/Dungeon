@@ -5,6 +5,7 @@ import { Wall } from '../model/celloccupiers/wall.model';
 import { Cell } from '../model/cell.model';
 import { Charactor } from '../model/celloccupiers/charactor.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
+import { Enemy } from '../model/celloccupiers/enemy.model';
 
 describe('FactoryService', () => {
   let service: FactoryService;
@@ -51,5 +52,15 @@ describe('FactoryService', () => {
     const cell = service.createTreasureChestCell();
     expect(cell).toEqual(jasmine.any(Cell));
     expect(cell.occupier).toEqual(jasmine.any(TreasureChest));
+  });
+
+  it('should create an enemy', () => {
+    expect(service.createEnemy()).toEqual(jasmine.any(Enemy));
+  });
+
+  it('should create an enemy cell', () => {
+    const cell = service.createEnemyCell();
+    expect(cell).toEqual(jasmine.any(Cell));
+    expect(cell.occupier).toEqual(jasmine.any(Enemy));
   });
 });
