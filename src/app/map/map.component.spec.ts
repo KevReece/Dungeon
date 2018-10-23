@@ -4,7 +4,7 @@ import { MapComponent } from './map.component';
 import { MapGrid } from '../model/map-grid.model';
 import { Row } from '../model/row.model';
 import { Wall } from '../model/wall.model';
-import { Floor } from '../model/floor.model';
+import { Cell } from '../model/cell.model';
 import { Charactor } from '../model/charactor.model';
 
 describe('MapComponent', () => {
@@ -19,11 +19,11 @@ describe('MapComponent', () => {
   }));
 
   const buildTestMapGrid = function() {
-    const wallRow = new Row([new Wall()]);
-    const multipleWallRow = new Row([new Wall(), new Wall()]);
-    const floorRow = new Row([new Floor()]);
-    const mixedRow = new Row([new Floor(), new Wall(), new Floor(), new Wall()]);
-    const charactorRow = new Row([new Floor(new Charactor())]);
+    const wallRow = new Row([new Cell(new Wall())]);
+    const multipleWallRow = new Row([new Cell(new Wall()), new Cell(new Wall())]);
+    const floorRow = new Row([new Cell()]);
+    const mixedRow = new Row([new Cell(), new Cell(new Wall()), new Cell(), new Cell(new Wall())]);
+    const charactorRow = new Row([new Cell(new Charactor())]);
     return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, charactorRow]);
   };
 

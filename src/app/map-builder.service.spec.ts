@@ -4,9 +4,10 @@ import { MapBuilderService } from './map-builder.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MapGrid } from './model/map-grid.model';
 import { Wall } from './model/wall.model';
-import { Floor } from './model/floor.model';
+import { Cell } from './model/cell.model';
 import { HttpClientModule } from '@angular/common/http';
 import { Charactor } from './model/charactor.model';
+import { ICellOccupier } from './model/i-cell-occupier.model';
 
 describe('MapBuilderService', () => {
 
@@ -33,7 +34,7 @@ describe('MapBuilderService', () => {
         const service: MapBuilderService = TestBed.get(MapBuilderService);
         mapGrid = service.getMapGrid(charactor);
         const mapRequest = httpMock.expectOne('assets/maps/1.map');
-        mapRequest.flush('XX\n X\nBX');
+        mapRequest.flush('  \nX \nB ');
       });
 
       it('should return all rows', () => {
@@ -44,18 +45,19 @@ describe('MapBuilderService', () => {
         expect(mapGrid.rows[0].cells.length).toEqual(2);
       });
 
-      it('should return a wall cell', () => {
-        expect(mapGrid.rows[0].cells[0]).toEqual(jasmine.any(Wall));
+      it('should return a cell', () => {
+        expect(mapGrid.rows[0].cells[0]).toEqual(jasmine.any(Cell));
       });
 
-      it('should return a floor cell', () => {
-        expect(mapGrid.rows[1].cells[0]).toEqual(jasmine.any(Floor));
+      it('should return a wall cell', () => {
+        const cell = mapGrid.rows[1].cells[0];
+        expect(cell.occupier).toEqual(jasmine.any(Wall));
       });
 
       it('should assign the charactor to a cell', () => {
         const cell = mapGrid.rows[2].cells[0];
-        expect(cell).toEqual(jasmine.any(Floor));
-        expect((<Floor>cell).cellItem).toBe(charactor);
+        expect(cell).toEqual(jasmine.any(Cell));
+        expect(cell.occupier).toBe(<ICellOccupier>charactor);
       });
     });
   });
@@ -71,7 +73,7 @@ describe('MapBuilderService', () => {
     it('should import 1.map', (done) => {
       const service: MapBuilderService = TestBed.get(MapBuilderService);
       const assertionFunction = function(mapGrid) {
-        expect(mapGrid.rows[0].cells[0]).toEqual(jasmine.any(Wall));
+        expect(mapGrid.rows[0].cells[0].occupier).toEqual(jasmine.any(Wall));
         done();
       };
       service.getMapGrid(null, assertionFunction);

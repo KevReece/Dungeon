@@ -64,7 +64,9 @@ describe('AppComponent', () => {
 
   it('should move charactor', () => {
     spyOn(component.charactor, 'act');
+
     component.actionHandler(Direction.Left);
+
     expect(component.charactor.act).toHaveBeenCalledWith(Direction.Left);
   });
 });

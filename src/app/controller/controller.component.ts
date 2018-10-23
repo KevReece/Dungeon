@@ -10,7 +10,7 @@ export class ControllerComponent implements OnInit {
 
   constructor() { }
 
-  @Output() actionEvent = new EventEmitter();
+  @Output() actionEvent = new EventEmitter<Direction>();
 
   ngOnInit() {
   }

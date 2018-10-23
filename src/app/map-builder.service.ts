@@ -3,7 +3,7 @@ import { Row } from './model/row.model';
 import { MapGrid } from './model/map-grid.model';
 import { HttpClient } from '@angular/common/http';
 import { Wall } from './model/wall.model';
-import { Floor } from './model/floor.model';
+import { Cell } from './model/cell.model';
 import { Charactor } from './model/charactor.model';
 
 @Injectable({
@@ -26,20 +26,21 @@ export class MapBuilderService {
   }
 
   private buildGridFromFile(file: String, mapGrid: MapGrid, charactor: Charactor) {
+    const rows = [];
     file.split('\n').forEach(rowString => {
       const rowCells = [];
-      rowString.split('').forEach(cellChar => {
-        if (cellChar === 'X') {
-          rowCells.push(new Wall());
-        } else {
-          if (cellChar === 'B') {
-            rowCells.push(new Floor(charactor));
-          } else {
-            rowCells.push(new Floor());
-          }
-        }
-      });
-      mapGrid.rows.push(new Row(rowCells));
+      rowString.split('').forEach(cellChar => rowCells.push(this.buildCell(cellChar, charactor)));
+      rows.push(new Row(rowCells));
     });
+    mapGrid.rows = rows;
+    mapGrid.setAdjacentCells();
+  }
+
+  private buildCell(cellChar: String, charactor: Charactor) {
+    switch (cellChar) {
+      case 'X': return new Cell(new Wall());
+      case 'B': return new Cell(charactor);
+      default: return new Cell();
+    }
   }
 }

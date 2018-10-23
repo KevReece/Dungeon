@@ -1,8 +1,8 @@
-import { ICell } from './icell.model';
+import { Cell } from './cell.model';
 
 export class Row {
-    constructor(cells: ICell[]) {
+    constructor(cells: Cell[]) {
         this.cells = cells;
     }
-    cells: ICell[];
+    cells: Cell[];
 }

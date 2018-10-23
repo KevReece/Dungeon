@@ -33,16 +33,17 @@ Save the new user AWS key/secret into CircleCI project AWS permissions
 Ensure config.yml has correct bucket name
 
 ## Todo
-- user walk logic
 - walking blocked by walls logic
 - disable controller button when walking blocked
 - show treasure chests ('T')
 - open treasure
+- show as 'open' on controller
 - drop gold item ('G')(consider ahead that enemies can walk on top of these)
 - collect item
 - show goblins on map ('E')
 - add enemies panel (ordered)
 - attack enemies (succeed if: charactor.attack + random[-2:3] > enemy.defence)
+- show as 'attack' on controller
 - damage multiplier for health taken (add damage stat)(health lost = charactor.damage * random[0.5:1.5].roundup())
 - kill enemies (gives xp)
 - level up charactor (stats too)

@@ -15,7 +15,7 @@ export class AppComponent {
   charactor = new Charactor();
   mapGrid: MapGrid;
 
-  actionHandler(direction?: Direction) {
+  actionHandler(direction: Direction) {
     this.charactor.act(direction);
   }
 
