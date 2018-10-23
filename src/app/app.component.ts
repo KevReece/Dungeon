@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Charactor } from './model/charactor.model';
+import { Charactor } from './model/celloccupiers/charactor.model';
 import { MapGrid } from './model/map-grid.model';
 import { MapBuilderService } from './map-builder.service';
 import { Direction } from './model/direction.model';

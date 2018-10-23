@@ -1,6 +1,6 @@
 import { TreasureChest } from './treasure-chest.model';
-import { Cell } from './cell.model';
-import { Gold } from './gold.model';
+import { Cell } from '../cell.model';
+import { Gold } from '../cellitems/gold.model';
 
 describe('TresureChest', () => {
     describe('open', () => {

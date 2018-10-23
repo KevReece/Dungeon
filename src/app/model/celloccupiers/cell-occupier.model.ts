@@ -1,4 +1,4 @@
-import { Cell } from './cell.model';
+import { Cell } from '../cell.model';
 
 export class CellOccupier {
     cell: Cell;

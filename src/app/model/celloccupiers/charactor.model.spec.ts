@@ -1,8 +1,8 @@
 import { Charactor } from './charactor.model';
-import { Direction } from './direction.model';
-import { MapGrid } from './map-grid.model';
-import { Row } from './row.model';
-import { Cell } from './cell.model';
+import { Direction } from '../direction.model';
+import { MapGrid } from '../map-grid.model';
+import { Row } from '../row.model';
+import { Cell } from '../cell.model';
 import { Wall } from './wall.model';
 import { TreasureChest } from './treasure-chest.model';
 

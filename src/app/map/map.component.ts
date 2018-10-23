@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MapGrid } from '../model/map-grid.model';
 import { Cell } from '../model/cell.model';
-import { Charactor } from '../model/charactor.model';
-import { Wall } from '../model/wall.model';
-import { TreasureChest } from '../model/treasure-chest.model';
+import { Charactor } from '../model/celloccupiers/charactor.model';
+import { Wall } from '../model/celloccupiers/wall.model';
+import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 
 @Component({
   selector: 'app-map',

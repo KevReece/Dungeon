@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Charactor } from '../model/charactor.model';
+import { Charactor } from '../model/celloccupiers/charactor.model';
 
 @Component({
   selector: 'app-charactor',

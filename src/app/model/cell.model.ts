@@ -1,6 +1,6 @@
-import { CellOccupier } from './cell-occupier.model';
+import { CellOccupier } from './celloccupiers/cell-occupier.model';
 import { Direction } from './direction.model';
-import { ICellItem } from './i-cell-item.model';
+import { ICellItem } from './cellitems/i-cell-item.model';
 
 export class Cell {
 

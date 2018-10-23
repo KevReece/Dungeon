@@ -1,5 +1,5 @@
 import { CellOccupier } from './cell-occupier.model';
-import { Direction } from './direction.model';
+import { Direction } from '../direction.model';
 import { TreasureChest } from './treasure-chest.model';
 
 export class Charactor extends CellOccupier {

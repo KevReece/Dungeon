@@ -3,12 +3,12 @@ import { TestBed } from '@angular/core/testing';
 import { MapBuilderService } from './map-builder.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MapGrid } from './model/map-grid.model';
-import { Wall } from './model/wall.model';
+import { Wall } from './model/celloccupiers/wall.model';
 import { Cell } from './model/cell.model';
 import { HttpClientModule } from '@angular/common/http';
-import { Charactor } from './model/charactor.model';
-import { CellOccupier } from './model/cell-occupier.model';
-import { TreasureChest } from './model/treasure-chest.model';
+import { Charactor } from './model/celloccupiers/charactor.model';
+import { CellOccupier } from './model/celloccupiers/cell-occupier.model';
+import { TreasureChest } from './model/celloccupiers/treasure-chest.model';
 
 describe('MapBuilderService', () => {
 

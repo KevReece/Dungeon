@@ -3,11 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MapComponent } from './map.component';
 import { MapGrid } from '../model/map-grid.model';
 import { Row } from '../model/row.model';
-import { Wall } from '../model/wall.model';
+import { Wall } from '../model/celloccupiers/wall.model';
 import { Cell } from '../model/cell.model';
-import { Charactor } from '../model/charactor.model';
-import { TreasureChest } from '../model/treasure-chest.model';
-import { Gold } from '../model/gold.model';
+import { Charactor } from '../model/celloccupiers/charactor.model';
+import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
+import { Gold } from '../model/cellitems/gold.model';
 
 describe('MapComponent', () => {
   let component: MapComponent;

@@ -1,6 +1,6 @@
 import { Cell } from './cell.model';
-import { Charactor } from './charactor.model';
-import { Wall } from './wall.model';
+import { Charactor } from './celloccupiers/charactor.model';
+import { Wall } from './celloccupiers/wall.model';
 
 describe('Cell', () => {
     describe('constructor', () => {
