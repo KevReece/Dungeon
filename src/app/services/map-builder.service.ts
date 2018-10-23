@@ -33,7 +33,7 @@ export class MapBuilderService {
       rows.push(new Row(rowCells));
     });
     mapGrid.rows = rows;
-    mapGrid.setAdjacentCells();
+    mapGrid.setupCells();
   }
 
   private buildCell(cellChar: String, charactor: Charactor, enemies: Enemy[]) {

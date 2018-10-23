@@ -4,16 +4,18 @@ import { Direction } from './direction.model';
 export class MapGrid {
     constructor(rows: Row[]) {
         this.rows = rows;
-        this.setAdjacentCells();
+        this.setupCells();
     }
 
     rows: Row[];
 
-    setAdjacentCells() {
+    setupCells() {
         for (let rowIndex = 0; rowIndex < this.rows.length; rowIndex++) {
             const row = this.rows[rowIndex];
             for (let columnIndex = 0; columnIndex < row.cells.length; columnIndex++) {
                 const cell = row.cells[columnIndex];
+                cell.columnIndex = columnIndex;
+                cell.rowIndex = rowIndex;
                 if (rowIndex - 1 >= 0) {
                     cell.adjacentCells[Direction.Up] = this.rows[rowIndex - 1].cells[columnIndex];
                 }

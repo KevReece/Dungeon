@@ -5,7 +5,7 @@ import { Direction } from './direction.model';
 
 describe('MapGrid', () => {
     describe('constructor', () => {
-        it('should call setAdjacentCells', () => {
+        it('should call setupCells', () => {
             const sourceCell = new Cell();
             const rightCell = new Cell();
 
@@ -15,7 +15,7 @@ describe('MapGrid', () => {
         });
     });
 
-    describe('setAdjacentCells', () => {
+    describe('setupCells', () => {
         it('should set cell directions', () => {
             const mapGrid = new MapGrid([]);
             const sourceCell = new Cell();
@@ -30,7 +30,7 @@ describe('MapGrid', () => {
             ];
             mapGrid.rows = rows;
 
-            mapGrid.setAdjacentCells();
+            mapGrid.setupCells();
 
             expect(sourceCell.getAdjacentCell(Direction.Up)).toBe(upCell);
             expect(sourceCell.getAdjacentCell(Direction.Right)).toBe(rightCell);
@@ -43,12 +43,28 @@ describe('MapGrid', () => {
             const sourceCell = new Cell();
             mapGrid.rows = [new Row([sourceCell])];
 
-            mapGrid.setAdjacentCells();
+            mapGrid.setupCells();
 
             expect(sourceCell.getAdjacentCell(Direction.Up)).toBeUndefined();
             expect(sourceCell.getAdjacentCell(Direction.Right)).toBeUndefined();
             expect(sourceCell.getAdjacentCell(Direction.Down)).toBeUndefined();
             expect(sourceCell.getAdjacentCell(Direction.Left)).toBeUndefined();
+        });
+
+        it('should set cell indexes', () => {
+            const mapGrid = new MapGrid([]);
+            const sourceCell = new Cell();
+            const rows = [
+                new Row([new Cell(), new Cell()]),
+                new Row([new Cell(), new Cell()]),
+                new Row([new Cell(), sourceCell])
+            ];
+            mapGrid.rows = rows;
+
+            mapGrid.setupCells();
+
+            expect(sourceCell.columnIndex).toEqual(1);
+            expect(sourceCell.rowIndex).toEqual(2);
         });
     });
 });

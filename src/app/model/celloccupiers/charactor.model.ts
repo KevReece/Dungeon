@@ -5,6 +5,7 @@ import { FactoryService } from 'src/app/services/factory.service';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { Cell } from '../cell.model';
 import { Gold } from '../cellitems/gold.model';
+import { Enemy } from './enemy.model';
 
 export class Charactor extends CellOccupier {
 

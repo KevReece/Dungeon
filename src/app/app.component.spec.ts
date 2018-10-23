@@ -6,17 +6,20 @@ import { MapBuilderService } from './services/map-builder.service';
 import { MapGrid } from './model/map-grid.model';
 import { Direction } from './model/direction.model';
 import { UserConsoleService } from './services/user-console.service';
+import { EnemySorterService } from './services/enemy-sorter.service';
 
 describe('AppComponent', () => {
   const mockMapGrid = new MapGrid([]);
   const mockMapBuilderService  = { getMapGrid: {} };
   const mockUserConsoleService  = { writeWelcome: {} };
+  const mockEnemySorterService = { sort: {} };
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
 
   beforeEach(async(() => {
     spyOn(mockMapBuilderService, 'getMapGrid').and.returnValue(mockMapGrid);
     spyOn(mockUserConsoleService, 'writeWelcome');
+    spyOn(mockEnemySorterService, 'sort');
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
@@ -26,7 +29,8 @@ describe('AppComponent', () => {
       ],
       providers: [
         {provide: MapBuilderService, useValue: mockMapBuilderService},
-        {provide: UserConsoleService, useValue: mockUserConsoleService}
+        {provide: UserConsoleService, useValue: mockUserConsoleService},
+        {provide: EnemySorterService, useValue: mockEnemySorterService}
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -67,7 +71,7 @@ describe('AppComponent', () => {
   });
 
   it('should pass charactor and enemies to grid builder', () => {
-    expect(mockMapBuilderService.getMapGrid).toHaveBeenCalledWith(component.charactor, component.enemies);
+    expect(mockMapBuilderService.getMapGrid).toHaveBeenCalledWith(component.charactor, component.enemies, jasmine.any(Function));
   });
 
   it('should move charactor', () => {
@@ -77,4 +81,17 @@ describe('AppComponent', () => {
 
     expect(component.charactor.act).toHaveBeenCalledWith(Direction.Left);
   });
+
+  // TODO: refactor async map grid callback to test these:
+  // it('should sort enemies', () => {
+  //   expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.charactor); //must be async
+  // });
+
+  // it('should sort enemies after actions', () => {
+  //   expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.charactor);
+  //   spyOn(component.charactor, 'act');
+  //   component.actionHandler(Direction.Left);
+  //   expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.charactor); //check this second one works
+  // });
+
 });

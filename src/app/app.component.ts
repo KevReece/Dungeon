@@ -6,6 +6,7 @@ import { Direction } from './model/direction.model';
 import { FactoryService } from './services/factory.service';
 import { UserConsoleService } from './services/user-console.service';
 import { Enemy } from './model/celloccupiers/enemy.model';
+import { EnemySorterService } from './services/enemy-sorter.service';
 
 @Component({
   selector: 'app-root',
@@ -20,14 +21,20 @@ export class AppComponent {
 
   actionHandler(direction: Direction) {
     this.charactor.act(direction);
+    this.enemySorterService.sort(this.enemies, this.charactor);
   }
 
   constructor(
       private mapBuilderService: MapBuilderService,
       private factoryService: FactoryService,
-      private userConsoleService: UserConsoleService) {
+      private userConsoleService: UserConsoleService,
+      private enemySorterService: EnemySorterService) {
     this.charactor = factoryService.createCharactor();
-    this.mapGrid = mapBuilderService.getMapGrid(this.charactor, this.enemies);
+    const sortEnemiesFunction = function(mapGrid: MapGrid): void {
+      enemySorterService.sort(this.enemies, this.charactor);
+    };
+    this.mapGrid = mapBuilderService.getMapGrid(this.charactor, this.enemies, sortEnemiesFunction);
+
     userConsoleService.writeWelcome();
   }
 }
