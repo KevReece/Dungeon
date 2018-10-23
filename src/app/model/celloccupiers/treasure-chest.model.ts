@@ -1,12 +1,11 @@
 import { CellOccupier } from './cell-occupier.model';
 import { Gold } from '../cellitems/gold.model';
-import { FactoryService } from 'src/app/services/factory.service';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 
 export class TreasureChest extends CellOccupier {
 
-    constructor(protected factoryService: FactoryService, private userConsoleService: UserConsoleService) {
-        super(factoryService);
+    constructor(private userConsoleService: UserConsoleService) {
+        super();
     }
 
     open() {

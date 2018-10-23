@@ -30,7 +30,7 @@ describe('MapBuilderService', () => {
 
     describe('getMapGrid', () => {
       let mapGrid: MapGrid;
-      const charactor: Charactor = new Charactor(null, null);
+      const charactor: Charactor = new Charactor(null);
       const enemies: Enemy[] = [];
 
       beforeEach(async() => {

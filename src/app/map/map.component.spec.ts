@@ -22,15 +22,15 @@ describe('MapComponent', () => {
   }));
 
   const buildTestMapGrid = function() {
-    const wallRow = new Row([new Cell(new Wall(null))]);
-    const multipleWallRow = new Row([new Cell(new Wall(null)), new Cell(new Wall(null))]);
+    const wallRow = new Row([new Cell(new Wall())]);
+    const multipleWallRow = new Row([new Cell(new Wall()), new Cell(new Wall())]);
     const floorRow = new Row([new Cell()]);
-    const mixedRow = new Row([new Cell(), new Cell(new Wall(null)), new Cell(), new Cell(new Wall(null))]);
-    const charactorRow = new Row([new Cell(new Charactor(null, null))]);
-    const treasureChestRow = new Row([new Cell(new TreasureChest(null, null))]);
+    const mixedRow = new Row([new Cell(), new Cell(new Wall()), new Cell(), new Cell(new Wall())]);
+    const charactorRow = new Row([new Cell(new Charactor(null))]);
+    const treasureChestRow = new Row([new Cell(new TreasureChest(null))]);
     const goldRow = new Row([new Cell()]);
     goldRow.cells[0].items.push(new Gold());
-    const enemyRow = new Row([new Cell(new Enemy(null))]);
+    const enemyRow = new Row([new Cell(new Enemy())]);
     return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, charactorRow, treasureChestRow, goldRow, enemyRow]);
   };
 

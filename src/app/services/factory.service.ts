@@ -27,15 +27,15 @@ export class FactoryService {
     return new Cell();
   }
   createWall(): Wall {
-    return new Wall(this);
+    return new Wall();
   }
   createCharactor(): Charactor {
-    return new Charactor(this, this.userConsoleService);
+    return new Charactor(this.userConsoleService);
   }
   createTreasureChest(): TreasureChest {
-    return new TreasureChest(this, this.userConsoleService);
+    return new TreasureChest(this.userConsoleService);
   }
   createEnemy(): Enemy {
-    return new Enemy(this);
+    return new Enemy();
   }
 }

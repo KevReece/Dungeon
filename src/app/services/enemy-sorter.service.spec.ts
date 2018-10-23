@@ -18,13 +18,13 @@ describe('EnemySorterService', () => {
   });
 
   it('should return for single enemies', () => {
-    new EnemySorterService().sort([new Enemy(null)], null);
+    new EnemySorterService().sort([new Enemy()], null);
   });
 
   it('should not sort enemies if correct already', () => {
-    const enemyA = <Enemy>new Cell(new Enemy(null)).occupier;
-    const enemyB = <Enemy>new Cell(new Enemy(null)).occupier;
-    const charactor = <Charactor>new Cell(new Charactor(null, null)).occupier;
+    const enemyA = <Enemy>new Cell(new Enemy()).occupier;
+    const enemyB = <Enemy>new Cell(new Enemy()).occupier;
+    const charactor = <Charactor>new Cell(new Charactor(null)).occupier;
     const enemies = [enemyA, enemyB];
     spyOn(enemyA.cell, 'getDistance').and.returnValue(1);
     spyOn(enemyB.cell, 'getDistance').and.returnValue(2);
@@ -36,9 +36,9 @@ describe('EnemySorterService', () => {
   });
 
   it('should sort enemies by charactor distance', () => {
-    const enemyA = <Enemy>new Cell(new Enemy(null)).occupier;
-    const enemyB = <Enemy>new Cell(new Enemy(null)).occupier;
-    const charactor = <Charactor>new Cell(new Charactor(null, null)).occupier;
+    const enemyA = <Enemy>new Cell(new Enemy()).occupier;
+    const enemyB = <Enemy>new Cell(new Enemy()).occupier;
+    const charactor = <Charactor>new Cell(new Charactor(null)).occupier;
     const enemies = [enemyA, enemyB];
     spyOn(enemyA.cell, 'getDistance').and.returnValue(2);
     spyOn(enemyB.cell, 'getDistance').and.returnValue(1);
@@ -50,9 +50,9 @@ describe('EnemySorterService', () => {
   });
 
   it('should not sort same distance enemies by direction from charactor (clockwise from up) if correct already', () => {
-    const enemyA = <Enemy>new Cell(new Enemy(null)).occupier;
-    const enemyB = <Enemy>new Cell(new Enemy(null)).occupier;
-    const charactor = <Charactor>new Cell(new Charactor(null, null)).occupier;
+    const enemyA = <Enemy>new Cell(new Enemy()).occupier;
+    const enemyB = <Enemy>new Cell(new Enemy()).occupier;
+    const charactor = <Charactor>new Cell(new Charactor(null)).occupier;
     const enemies = [enemyA, enemyB];
     spyOn(enemyA.cell, 'getDistance').and.returnValue(1);
     spyOn(enemyB.cell, 'getDistance').and.returnValue(1);
@@ -65,9 +65,9 @@ describe('EnemySorterService', () => {
   });
 
   it('should not sort same distance enemies by direction from charactor (clockwise from up) if correct already', () => {
-    const enemyA = <Enemy>new Cell(new Enemy(null)).occupier;
-    const enemyB = <Enemy>new Cell(new Enemy(null)).occupier;
-    const charactor = <Charactor>new Cell(new Charactor(null, null)).occupier;
+    const enemyA = <Enemy>new Cell(new Enemy()).occupier;
+    const enemyB = <Enemy>new Cell(new Enemy()).occupier;
+    const charactor = <Charactor>new Cell(new Charactor(null)).occupier;
     const enemies = [enemyA, enemyB];
     spyOn(enemyA.cell, 'getDistance').and.returnValue(1);
     spyOn(enemyB.cell, 'getDistance').and.returnValue(1);
@@ -80,12 +80,12 @@ describe('EnemySorterService', () => {
   });
 
   it('should sort many enemies', () => {
-    const enemyA = <Enemy>new Cell(new Enemy(null)).occupier;
-    const enemyB = <Enemy>new Cell(new Enemy(null)).occupier;
-    const enemyC = <Enemy>new Cell(new Enemy(null)).occupier;
-    const enemyD = <Enemy>new Cell(new Enemy(null)).occupier;
-    const enemyE = <Enemy>new Cell(new Enemy(null)).occupier;
-    const charactor = <Charactor>new Cell(new Charactor(null, null)).occupier;
+    const enemyA = <Enemy>new Cell(new Enemy()).occupier;
+    const enemyB = <Enemy>new Cell(new Enemy()).occupier;
+    const enemyC = <Enemy>new Cell(new Enemy()).occupier;
+    const enemyD = <Enemy>new Cell(new Enemy()).occupier;
+    const enemyE = <Enemy>new Cell(new Enemy()).occupier;
+    const charactor = <Charactor>new Cell(new Charactor(null)).occupier;
     const enemies = [enemyA, enemyB, enemyC, enemyD, enemyE];
     spyOn(enemyA.cell, 'getDistance').and.returnValue(1);
     spyOn(enemyB.cell, 'getDistance').and.returnValue(2);

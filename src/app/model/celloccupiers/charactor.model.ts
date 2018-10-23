@@ -9,8 +9,8 @@ import { Enemy } from './enemy.model';
 
 export class Charactor extends CellOccupier {
 
-    constructor(protected factoryService: FactoryService, private userConsoleService: UserConsoleService) {
-        super(factoryService);
+    constructor(private userConsoleService: UserConsoleService) {
+        super();
     }
 
     level = 1;

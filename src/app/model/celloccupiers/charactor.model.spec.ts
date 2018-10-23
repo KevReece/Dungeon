@@ -16,7 +16,7 @@ describe('Charactor', () => {
     beforeEach(() => {
         mockUserConsoleService = new UserConsoleService();
         spyOn(mockUserConsoleService, 'writeItemsCollected');
-        charactor = new Charactor(null, mockUserConsoleService);
+        charactor = new Charactor(mockUserConsoleService);
     });
 
     describe('initializeToCell', () => {
@@ -47,7 +47,7 @@ describe('Charactor', () => {
         });
 
         it('should not move the charactor into occupied cell', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(charactor), new Cell(new Wall(null))])]);
+            const mapGrid = new MapGrid([new Row([new Cell(charactor), new Cell(new Wall())])]);
 
             charactor.act(Direction.Right);
 
@@ -55,7 +55,7 @@ describe('Charactor', () => {
         });
 
         it('should open a treasure chest', () => {
-            const treasureChest = new TreasureChest(null, null);
+            const treasureChest = new TreasureChest(null);
             const mapGrid = new MapGrid([new Row([new Cell(charactor), new Cell(treasureChest)])]);
             spyOn(treasureChest, 'open');
 
