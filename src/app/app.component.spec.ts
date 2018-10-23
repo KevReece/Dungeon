@@ -2,10 +2,10 @@ import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MapBuilderService } from './map-builder.service';
+import { MapBuilderService } from './services/map-builder.service';
 import { MapGrid } from './model/map-grid.model';
 import { Direction } from './model/direction.model';
-import { UserConsoleService } from './user-console.service';
+import { UserConsoleService } from './services/user-console.service';
 
 describe('AppComponent', () => {
   const mockMapGrid = new MapGrid([]);

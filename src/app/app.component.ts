@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Charactor } from './model/celloccupiers/charactor.model';
 import { MapGrid } from './model/map-grid.model';
-import { MapBuilderService } from './map-builder.service';
+import { MapBuilderService } from './services/map-builder.service';
 import { Direction } from './model/direction.model';
-import { FactoryService } from './factory.service';
-import { UserConsoleService } from './user-console.service';
+import { FactoryService } from './services/factory.service';
+import { UserConsoleService } from './services/user-console.service';
 
 @Component({
   selector: 'app-root',

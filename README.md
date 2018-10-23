@@ -33,7 +33,6 @@ Save the new user AWS key/secret into CircleCI project AWS permissions
 Ensure config.yml has correct bucket name
 
 ## Todo
-- collect item
 - show goblins on map ('E')
 - add enemies panel (ordered)
 - attack enemies (succeed if: charactor.attack + random[-2:3] > enemy.defence)

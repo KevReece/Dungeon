@@ -6,7 +6,7 @@ import { Cell } from '../cell.model';
 import { Wall } from './wall.model';
 import { TreasureChest } from './treasure-chest.model';
 import { Gold } from '../cellitems/gold.model';
-import { UserConsoleService } from 'src/app/user-console.service';
+import { UserConsoleService } from 'src/app/services/user-console.service';
 
 describe('Charactor', () => {
     let charactor: Charactor;

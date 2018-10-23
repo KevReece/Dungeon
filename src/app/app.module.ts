@@ -7,10 +7,10 @@ import { UserConsoleComponent } from './user-console/user-console.component';
 import { CharactorComponent } from './charactor/charactor.component';
 import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MapBuilderService } from './map-builder.service';
+import { MapBuilderService } from './services/map-builder.service';
 import { ControllerComponent } from './controller/controller.component';
-import { FactoryService } from './factory.service';
-import { UserConsoleService } from './user-console.service';
+import { FactoryService } from './services/factory.service';
+import { UserConsoleService } from './services/user-console.service';
 
 @NgModule({
   declarations: [

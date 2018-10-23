@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Row } from './model/row.model';
-import { MapGrid } from './model/map-grid.model';
+import { Row } from '../model/row.model';
+import { MapGrid } from '../model/map-grid.model';
 import { HttpClient } from '@angular/common/http';
-import { Wall } from './model/celloccupiers/wall.model';
-import { Cell } from './model/cell.model';
-import { Charactor } from './model/celloccupiers/charactor.model';
-import { TreasureChest } from './model/celloccupiers/treasure-chest.model';
+import { Wall } from '../model/celloccupiers/wall.model';
+import { Cell } from '../model/cell.model';
+import { Charactor } from '../model/celloccupiers/charactor.model';
+import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { FactoryService } from './factory.service';
 
 @Injectable({

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Charactor } from './model/celloccupiers/charactor.model';
-import { Cell } from './model/cell.model';
-import { Wall } from './model/celloccupiers/wall.model';
-import { CellOccupier } from './model/celloccupiers/cell-occupier.model';
-import { TreasureChest } from './model/celloccupiers/treasure-chest.model';
+import { Charactor } from '../model/celloccupiers/charactor.model';
+import { Cell } from '../model/cell.model';
+import { Wall } from '../model/celloccupiers/wall.model';
+import { CellOccupier } from '../model/celloccupiers/cell-occupier.model';
+import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { UserConsoleService } from './user-console.service';
 
 @Injectable({

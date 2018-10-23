@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
 import { FactoryService } from './factory.service';
-import { Wall } from './model/celloccupiers/wall.model';
-import { Cell } from './model/cell.model';
-import { Charactor } from './model/celloccupiers/charactor.model';
-import { TreasureChest } from './model/celloccupiers/treasure-chest.model';
+import { Wall } from '../model/celloccupiers/wall.model';
+import { Cell } from '../model/cell.model';
+import { Charactor } from '../model/celloccupiers/charactor.model';
+import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 
 describe('FactoryService', () => {
   let service: FactoryService;

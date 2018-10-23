@@ -1,7 +1,7 @@
 import { TreasureChest } from './treasure-chest.model';
 import { Cell } from '../cell.model';
 import { Gold } from '../cellitems/gold.model';
-import { UserConsoleService } from 'src/app/user-console.service';
+import { UserConsoleService } from 'src/app/services/user-console.service';
 
 describe('TresureChest', () => {
     let mockUserConsoleService: UserConsoleService;

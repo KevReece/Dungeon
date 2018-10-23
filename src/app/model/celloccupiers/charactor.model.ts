@@ -1,8 +1,8 @@
 import { CellOccupier } from './cell-occupier.model';
 import { Direction } from '../direction.model';
 import { TreasureChest } from './treasure-chest.model';
-import { FactoryService } from 'src/app/factory.service';
-import { UserConsoleService } from 'src/app/user-console.service';
+import { FactoryService } from 'src/app/services/factory.service';
+import { UserConsoleService } from 'src/app/services/user-console.service';
 import { Cell } from '../cell.model';
 import { Gold } from '../cellitems/gold.model';
 
