@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Wall } from './model/wall.model';
 import { Cell } from './model/cell.model';
 import { Charactor } from './model/charactor.model';
+import { TreasureChest } from './model/treasure-chest.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,7 @@ export class MapBuilderService {
   private buildCell(cellChar: String, charactor: Charactor) {
     switch (cellChar) {
       case 'X': return new Cell(new Wall());
+      case 'T': return new Cell(new TreasureChest());
       case 'B': return new Cell(charactor);
       default: return new Cell();
     }

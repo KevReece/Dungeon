@@ -33,11 +33,7 @@ Save the new user AWS key/secret into CircleCI project AWS permissions
 Ensure config.yml has correct bucket name
 
 ## Todo
-- walking blocked by walls logic
-- disable controller button when walking blocked
-- show treasure chests ('T')
 - open treasure
-- show as 'open' on controller
 - drop gold item ('G')(consider ahead that enemies can walk on top of these)
 - collect item
 - show goblins on map ('E')
@@ -48,6 +44,9 @@ Ensure config.yml has correct bucket name
 - kill enemies (gives xp)
 - level up charactor (stats too)
 - enemies move (store last direction, initialy random)(random based on ratio 4:forward; 2:left; 2:right; 1:stay; 1:reverse)(don't block for items)
+- disable controller buttons (when enemy turn/action in direction is blocked)
+- show action text for controller buttons ('move'/'attack'/'open')
+- move enemies towards charactor (within 10 distance)(walk towards on shortest unblocked axis/ random if both axis are equal)
 - enemies attack
 - treasure chests can drop food ('F')(add max health stat)(food gives 50%)
 - kill charactor

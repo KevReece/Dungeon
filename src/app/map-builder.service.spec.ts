@@ -7,7 +7,8 @@ import { Wall } from './model/wall.model';
 import { Cell } from './model/cell.model';
 import { HttpClientModule } from '@angular/common/http';
 import { Charactor } from './model/charactor.model';
-import { ICellOccupier } from './model/i-cell-occupier.model';
+import { CellOccupier } from './model/cell-occupier.model';
+import { TreasureChest } from './model/treasure-chest.model';
 
 describe('MapBuilderService', () => {
 
@@ -34,11 +35,11 @@ describe('MapBuilderService', () => {
         const service: MapBuilderService = TestBed.get(MapBuilderService);
         mapGrid = service.getMapGrid(charactor);
         const mapRequest = httpMock.expectOne('assets/maps/1.map');
-        mapRequest.flush('  \nX \nB ');
+        mapRequest.flush('  \nX \nB \nT ');
       });
 
       it('should return all rows', () => {
-        expect(mapGrid.rows.length).toEqual(3);
+        expect(mapGrid.rows.length).toEqual(4);
       });
 
       it('should return all cells in a row', () => {
@@ -54,10 +55,15 @@ describe('MapBuilderService', () => {
         expect(cell.occupier).toEqual(jasmine.any(Wall));
       });
 
+      it('should return a treasure chest cell', () => {
+        const cell = mapGrid.rows[3].cells[0];
+        expect(cell.occupier).toEqual(jasmine.any(TreasureChest));
+      });
+
       it('should assign the charactor to a cell', () => {
         const cell = mapGrid.rows[2].cells[0];
         expect(cell).toEqual(jasmine.any(Cell));
-        expect(cell.occupier).toBe(<ICellOccupier>charactor);
+        expect(cell.occupier).toBe(<CellOccupier>charactor);
       });
     });
   });

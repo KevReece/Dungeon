@@ -3,6 +3,7 @@ import { MapGrid } from '../model/map-grid.model';
 import { Cell } from '../model/cell.model';
 import { Charactor } from '../model/charactor.model';
 import { Wall } from '../model/wall.model';
+import { TreasureChest } from '../model/treasure-chest.model';
 
 @Component({
   selector: 'app-map',
@@ -23,6 +24,8 @@ export class MapComponent implements OnInit {
       return 'B';
     } else if (cell.occupier instanceof Wall) {
       return 'X';
+    } else if (cell.occupier instanceof TreasureChest) {
+      return 'T';
     } else {
       return ' ';
     }
