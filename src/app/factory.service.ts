@@ -29,7 +29,7 @@ export class FactoryService {
     return new Wall(this);
   }
   createCharactor(): Charactor {
-    return new Charactor(this);
+    return new Charactor(this, this.userConsoleService);
   }
   createTreasureChest(): TreasureChest {
     return new TreasureChest(this, this.userConsoleService);

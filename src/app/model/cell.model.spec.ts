@@ -9,7 +9,7 @@ describe('Cell', () => {
         });
 
         it('should call set occupier', () => {
-            const charactor = new Charactor(null);
+            const charactor = new Charactor(null, null);
 
             const cell = new Cell(charactor);
 
@@ -20,7 +20,7 @@ describe('Cell', () => {
     describe('setOccupier', () => {
 
         it('should set cell occupier', () => {
-            const charactor = new Charactor(null);
+            const charactor = new Charactor(null, null);
 
             const cell = new Cell(charactor);
 
@@ -28,7 +28,7 @@ describe('Cell', () => {
         });
 
         it('should initialize the cell occupier', () => {
-            const charactor = new Charactor(null);
+            const charactor = new Charactor(null, null);
             spyOn(charactor, 'initializeToCell');
 
             const cell = new Cell(charactor);
@@ -37,7 +37,7 @@ describe('Cell', () => {
         });
 
         it('should clear previous cell of occupier', () => {
-            const charactor = new Charactor(null);
+            const charactor = new Charactor(null, null);
             const previousCell = new Cell(charactor);
 
             const newCell = new Cell(charactor);

@@ -16,14 +16,21 @@ describe('UserConsoleService', () => {
   });
 
   it('should write welcome message', () => {
-    service.writeWelcome()
+    service.writeWelcome();
     expect(service.lines[service.lines.length - 1]).toContain('Welcome');
   });
 
   it('should write gold treasure message', () => {
     const gold = new Gold();
-    service.writeTreasureChestOpenedAndGoldDropped(gold)
+    service.writeTreasureChestOpenedAndGoldDropped(gold);
     expect(service.lines[service.lines.length - 1]).toContain('treasure');
     expect(service.lines[service.lines.length - 1]).toContain(gold.quantity.toString());
+  });
+
+  it('should write items collected message', () => {
+    const gold = new Gold();
+    service.writeItemsCollected([gold]);
+    expect(service.lines[service.lines.length - 1]).toContain('collected');
+    expect(service.lines[service.lines.length - 1]).toContain('gold');
   });
 });

@@ -29,7 +29,7 @@ describe('MapBuilderService', () => {
 
     describe('getMapGrid', () => {
       let mapGrid: MapGrid;
-      const charactor: Charactor = new Charactor(null);
+      const charactor: Charactor = new Charactor(null, null);
 
       beforeEach(async() => {
         const service: MapBuilderService = TestBed.get(MapBuilderService);

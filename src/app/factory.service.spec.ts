@@ -37,7 +37,7 @@ describe('FactoryService', () => {
   });
 
   it('should create a cell occupied by something', () => {
-    const charactor = new Charactor(null);
+    const charactor = new Charactor(null, null);
     const cell = service.createCellOccupiedBy(charactor);
     expect(cell).toEqual(jasmine.any(Cell));
     expect(cell.occupier).toEqual(jasmine.any(Charactor));
