@@ -27,4 +27,8 @@ describe('workspace-project App', () => {
   it('should load controller component', () => {
     expect(page.getControllerComponent().isPresent()).toBeTruthy();
   });
+
+  it('should load enemies component', () => {
+    expect(page.getEnemiesComponent().isPresent()).toBeTruthy();
+  });
 });

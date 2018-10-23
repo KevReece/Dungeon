@@ -11,6 +11,7 @@ import { MapBuilderService } from './services/map-builder.service';
 import { ControllerComponent } from './controller/controller.component';
 import { FactoryService } from './services/factory.service';
 import { UserConsoleService } from './services/user-console.service';
+import { EnemiesComponent } from './enemies/enemies.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserConsoleService } from './services/user-console.service';
     UserConsoleComponent,
     CharactorComponent,
     MapComponent,
-    ControllerComponent
+    ControllerComponent,
+    EnemiesComponent
   ],
   imports: [
     BrowserModule,

@@ -24,4 +24,8 @@ export class AppPage {
   getControllerComponent() {
     return element(by.id('ControllerComponent'));
   }
+
+  getEnemiesComponent() {
+    return element(by.id('EnemiesComponent'));
+  }
 }

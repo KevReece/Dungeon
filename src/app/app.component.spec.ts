@@ -66,6 +66,10 @@ describe('AppComponent', () => {
     expect(component.mapGrid).toBe(mockMapGrid);
   });
 
+  it('should pass charactor and enemies to grid builder', () => {
+    expect(mockMapBuilderService.getMapGrid).toHaveBeenCalledWith(component.charactor, component.enemies);
+  });
+
   it('should move charactor', () => {
     spyOn(component.charactor, 'act');
 

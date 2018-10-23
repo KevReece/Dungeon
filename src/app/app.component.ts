@@ -5,6 +5,7 @@ import { MapBuilderService } from './services/map-builder.service';
 import { Direction } from './model/direction.model';
 import { FactoryService } from './services/factory.service';
 import { UserConsoleService } from './services/user-console.service';
+import { Enemy } from './model/celloccupiers/enemy.model';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent {
   title = 'Dungeon';
   mapGrid: MapGrid;
   charactor: Charactor;
+  enemies: Enemy[] = [];
 
   actionHandler(direction: Direction) {
     this.charactor.act(direction);
@@ -25,7 +27,7 @@ export class AppComponent {
       private factoryService: FactoryService,
       private userConsoleService: UserConsoleService) {
     this.charactor = factoryService.createCharactor();
-    this.mapGrid = mapBuilderService.getMapGrid(this.charactor);
+    this.mapGrid = mapBuilderService.getMapGrid(this.charactor, this.enemies);
     userConsoleService.writeWelcome();
   }
 }

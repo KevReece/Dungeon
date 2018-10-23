@@ -31,10 +31,11 @@ describe('MapBuilderService', () => {
     describe('getMapGrid', () => {
       let mapGrid: MapGrid;
       const charactor: Charactor = new Charactor(null, null);
+      const enemies: Enemy[] = [];
 
       beforeEach(async() => {
         const service: MapBuilderService = TestBed.get(MapBuilderService);
-        mapGrid = service.getMapGrid(charactor);
+        mapGrid = service.getMapGrid(charactor, enemies);
         const mapRequest = httpMock.expectOne('assets/maps/1.map');
         mapRequest.flush('  \nX \nB \nT \nE ');
       });
@@ -64,6 +65,7 @@ describe('MapBuilderService', () => {
       it('should return an enemy cell', () => {
         const cell = mapGrid.rows[4].cells[0];
         expect(cell.occupier).toEqual(jasmine.any(Enemy));
+        expect(enemies).toContain(<Enemy>cell.occupier);
       });
 
       it('should assign the charactor to a cell', () => {
@@ -88,7 +90,7 @@ describe('MapBuilderService', () => {
         expect(mapGrid.rows[0].cells[0].occupier).toEqual(jasmine.any(Wall));
         done();
       };
-      service.getMapGrid(null, assertionFunction);
+      service.getMapGrid(null, [], assertionFunction);
     });
   });
 });

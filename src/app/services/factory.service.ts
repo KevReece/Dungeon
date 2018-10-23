@@ -20,9 +20,6 @@ export class FactoryService {
   createTreasureChestCell(): Cell {
     return this.createCellOccupiedBy(this.createTreasureChest());
   }
-  createEnemyCell(): Cell {
-    return this.createCellOccupiedBy(this.createEnemy());
-  }
   createWallCell(): Cell {
     return this.createCellOccupiedBy(this.createWall());
   }

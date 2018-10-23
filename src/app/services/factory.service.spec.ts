@@ -57,10 +57,4 @@ describe('FactoryService', () => {
   it('should create an enemy', () => {
     expect(service.createEnemy()).toEqual(jasmine.any(Enemy));
   });
-
-  it('should create an enemy cell', () => {
-    const cell = service.createEnemyCell();
-    expect(cell).toEqual(jasmine.any(Cell));
-    expect(cell.occupier).toEqual(jasmine.any(Enemy));
-  });
 });

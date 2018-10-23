@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Direction } from '../model/direction.model';
 
 @Component({
@@ -6,14 +6,9 @@ import { Direction } from '../model/direction.model';
   templateUrl: './controller.component.html',
   styleUrls: ['./controller.component.sass']
 })
-export class ControllerComponent implements OnInit {
-
-  constructor() { }
+export class ControllerComponent {
 
   @Output() actionEvent = new EventEmitter<Direction>();
-
-  ngOnInit() {
-  }
 
   upClickHandler() {
     this.actionEvent.emit(Direction.Up);

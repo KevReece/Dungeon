@@ -33,10 +33,8 @@ Save the new user AWS key/secret into CircleCI project AWS permissions
 Ensure config.yml has correct bucket name
 
 ## Todo
-- show goblins on map ('E')
-- add enemies panel (ordered)
+- order enemies panel
 - attack enemies (succeed if: charactor.attack + random[-2:3] > enemy.defence)
-- show as 'attack' on controller
 - damage multiplier for health taken (add damage stat)(health lost = charactor.damage * random[0.5:1.5].roundup())
 - kill enemies (gives xp)
 - level up charactor (stats too)
