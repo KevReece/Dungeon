@@ -4,33 +4,30 @@
 
 This is a dungeon crawler writen in AngularJS
 
-## Development server
-
-Run `ng serve`. Navigate to `http://localhost:4200/`
-
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `ng build`. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Running tests
 
 Run `ng test`
-
-## Running end-to-end tests
-
 Run `ng e2e`
 
-## Deploying
+## Local deploy
 
-Push to GitHub and CircleCI will detect the changes, run the tests and deploy
+Run `ng serve`. `http://localhost:4200/`
 
-## First Deploying
+## Prod deploy
+
+Push to GitHub, then CircleCI will detect the changes, run the tests and deploy. `http://d244gfx0zgow1.cloudfront.net/`
+
+## First prod deploy
 
 Create AWS S3 bucket
 Enable the bucket propery for static website hosting
 Add bucket permissions policy as... effect:"allow", principle: "*", action: "s3:GetObject", resource: "arn:aws:s3:::bucketname/*"
 Create AWS IAM User with full s3 access
-Create CloudFront distribution to the bucket, with Default Root Object as index.html
+Create CloudFront distribution to the bucket, with 'Default Root Object' as index.html
 Create CircleCI project
 Save the new user AWS key/secret into CircleCI project AWS permissions
 Ensure config.yml has correct bucket name
@@ -58,11 +55,11 @@ Ensure config.yml has correct bucket name
 - level indicator
 - prettify
 - other enemies types
-- spawn enemies (every 20 player turns)(gather free spaces into array, then random)
-- progress spawned enemies types (levels define base enemy)(spawn 3 from last level, then 3 from current, then 3 from next, etc)
 - create different levels (progressively harder enemy types)
 - loop levels or complete game?
 - save and load state (in cookies)
+- spawn enemies (every 20 player turns)(gather free spaces into array, then random)
+- progress spawned enemies types (levels define base enemy)(spawn 3 from last level, then 3 from current, then 3 from next, etc)
 - intro (backstory?) and gameplay explanation 
 - about page?
 - enter name at beginning, and store topscore when dead or restart/end? and show
