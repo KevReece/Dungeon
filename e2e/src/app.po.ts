@@ -9,8 +9,8 @@ export class AppPage {
     return element(by.css('app-root h1')).getText();
   }
 
-  getCharactorComponent() {
-    return element(by.id('CharactorComponent'));
+  getCharacterComponent() {
+    return element(by.id('CharacterComponent'));
   }
 
   getUserConsoleComponent() {

@@ -52,14 +52,14 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to the Dungeon!');
   });
 
-  it('should have initial charactor', () => {
-    const charactor = component.charactor;
-    expect(charactor.attack).toBe(1);
-    expect(charactor.defence).toBe(1);
-    expect(charactor.experience).toBe(0);
-    expect(charactor.gold).toBe(0);
-    expect(charactor.health).toBe(10);
-    expect(charactor.level).toBe(1);
+  it('should have initial character', () => {
+    const character = component.character;
+    expect(character.attack).toBe(1);
+    expect(character.defence).toBe(1);
+    expect(character.experience).toBe(0);
+    expect(character.gold).toBe(0);
+    expect(character.health).toBe(10);
+    expect(character.level).toBe(1);
   });
 
   it('should have initial console lines', () => {
@@ -70,28 +70,28 @@ describe('AppComponent', () => {
     expect(component.mapGrid).toBe(mockMapGrid);
   });
 
-  it('should pass charactor and enemies to grid builder', () => {
-    expect(mockMapBuilderService.getMapGrid).toHaveBeenCalledWith(component.charactor, component.enemies, jasmine.any(Function));
+  it('should pass character and enemies to grid builder', () => {
+    expect(mockMapBuilderService.getMapGrid).toHaveBeenCalledWith(component.character, component.enemies, jasmine.any(Function));
   });
 
-  it('should move charactor', () => {
-    spyOn(component.charactor, 'act');
+  it('should move character', () => {
+    spyOn(component.character, 'act');
 
     component.actionHandler(Direction.Left);
 
-    expect(component.charactor.act).toHaveBeenCalledWith(Direction.Left);
+    expect(component.character.act).toHaveBeenCalledWith(Direction.Left);
   });
 
   // TODO: refactor async map grid callback to test these:
   // it('should sort enemies', () => {
-  //   expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.charactor); //must be async
+  //   expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.character); //must be async
   // });
 
   // it('should sort enemies after actions', () => {
-  //   expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.charactor);
-  //   spyOn(component.charactor, 'act');
+  //   expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.character);
+  //   spyOn(component.character, 'act');
   //   component.actionHandler(Direction.Left);
-  //   expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.charactor); //check this second one works
+  //   expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.character); //check this second one works
   // });
 
 });

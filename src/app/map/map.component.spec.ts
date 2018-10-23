@@ -5,7 +5,7 @@ import { MapGrid } from '../model/map-grid.model';
 import { Row } from '../model/row.model';
 import { Wall } from '../model/celloccupiers/wall.model';
 import { Cell } from '../model/cell.model';
-import { Charactor } from '../model/celloccupiers/charactor.model';
+import { Character } from '../model/celloccupiers/character.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Gold } from '../model/cellitems/gold.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
@@ -26,12 +26,12 @@ describe('MapComponent', () => {
     const multipleWallRow = new Row([new Cell(new Wall()), new Cell(new Wall())]);
     const floorRow = new Row([new Cell()]);
     const mixedRow = new Row([new Cell(), new Cell(new Wall()), new Cell(), new Cell(new Wall())]);
-    const charactorRow = new Row([new Cell(new Charactor(null))]);
+    const characterRow = new Row([new Cell(new Character(null))]);
     const treasureChestRow = new Row([new Cell(new TreasureChest(null))]);
     const goldRow = new Row([new Cell()]);
     goldRow.cells[0].items.push(new Gold());
     const enemyRow = new Row([new Cell(new Enemy())]);
-    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, charactorRow, treasureChestRow, goldRow, enemyRow]);
+    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, characterRow, treasureChestRow, goldRow, enemyRow]);
   };
 
   beforeEach(() => {
@@ -65,7 +65,7 @@ describe('MapComponent', () => {
     expect(compiled.querySelector('tr:nth-of-type(4)').textContent).toBe(' X X');
   });
 
-  it('should render a charactor', () => {
+  it('should render a character', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('tr:nth-of-type(5)').querySelector('td').textContent).toBe('B');
   });

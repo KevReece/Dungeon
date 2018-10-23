@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserConsoleComponent } from './user-console/user-console.component';
-import { CharactorComponent } from './charactor/charactor.component';
+import { CharacterComponent } from './character/character.component';
 import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MapBuilderService } from './services/map-builder.service';
@@ -17,7 +17,7 @@ import { EnemiesComponent } from './enemies/enemies.component';
   declarations: [
     AppComponent,
     UserConsoleComponent,
-    CharactorComponent,
+    CharacterComponent,
     MapComponent,
     ControllerComponent,
     EnemiesComponent

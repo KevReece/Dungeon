@@ -1,5 +1,5 @@
 import { Cell } from './cell.model';
-import { Charactor } from './celloccupiers/charactor.model';
+import { Character } from './celloccupiers/character.model';
 import { Wall } from './celloccupiers/wall.model';
 import { MapGrid } from './map-grid.model';
 import { Row } from './row.model';
@@ -11,38 +11,38 @@ describe('Cell', () => {
         });
 
         it('should call set occupier', () => {
-            const charactor = new Charactor(null);
+            const character = new Character(null);
 
-            const cell = new Cell(charactor);
+            const cell = new Cell(character);
 
-            expect(cell.occupier).toBe(charactor);
+            expect(cell.occupier).toBe(character);
         });
     });
 
     describe('setOccupier', () => {
 
         it('should set cell occupier', () => {
-            const charactor = new Charactor(null);
+            const character = new Character(null);
 
-            const cell = new Cell(charactor);
+            const cell = new Cell(character);
 
-            expect(cell.occupier).toBe(charactor);
+            expect(cell.occupier).toBe(character);
         });
 
         it('should initialize the cell occupier', () => {
-            const charactor = new Charactor(null);
-            spyOn(charactor, 'initializeToCell');
+            const character = new Character(null);
+            spyOn(character, 'initializeToCell');
 
-            const cell = new Cell(charactor);
+            const cell = new Cell(character);
 
-            expect(charactor.initializeToCell).toHaveBeenCalledWith(cell);
+            expect(character.initializeToCell).toHaveBeenCalledWith(cell);
         });
 
         it('should clear previous cell of occupier', () => {
-            const charactor = new Charactor(null);
-            const previousCell = new Cell(charactor);
+            const character = new Character(null);
+            const previousCell = new Cell(character);
 
-            const newCell = new Cell(charactor);
+            const newCell = new Cell(character);
 
             expect(previousCell.occupier).toBeNull();
         });

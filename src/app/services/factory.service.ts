@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Charactor } from '../model/celloccupiers/charactor.model';
+import { Character } from '../model/celloccupiers/character.model';
 import { Cell } from '../model/cell.model';
 import { Wall } from '../model/celloccupiers/wall.model';
 import { CellOccupier } from '../model/celloccupiers/cell-occupier.model';
@@ -29,8 +29,8 @@ export class FactoryService {
   createWall(): Wall {
     return new Wall();
   }
-  createCharactor(): Charactor {
-    return new Charactor(this.userConsoleService);
+  createCharacter(): Character {
+    return new Character(this.userConsoleService);
   }
   createTreasureChest(): TreasureChest {
     return new TreasureChest(this.userConsoleService);

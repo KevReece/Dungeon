@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MapGrid } from '../model/map-grid.model';
 import { Cell } from '../model/cell.model';
-import { Charactor } from '../model/celloccupiers/charactor.model';
+import { Character } from '../model/celloccupiers/character.model';
 import { Wall } from '../model/celloccupiers/wall.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
@@ -21,7 +21,7 @@ export class MapComponent implements OnInit {
   }
 
   showCell(cell: Cell) {
-    if (cell.occupier instanceof Charactor) {
+    if (cell.occupier instanceof Character) {
       return 'B';
     } else if (cell.occupier instanceof Enemy) {
       return 'E';

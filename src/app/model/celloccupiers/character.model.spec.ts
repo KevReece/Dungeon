@@ -1,4 +1,4 @@
-import { Charactor } from './charactor.model';
+import { Character } from './character.model';
 import { Direction } from '../direction.model';
 import { MapGrid } from '../map-grid.model';
 import { Row } from '../row.model';
@@ -9,57 +9,57 @@ import { Gold } from '../cellitems/gold.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { Enemy } from './enemy.model';
 
-describe('Charactor', () => {
-    let charactor: Charactor;
+describe('Character', () => {
+    let character: Character;
     let mockUserConsoleService: UserConsoleService;
 
     beforeEach(() => {
         mockUserConsoleService = new UserConsoleService();
         spyOn(mockUserConsoleService, 'writeItemsCollected');
-        charactor = new Charactor(mockUserConsoleService);
+        character = new Character(mockUserConsoleService);
     });
 
     describe('initializeToCell', () => {
         it('should be getable', () => {
             const cell = new Cell();
 
-            charactor.initializeToCell(cell);
+            character.initializeToCell(cell);
 
-            expect(charactor.getCell()).toBe(cell);
+            expect(character.getCell()).toBe(cell);
         });
     });
 
     describe('act', () => {
-        it('should move the charactor', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(charactor)]), new Row([new Cell()])]);
+        it('should move the character', () => {
+            const mapGrid = new MapGrid([new Row([new Cell(character)]), new Row([new Cell()])]);
 
-            charactor.act(Direction.Down);
+            character.act(Direction.Down);
 
-            expect(charactor.getCell()).toBe(mapGrid.rows[1].cells[0]);
+            expect(character.getCell()).toBe(mapGrid.rows[1].cells[0]);
         });
 
-        it('should not move the charactor out of bounds', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(charactor)])]);
+        it('should not move the character out of bounds', () => {
+            const mapGrid = new MapGrid([new Row([new Cell(character)])]);
 
-            charactor.act(Direction.Up);
+            character.act(Direction.Up);
 
-            expect(charactor.getCell()).toBe(mapGrid.rows[0].cells[0]);
+            expect(character.getCell()).toBe(mapGrid.rows[0].cells[0]);
         });
 
-        it('should not move the charactor into occupied cell', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(charactor), new Cell(new Wall())])]);
+        it('should not move the character into occupied cell', () => {
+            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(new Wall())])]);
 
-            charactor.act(Direction.Right);
+            character.act(Direction.Right);
 
-            expect(charactor.getCell()).toBe(mapGrid.rows[0].cells[0]);
+            expect(character.getCell()).toBe(mapGrid.rows[0].cells[0]);
         });
 
         it('should open a treasure chest', () => {
             const treasureChest = new TreasureChest(null);
-            const mapGrid = new MapGrid([new Row([new Cell(charactor), new Cell(treasureChest)])]);
+            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(treasureChest)])]);
             spyOn(treasureChest, 'open');
 
-            charactor.act(Direction.Right);
+            character.act(Direction.Right);
 
             expect(treasureChest.open).toHaveBeenCalled();
         });
@@ -68,11 +68,11 @@ describe('Charactor', () => {
             const gold = new Gold();
             const newCell = new Cell();
             newCell.items.push(gold);
-            const mapGrid = new MapGrid([new Row([new Cell(charactor), newCell])]);
+            const mapGrid = new MapGrid([new Row([new Cell(character), newCell])]);
 
-            charactor.act(Direction.Right);
+            character.act(Direction.Right);
 
-            expect(charactor.gold).toEqual(gold.quantity);
+            expect(character.gold).toEqual(gold.quantity);
             expect(newCell.items.length).toEqual(0);
         });
 
@@ -80,9 +80,9 @@ describe('Charactor', () => {
             const gold = new Gold();
             const newCell = new Cell();
             newCell.items.push(gold);
-            const mapGrid = new MapGrid([new Row([new Cell(charactor), newCell])]);
+            const mapGrid = new MapGrid([new Row([new Cell(character), newCell])]);
 
-            charactor.act(Direction.Right);
+            character.act(Direction.Right);
 
             expect(mockUserConsoleService.writeItemsCollected).toHaveBeenCalled();
         });
@@ -90,9 +90,9 @@ describe('Charactor', () => {
         it('shouldn\'t raise items collected console message for no items', () => {
             const gold = new Gold();
             const newCell = new Cell();
-            const mapGrid = new MapGrid([new Row([new Cell(charactor), newCell])]);
+            const mapGrid = new MapGrid([new Row([new Cell(character), newCell])]);
 
-            charactor.act(Direction.Right);
+            character.act(Direction.Right);
 
             expect(mockUserConsoleService.writeItemsCollected).not.toHaveBeenCalled();
         });

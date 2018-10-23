@@ -1,5 +1,5 @@
 import { CellOccupier } from './cell-occupier.model';
-import { Charactor } from './charactor.model';
+import { Character } from './character.model';
 
 export class Enemy extends CellOccupier {
     typeName = 'Goblin';

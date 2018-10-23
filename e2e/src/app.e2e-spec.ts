@@ -12,8 +12,8 @@ describe('workspace-project App', () => {
     expect(page.getParagraphText()).toEqual('Welcome to the Dungeon!');
   });
 
-  it('should load charactor component', () => {
-    expect(page.getCharactorComponent().isPresent()).toBeTruthy();
+  it('should load character component', () => {
+    expect(page.getCharacterComponent().isPresent()).toBeTruthy();
   });
 
   it('should load map component', () => {

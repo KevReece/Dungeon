@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { FactoryService } from './factory.service';
 import { Wall } from '../model/celloccupiers/wall.model';
 import { Cell } from '../model/cell.model';
-import { Charactor } from '../model/celloccupiers/charactor.model';
+import { Character } from '../model/celloccupiers/character.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 
@@ -33,15 +33,15 @@ describe('FactoryService', () => {
     expect(cell.occupier).toEqual(jasmine.any(Wall));
   });
 
-  it('should create a charactor', () => {
-    expect(service.createCharactor()).toEqual(jasmine.any(Charactor));
+  it('should create a character', () => {
+    expect(service.createCharacter()).toEqual(jasmine.any(Character));
   });
 
   it('should create a cell occupied by something', () => {
-    const charactor = new Charactor(null);
-    const cell = service.createCellOccupiedBy(charactor);
+    const character = new Character(null);
+    const cell = service.createCellOccupiedBy(character);
     expect(cell).toEqual(jasmine.any(Cell));
-    expect(cell.occupier).toEqual(jasmine.any(Charactor));
+    expect(cell.occupier).toEqual(jasmine.any(Character));
   });
 
   it('should create a treasure chest', () => {

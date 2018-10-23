@@ -1,13 +1,11 @@
 import { CellOccupier } from './cell-occupier.model';
 import { Direction } from '../direction.model';
 import { TreasureChest } from './treasure-chest.model';
-import { FactoryService } from 'src/app/services/factory.service';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { Cell } from '../cell.model';
 import { Gold } from '../cellitems/gold.model';
-import { Enemy } from './enemy.model';
 
-export class Charactor extends CellOccupier {
+export class Character extends CellOccupier {
 
     constructor(private userConsoleService: UserConsoleService) {
         super();

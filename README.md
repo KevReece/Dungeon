@@ -33,18 +33,18 @@ Save the new user AWS key/secret into CircleCI project AWS permissions
 Ensure config.yml has correct bucket name
 
 ## Todo
-- order enemies panel
-- attack enemies (succeed if: charactor.attack + random[-2:3] > enemy.defence)
-- damage multiplier for health taken (add damage stat)(health lost = charactor.damage * random[0.5:1.5].roundup())
+- change getMapGrid to a promise
+- attack enemies (succeed if: character.attack + random[-2:3] > enemy.defence)
+- damage multiplier for health taken (add damage stat)(health lost = character.damage * random[0.5:1.5].roundup())
 - kill enemies (gives xp)
-- level up charactor (stats too)
+- level up character (stats too)
 - enemies move (store last direction, initialy random)(random based on ratio 4:forward; 2:left; 2:right; 1:stay; 1:reverse)(don't block for items)
 - disable controller buttons (when enemy turn/action in direction is blocked)
 - show action text for controller buttons ('move'/'attack'/'open')
-- move enemies towards charactor (within 10 distance)(walk towards on shortest unblocked axis/ random if both axis are equal)
+- move enemies towards character (within 10 distance)(walk towards on shortest unblocked axis/ random if both axis are equal)
 - enemies attack
 - treasure chests can drop food ('F')(add max health stat)(food gives 50%)
-- kill charactor
+- kill character
 - restart/end button
 - hole to next level ('O')
 - level indicator
