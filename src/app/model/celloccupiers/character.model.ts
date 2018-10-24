@@ -6,8 +6,9 @@ import { Cell } from '../cell.model';
 import { Gold } from '../cellitems/gold.model';
 import { FightService } from 'src/app/services/fight.service';
 import { Enemy } from './enemy.model';
+import { Fighter } from './fighter.model';
 
-export class Character extends CellOccupier {
+export class Character extends Fighter {
 
     constructor(private userConsoleService: UserConsoleService, private fightService: FightService) {
         super();
@@ -33,6 +34,11 @@ export class Character extends CellOccupier {
                 this.fightService.attack(this, adjacentCell.occupier);
             }
         }
+    }
+
+    killedOpponent(enemy: Enemy): void {
+        this.userConsoleService.writeExperienceGained(enemy.experienceValue);
+        this.experience += enemy.experienceValue;
     }
 
     private collectItems(cell: Cell): void {

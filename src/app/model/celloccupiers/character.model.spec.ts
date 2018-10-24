@@ -20,6 +20,7 @@ describe('Character', () => {
         mockUserConsoleService = new UserConsoleService();
         mockFightService = new FightService(null, null);
         spyOn(mockUserConsoleService, 'writeItemsCollected');
+        spyOn(mockUserConsoleService, 'writeExperienceGained');
         character = new Character(mockUserConsoleService, mockFightService);
     });
 
@@ -121,6 +122,20 @@ describe('Character', () => {
             character.act(Direction.Right);
 
             expect(mockFightService.attack).toHaveBeenCalledWith(character, enemy);
+        });
+    });
+
+    describe('killedOpponent', () => {
+        it('should increase experience', () => {
+            character.killedOpponent(new Enemy());
+
+            expect(character.experience).toEqual(2);
+        });
+
+        it('should send experience gained message', () => {
+            character.killedOpponent(new Enemy());
+
+            expect(mockUserConsoleService.writeExperienceGained).toHaveBeenCalledWith(2);
         });
     });
 });

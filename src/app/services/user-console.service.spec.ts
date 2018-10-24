@@ -12,37 +12,47 @@ describe('UserConsoleService', () => {
     service = TestBed.get(UserConsoleService);
   });
 
+  const getLastMessage = (): string => {
+    return service.lines[service.lines.length - 1];
+  };
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
   it('should write welcome message', () => {
     service.writeWelcome();
-    expect(service.lines[service.lines.length - 1]).toContain('Welcome');
+    expect(getLastMessage()).toContain('Welcome');
   });
 
   it('should write gold treasure message', () => {
     const gold = TestFactory.createGold();
     service.writeTreasureChestOpenedAndGoldDropped(gold);
-    expect(service.lines[service.lines.length - 1]).toContain('treasure');
-    expect(service.lines[service.lines.length - 1]).toContain(gold.quantity.toString());
+    expect(getLastMessage()).toContain('treasure');
+    expect(getLastMessage()).toContain(gold.quantity.toString());
   });
 
   it('should write items collected message', () => {
     const gold = TestFactory.createGold();
     service.writeItemsCollected([gold]);
-    expect(service.lines[service.lines.length - 1]).toContain('collected');
-    expect(service.lines[service.lines.length - 1]).toContain('gold');
+    expect(getLastMessage()).toContain('collected');
+    expect(getLastMessage()).toContain('gold');
   });
 
   it('should write attack succeeded message', () => {
     service.writeAttackSucceeded(5);
-    expect(service.lines[service.lines.length - 1]).toContain('succeeded');
-    expect(service.lines[service.lines.length - 1]).toContain('5');
+    expect(getLastMessage()).toContain('succeeded');
+    expect(getLastMessage()).toContain('5');
   });
 
   it('should write attack failed message', () => {
     service.writeAttackFailed();
-    expect(service.lines[service.lines.length - 1]).toContain('failed');
+    expect(getLastMessage()).toContain('failed');
+  });
+
+  it('should write experience gained message', () => {
+    service.writeExperienceGained(2);
+    expect(getLastMessage()).toContain('experience');
+    expect(getLastMessage()).toContain('2');
   });
 });

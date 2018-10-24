@@ -1,7 +1,6 @@
 import { Cell } from '../cell.model';
-import { FactoryService } from 'src/app/services/factory.service';
 
-export class CellOccupier {
+export abstract class CellOccupier {
 
     cell: Cell;
 

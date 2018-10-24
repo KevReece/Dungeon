@@ -14,13 +14,20 @@ export class FightService {
   attack(attacker: Character, defender: Enemy): void {
     const attackLuck = this.factoryService.createRandomInteger(-3, 4);
     if (attacker.attack + attackLuck > defender.defence) {
-      const minDamage = Math.ceil(attacker.damage * 0.5);
-      const maxDamage = Math.ceil(attacker.damage * 1.5);
-      const damage = this.factoryService.createRandomInteger(minDamage, maxDamage);
-      defender.health -= damage;
-      this.userConsoleService.writeAttackSucceeded(damage);
+      this.dealDamage(attacker, defender);
     } else {
       this.userConsoleService.writeAttackFailed();
+    }
+  }
+
+  private dealDamage(attacker: Character, defender: Enemy) {
+    const minDamage = Math.ceil(attacker.damage * 0.5);
+    const maxDamage = Math.ceil(attacker.damage * 1.5);
+    const damage = this.factoryService.createRandomInteger(minDamage, maxDamage);
+    defender.takeDamage(damage);
+    this.userConsoleService.writeAttackSucceeded(damage);
+    if (!defender.isAlive()) {
+      attacker.killedOpponent(defender);
     }
   }
 }

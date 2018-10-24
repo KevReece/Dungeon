@@ -28,6 +28,10 @@ export class UserConsoleService {
     this.lines.push('Attack failed');
   }
 
+  writeExperienceGained(experience: number): void {
+    this.lines.push(experience + ' experience points gained!');
+  }
+
   private getStringFromItem(item: ICellItem): String {
     if (item instanceof Gold) {
       return item.quantity + ' gold';

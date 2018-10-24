@@ -31,6 +31,7 @@ describe('FightService', () => {
       mockFactoryService = new FactoryService();
       spyOn(mockUserConsoleService, 'writeAttackSucceeded');
       spyOn(mockUserConsoleService, 'writeAttackFailed');
+      spyOn(enemy, 'takeDamage');
       service = new FightService(mockUserConsoleService, mockFactoryService);
     });
 
@@ -39,10 +40,11 @@ describe('FightService', () => {
       enemy.defence = 1;
       spyOn(mockFactoryService, 'createRandomInteger')
         .and.callFake(SpyExtensions.returnValuesAs([0, 1]));
+      spyOn(enemy, 'isAlive').and.returnValue(true);
 
       service.attack(character, enemy);
 
-      expect(enemy.health).toEqual(1);
+      expect(enemy.takeDamage).toHaveBeenCalledWith(1);
     });
 
     it('should send success message to user console', () => {
@@ -50,6 +52,7 @@ describe('FightService', () => {
       enemy.defence = 1;
       spyOn(mockFactoryService, 'createRandomInteger')
         .and.callFake(SpyExtensions.returnValuesAs([0, 1]));
+      spyOn(enemy, 'isAlive').and.returnValue(true);
 
       service.attack(character, enemy);
 
@@ -64,7 +67,7 @@ describe('FightService', () => {
 
       service.attack(character, enemy);
 
-      expect(enemy.health).toEqual(2);
+      expect(enemy.takeDamage).not.toHaveBeenCalled();
     });
 
     it('should send failed message to user console', () => {
@@ -83,10 +86,11 @@ describe('FightService', () => {
       enemy.defence = 1;
       spyOn(mockFactoryService, 'createRandomInteger')
         .and.callFake(SpyExtensions.returnValuesAs([1, 1]));
+      spyOn(enemy, 'isAlive').and.returnValue(true);
 
       service.attack(character, enemy);
 
-      expect(enemy.health).toEqual(1);
+      expect(enemy.takeDamage).toHaveBeenCalledWith(1);
       expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(-3, 4);
     });
 
@@ -98,7 +102,7 @@ describe('FightService', () => {
 
       service.attack(character, enemy);
 
-      expect(enemy.health).toEqual(2);
+      expect(enemy.takeDamage).not.toHaveBeenCalled();
     });
 
     it('should damage defender when attack is strong enough only with full luck', () => {
@@ -106,22 +110,23 @@ describe('FightService', () => {
       enemy.defence = 4;
       spyOn(mockFactoryService, 'createRandomInteger')
         .and.callFake(SpyExtensions.returnValuesAs([4, 1]));
+      spyOn(enemy, 'isAlive').and.returnValue(true);
 
       service.attack(character, enemy);
 
-      expect(enemy.health).toEqual(1);
+      expect(enemy.takeDamage).toHaveBeenCalledWith(1);
     });
 
     it('should not damage defender when attack is very strong enough but full bad luck just stops it', () => {
       character.attack = 4;
       enemy.defence = 1;
-      const fakeIndex = 0;
       spyOn(mockFactoryService, 'createRandomInteger')
         .and.callFake(SpyExtensions.returnValuesAs([-5, 1]));
 
       service.attack(character, enemy);
 
       expect(enemy.health).toEqual(2);
+      expect(enemy.takeDamage).not.toHaveBeenCalled();
     });
 
     it('should damage defender when attack is just strong enough to overcome full bad luck', () => {
@@ -129,22 +134,22 @@ describe('FightService', () => {
       enemy.defence = 1;
       spyOn(mockFactoryService, 'createRandomInteger')
         .and.callFake(SpyExtensions.returnValuesAs([-3, 1]));
+      spyOn(enemy, 'isAlive').and.returnValue(true);
 
       service.attack(character, enemy);
 
-      expect(enemy.health).toEqual(1);
+      expect(enemy.takeDamage).toHaveBeenCalledWith(1);
     });
 
     it('should cause damage with luck multiplier', () => {
       character.attack = 2;
       character.damage = 10;
-      enemy.health = 100;
       spyOn(mockFactoryService, 'createRandomInteger')
         .and.callFake(SpyExtensions.returnValuesAs([0, 15]));
 
       service.attack(character, enemy);
 
-      expect(enemy.health).toEqual(85);
+      expect(enemy.takeDamage).toHaveBeenCalledWith(15);
       expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(-3, 4);
       expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(5, 15);
     });
@@ -152,13 +157,13 @@ describe('FightService', () => {
     it('should cause damage with bad luck multiplier', () => {
       character.attack = 2;
       character.damage = 10;
-      enemy.health = 100;
       spyOn(mockFactoryService, 'createRandomInteger')
         .and.callFake(SpyExtensions.returnValuesAs([0, 5]));
+      spyOn(enemy, 'isAlive').and.returnValue(true);
 
       service.attack(character, enemy);
 
-      expect(enemy.health).toEqual(95);
+      expect(enemy.takeDamage).toHaveBeenCalledWith(5);
       expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(-3, 4);
       expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(5, 15);
     });
@@ -169,10 +174,11 @@ describe('FightService', () => {
       enemy.health = 10;
       spyOn(mockFactoryService, 'createRandomInteger')
         .and.callFake(SpyExtensions.returnValuesAs([0, 2]));
+      spyOn(enemy, 'isAlive').and.returnValue(true);
 
       service.attack(character, enemy);
 
-      expect(enemy.health).toEqual(8);
+      expect(enemy.takeDamage).toHaveBeenCalledWith(2);
       expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(-3, 4);
       expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(1, 2);
     });
@@ -180,15 +186,29 @@ describe('FightService', () => {
     it('should cause damage with tiny bad luck multiplier', () => {
       character.attack = 2;
       character.damage = 1;
-      enemy.health = 10;
       spyOn(mockFactoryService, 'createRandomInteger')
         .and.callFake(SpyExtensions.returnValuesAs([0, 1]));
+      spyOn(enemy, 'isAlive').and.returnValue(true);
 
       service.attack(character, enemy);
 
-      expect(enemy.health).toEqual(9);
+      expect(enemy.takeDamage).toHaveBeenCalledWith(1);
       expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(-3, 4);
       expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(1, 2);
+    });
+
+    it('should kill if damage exceeds health', () => {
+      character.attack = 2;
+      character.damage = 1;
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([0, 2]));
+      spyOn(enemy, 'isAlive').and.returnValue(false);
+      spyOn(character, 'killedOpponent');
+
+      service.attack(character, enemy);
+
+      expect(enemy.takeDamage).toHaveBeenCalledWith(2);
+      expect(character.killedOpponent).toHaveBeenCalledWith(enemy);
     });
   });
 });
