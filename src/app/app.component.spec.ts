@@ -6,11 +6,15 @@ import { MapLoaderService } from './services/map-loader.service';
 import { Direction } from './model/direction.model';
 import { UserConsoleService } from './services/user-console.service';
 import { EnemySorterService } from './services/enemy-sorter.service';
+import { FightService } from './services/fight.service';
+import { FactoryService } from './services/factory.service';
 
 describe('AppComponent', () => {
   const mockMapLoaderService  = { loadMapGrid: {} };
   const mockUserConsoleService  = { writeWelcome: {} };
   const mockEnemySorterService = { sort: {} };
+  const mockFightService = { };
+  const mockFactoryService = new FactoryService();
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
 
@@ -18,6 +22,7 @@ describe('AppComponent', () => {
     spyOn(mockMapLoaderService, 'loadMapGrid').and.returnValue(new Promise(() => {}));
     spyOn(mockUserConsoleService, 'writeWelcome');
     spyOn(mockEnemySorterService, 'sort');
+    spyOn(mockFactoryService, 'setUpDependencies');
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
@@ -28,7 +33,9 @@ describe('AppComponent', () => {
       providers: [
         {provide: MapLoaderService, useValue: mockMapLoaderService},
         {provide: UserConsoleService, useValue: mockUserConsoleService},
-        {provide: EnemySorterService, useValue: mockEnemySorterService}
+        {provide: EnemySorterService, useValue: mockEnemySorterService},
+        {provide: FightService, useValue: mockFightService},
+        {provide: FactoryService, useValue: mockFactoryService}
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -39,6 +46,10 @@ describe('AppComponent', () => {
 
   it('should create the app', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should setup dependencies for factory service (avoids circular dependencies)', () => {
+    expect(mockFactoryService.setUpDependencies).toHaveBeenCalledWith(mockUserConsoleService, mockFightService);
   });
 
   it(`should have as title 'Dungeon'`, () => {

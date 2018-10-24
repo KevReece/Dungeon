@@ -4,7 +4,7 @@ import { EnemySorterService } from './enemy-sorter.service';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 import { Character } from '../model/celloccupiers/character.model';
 import { Cell } from '../model/cell.model';
-import { TestFactory } from '../testhelpers/test-factory';
+import { TestFactory } from '../testhelpers/test-factory.spec';
 
 describe('EnemySorterService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

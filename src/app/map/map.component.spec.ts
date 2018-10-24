@@ -9,7 +9,7 @@ import { Character } from '../model/celloccupiers/character.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Gold } from '../model/cellitems/gold.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
-import { TestFactory } from '../testhelpers/test-factory';
+import { TestFactory } from '../testhelpers/test-factory.spec';
 
 describe('MapComponent', () => {
   let component: MapComponent;

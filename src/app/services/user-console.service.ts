@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Gold } from '../model/cellitems/gold.model';
 import { ICellItem } from '../model/cellitems/i-cell-item.model';
-import { Character } from '../model/celloccupiers/character.model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { Character } from './model/celloccupiers/character.model';
 import { MapGrid } from './model/map-grid.model';
 import { MapLoaderService } from './services/map-loader.service';
@@ -26,10 +26,12 @@ export class AppComponent implements OnInit {
       private factoryService: FactoryService,
       private userConsoleService: UserConsoleService,
       private enemySorterService: EnemySorterService,
-      private fightService: FightService) { }
+      private fightService: FightService) {
+        this.factoryService.setUpDependencies(this.userConsoleService, this.fightService);
+      }
 
   ngOnInit(): void {
-    this.character = this.factoryService.createCharacter(this.fightService);
+    this.character = this.factoryService.createCharacter();
     this.mapLoadPromise = this.mapLoaderService.loadMapGrid(this.mapGrid, this.character, this.enemies)
       .then(() => this.enemySorterService.sort(this.enemies, this.character));
     this.userConsoleService.writeWelcome();

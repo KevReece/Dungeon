@@ -8,7 +8,7 @@ export class TestFactory {
         return new Character(null, null);
     }
     static createGold(): Gold {
-        const mockFactoryService = new FactoryService(null);
+        const mockFactoryService = new FactoryService();
         spyOn(mockFactoryService, 'createRandomNumber').and.returnValue(1);
         return new Gold(mockFactoryService);
     }

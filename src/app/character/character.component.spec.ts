@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CharacterComponent } from './character.component';
 import { Character } from '../model/celloccupiers/character.model';
-import { TestFactory } from '../testhelpers/test-factory';
+import { TestFactory } from '../testhelpers/test-factory.spec';
 
 describe('CharacterComponent', () => {
   let component: CharacterComponent;

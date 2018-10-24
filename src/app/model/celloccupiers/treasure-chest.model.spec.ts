@@ -3,7 +3,7 @@ import { Cell } from '../cell.model';
 import { Gold } from '../cellitems/gold.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { FactoryService } from 'src/app/services/factory.service';
-import { TestFactory } from 'src/app/testhelpers/test-factory';
+import { TestFactory } from 'src/app/testhelpers/test-factory.spec';
 
 describe('TresureChest', () => {
     let mockUserConsoleService: UserConsoleService;
@@ -11,7 +11,7 @@ describe('TresureChest', () => {
 
     beforeEach(() => {
         mockUserConsoleService = new UserConsoleService();
-        mockFactoryService = new FactoryService(null);
+        mockFactoryService = new FactoryService();
         spyOn(mockUserConsoleService, 'writeTreasureChestOpenedAndGoldDropped');
         spyOn(mockFactoryService, 'createGold').and.returnValue(TestFactory.createGold());
     });

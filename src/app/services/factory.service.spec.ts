@@ -6,7 +6,7 @@ import { Cell } from '../model/cell.model';
 import { Character } from '../model/celloccupiers/character.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
-import { TestFactory } from '../testhelpers/test-factory';
+import { TestFactory } from '../testhelpers/test-factory.spec';
 import { Gold } from '../model/cellitems/gold.model';
 
 describe('FactoryService', () => {
@@ -36,7 +36,7 @@ describe('FactoryService', () => {
   });
 
   it('should create a character', () => {
-    expect(service.createCharacter(null)).toEqual(jasmine.any(Character));
+    expect(service.createCharacter()).toEqual(jasmine.any(Character));
   });
 
   it('should create a cell occupied by something', () => {

@@ -27,7 +27,7 @@ describe('FightService', () => {
       character = new Character(null, null);
       enemy = new Enemy();
       mockUserConsoleService = new UserConsoleService();
-      mockFactoryService = new FactoryService(null);
+      mockFactoryService = new FactoryService();
       spyOn(mockUserConsoleService, 'writeAttackSucceeded');
       spyOn(mockUserConsoleService, 'writeAttackFailed');
       service = new FightService(mockUserConsoleService, mockFactoryService);

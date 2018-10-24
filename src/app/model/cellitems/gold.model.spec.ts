@@ -6,7 +6,7 @@ describe('Gold', () => {
         let mockFactoryService: FactoryService;
 
         beforeEach(() => {
-            mockFactoryService = new FactoryService(null);
+            mockFactoryService = new FactoryService();
         });
 
         it('should have a minimum of 10 quantity', () => {

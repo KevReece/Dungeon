@@ -9,7 +9,7 @@ import { Gold } from '../cellitems/gold.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { Enemy } from './enemy.model';
 import { FightService } from 'src/app/services/fight.service';
-import { TestFactory } from 'src/app/testhelpers/test-factory';
+import { TestFactory } from 'src/app/testhelpers/test-factory.spec';
 
 describe('Character', () => {
     let character: Character;

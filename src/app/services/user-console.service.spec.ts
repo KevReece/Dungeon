@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { UserConsoleService } from './user-console.service';
 import { Gold } from '../model/cellitems/gold.model';
-import { TestFactory } from '../testhelpers/test-factory';
+import { TestFactory } from '../testhelpers/test-factory.spec';
 
 describe('UserConsoleService', () => {
   let service: UserConsoleService;

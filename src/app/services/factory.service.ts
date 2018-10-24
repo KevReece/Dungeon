@@ -13,15 +13,12 @@ import { Gold } from '../model/cellitems/gold.model';
   providedIn: 'root'
 })
 export class FactoryService {
-  private userConsoleService: UserConsoleService;
+  userConsoleService: UserConsoleService;
+  fightService: FightService;
 
-  constructor(private injector: Injector) { }
-
-  getUserConsoleService(): UserConsoleService {
-    if (!this.userConsoleService) {
-      this.userConsoleService = this.injector.get(UserConsoleService);
-    }
-    return this.userConsoleService;
+  setUpDependencies(userConsoleService: UserConsoleService, fightService: FightService): void {
+    this.userConsoleService = userConsoleService;
+    this.fightService = fightService;
   }
   createCellOccupiedBy(cellOccupier: CellOccupier): Cell {
     return new Cell(cellOccupier);
@@ -38,11 +35,11 @@ export class FactoryService {
   createWall(): Wall {
     return new Wall();
   }
-  createCharacter(fightService: FightService): Character {
-    return new Character(this.getUserConsoleService(), fightService);
+  createCharacter(): Character {
+    return new Character(this.userConsoleService, this.fightService);
   }
   createTreasureChest(): TreasureChest {
-    return new TreasureChest(this.getUserConsoleService(), this);
+    return new TreasureChest(this.userConsoleService, this);
   }
   createEnemy(): Enemy {
     return new Enemy();

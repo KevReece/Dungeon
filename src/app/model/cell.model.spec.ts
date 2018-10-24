@@ -3,7 +3,7 @@ import { Character } from './celloccupiers/character.model';
 import { Wall } from './celloccupiers/wall.model';
 import { MapGrid } from './map-grid.model';
 import { Row } from './row.model';
-import { TestFactory } from '../testhelpers/test-factory';
+import { TestFactory } from '../testhelpers/test-factory.spec';
 
 describe('Cell', () => {
     describe('constructor', () => {
