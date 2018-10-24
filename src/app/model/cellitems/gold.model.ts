@@ -1,12 +1,11 @@
 import { ICellItem } from './i-cell-item.model';
+import { FactoryService } from 'src/app/services/factory.service';
 
 export class Gold implements ICellItem {
     quantity: number;
 
-    constructor() {
+    constructor(factoryService: FactoryService) {
         const quantityMultipleOf = 10;
-        const minimumQuantity = 10;
-        const maximumQuantity = 100;
-        this.quantity = Math.floor(((Math.random() * maximumQuantity) + minimumQuantity) / quantityMultipleOf) * quantityMultipleOf;
+        this.quantity = factoryService.createRandomNumber(1, 10) * quantityMultipleOf;
     }
 }

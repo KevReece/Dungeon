@@ -7,6 +7,7 @@ import { Character } from '../model/celloccupiers/character.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 import { TestFactory } from '../testhelpers/test-factory';
+import { Gold } from '../model/cellitems/gold.model';
 
 describe('FactoryService', () => {
   let service: FactoryService;
@@ -61,5 +62,9 @@ describe('FactoryService', () => {
 
   it('should create a random number', () => {
     expect(service.createRandomNumber(1, 2)).toEqual(jasmine.any(Number));
+  });
+
+  it('should create gold', () => {
+    expect(service.createGold()).toEqual(jasmine.any(Gold));
   });
 });

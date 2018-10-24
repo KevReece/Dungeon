@@ -28,9 +28,9 @@ describe('MapComponent', () => {
     const floorRow = new Row([new Cell()]);
     const mixedRow = new Row([new Cell(), new Cell(new Wall()), new Cell(), new Cell(new Wall())]);
     const characterRow = new Row([new Cell(TestFactory.createCharacter())]);
-    const treasureChestRow = new Row([new Cell(new TreasureChest(null))]);
+    const treasureChestRow = new Row([new Cell(TestFactory.createTreasureChest())]);
     const goldRow = new Row([new Cell()]);
-    goldRow.cells[0].items.push(new Gold());
+    goldRow.cells[0].items.push(TestFactory.createGold());
     const enemyRow = new Row([new Cell(new Enemy())]);
     return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, characterRow, treasureChestRow, goldRow, enemyRow]);
   };

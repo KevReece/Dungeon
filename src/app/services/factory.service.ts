@@ -7,6 +7,7 @@ import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { UserConsoleService } from './user-console.service';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 import { FightService } from './fight.service';
+import { Gold } from '../model/cellitems/gold.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,12 +42,15 @@ export class FactoryService {
     return new Character(this.getUserConsoleService(), fightService);
   }
   createTreasureChest(): TreasureChest {
-    return new TreasureChest(this.getUserConsoleService());
+    return new TreasureChest(this.getUserConsoleService(), this);
   }
   createEnemy(): Enemy {
     return new Enemy();
   }
   createRandomNumber(min, max): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  createGold(): Gold {
+    return new Gold(this);
   }
 }

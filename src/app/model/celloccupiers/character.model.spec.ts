@@ -9,6 +9,7 @@ import { Gold } from '../cellitems/gold.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { Enemy } from './enemy.model';
 import { FightService } from 'src/app/services/fight.service';
+import { TestFactory } from 'src/app/testhelpers/test-factory';
 
 describe('Character', () => {
     let character: Character;
@@ -58,7 +59,7 @@ describe('Character', () => {
         });
 
         it('should open a treasure chest', () => {
-            const treasureChest = new TreasureChest(null);
+            const treasureChest = TestFactory.createTreasureChest();
             const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(treasureChest)])]);
             spyOn(treasureChest, 'open');
 
@@ -68,7 +69,7 @@ describe('Character', () => {
         });
 
         it('should collect gold', () => {
-            const gold = new Gold();
+            const gold = TestFactory.createGold();
             const newCell = new Cell();
             newCell.items.push(gold);
             const mapGrid = new MapGrid([new Row([new Cell(character), newCell])]);
@@ -80,7 +81,7 @@ describe('Character', () => {
         });
 
         it('should raise items collected console message', () => {
-            const gold = new Gold();
+            const gold = TestFactory.createGold();
             const newCell = new Cell();
             newCell.items.push(gold);
             const mapGrid = new MapGrid([new Row([new Cell(character), newCell])]);
@@ -91,7 +92,7 @@ describe('Character', () => {
         });
 
         it('shouldn\'t raise items collected console message for no items', () => {
-            const gold = new Gold();
+            const gold = TestFactory.createGold();
             const newCell = new Cell();
             const mapGrid = new MapGrid([new Row([new Cell(character), newCell])]);
 

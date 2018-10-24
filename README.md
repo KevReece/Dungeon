@@ -33,7 +33,6 @@ Save the new user AWS key/secret into CircleCI project AWS permissions
 Ensure config.yml has correct bucket name
 
 ## Todo
-- inject random throughout
 - improve fightservice injection
 - damage multiplier for health taken (add damage stat)(health lost = character.damage * random[0.5:1.5].roundup())
 - kill enemies (gives xp)

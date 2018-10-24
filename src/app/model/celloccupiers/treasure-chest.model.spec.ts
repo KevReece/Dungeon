@@ -2,18 +2,23 @@ import { TreasureChest } from './treasure-chest.model';
 import { Cell } from '../cell.model';
 import { Gold } from '../cellitems/gold.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
+import { FactoryService } from 'src/app/services/factory.service';
+import { TestFactory } from 'src/app/testhelpers/test-factory';
 
 describe('TresureChest', () => {
     let mockUserConsoleService: UserConsoleService;
+    let mockFactoryService: FactoryService;
 
     beforeEach(() => {
         mockUserConsoleService = new UserConsoleService();
+        mockFactoryService = new FactoryService(null);
         spyOn(mockUserConsoleService, 'writeTreasureChestOpenedAndGoldDropped');
+        spyOn(mockFactoryService, 'createGold').and.returnValue(TestFactory.createGold());
     });
 
     describe('open', () => {
         it('should remove itself', () => {
-            const treasureChest = new TreasureChest(mockUserConsoleService);
+            const treasureChest = new TreasureChest(mockUserConsoleService, mockFactoryService);
             const cell = new Cell(treasureChest);
 
             treasureChest.open();
@@ -22,7 +27,7 @@ describe('TresureChest', () => {
         });
 
         it('should drop item', () => {
-            const treasureChest = new TreasureChest(mockUserConsoleService);
+            const treasureChest = new TreasureChest(mockUserConsoleService, mockFactoryService);
             const cell = new Cell(treasureChest);
 
             treasureChest.open();
@@ -31,7 +36,7 @@ describe('TresureChest', () => {
         });
 
         it('should tell user console', () => {
-            const treasureChest = new TreasureChest(mockUserConsoleService);
+            const treasureChest = new TreasureChest(mockUserConsoleService, mockFactoryService);
             const cell = new Cell(treasureChest);
 
             treasureChest.open();

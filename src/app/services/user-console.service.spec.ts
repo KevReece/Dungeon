@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { UserConsoleService } from './user-console.service';
 import { Gold } from '../model/cellitems/gold.model';
+import { TestFactory } from '../testhelpers/test-factory';
 
 describe('UserConsoleService', () => {
   let service: UserConsoleService;
@@ -21,14 +22,14 @@ describe('UserConsoleService', () => {
   });
 
   it('should write gold treasure message', () => {
-    const gold = new Gold();
+    const gold = TestFactory.createGold();
     service.writeTreasureChestOpenedAndGoldDropped(gold);
     expect(service.lines[service.lines.length - 1]).toContain('treasure');
     expect(service.lines[service.lines.length - 1]).toContain(gold.quantity.toString());
   });
 
   it('should write items collected message', () => {
-    const gold = new Gold();
+    const gold = TestFactory.createGold();
     service.writeItemsCollected([gold]);
     expect(service.lines[service.lines.length - 1]).toContain('collected');
     expect(service.lines[service.lines.length - 1]).toContain('gold');
