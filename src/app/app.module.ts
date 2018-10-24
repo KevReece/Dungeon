@@ -7,7 +7,7 @@ import { UserConsoleComponent } from './user-console/user-console.component';
 import { CharacterComponent } from './character/character.component';
 import { MapComponent } from './map/map.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MapBuilderService } from './services/map-builder.service';
+import { MapLoaderService } from './services/map-loader.service';
 import { ControllerComponent } from './controller/controller.component';
 import { FactoryService } from './services/factory.service';
 import { UserConsoleService } from './services/user-console.service';
@@ -28,7 +28,7 @@ import { EnemiesComponent } from './enemies/enemies.component';
     HttpClientModule
   ],
   providers: [
-    MapBuilderService,
+    MapLoaderService,
     FactoryService,
     UserConsoleService
   ],

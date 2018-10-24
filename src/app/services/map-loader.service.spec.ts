@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MapBuilderService } from './map-builder.service';
+import { MapLoaderService } from './map-loader.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MapGrid } from '../model/map-grid.model';
 import { Wall } from '../model/celloccupiers/wall.model';
@@ -11,9 +11,9 @@ import { CellOccupier } from '../model/celloccupiers/cell-occupier.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 
-describe('MapBuilderService', () => {
+describe('MapLoadderService', () => {
 
-  describe('MapBuilderService isolated', () => {
+  describe('isolated', () => {
     let httpMock: HttpTestingController;
 
     beforeEach(() => {
@@ -24,7 +24,7 @@ describe('MapBuilderService', () => {
     });
 
     it('should be created', () => {
-      const service: MapBuilderService = TestBed.get(MapBuilderService);
+      const service: MapLoaderService = TestBed.get(MapLoaderService);
       expect(service).toBeTruthy();
     });
 
@@ -34,8 +34,9 @@ describe('MapBuilderService', () => {
       const enemies: Enemy[] = [];
 
       beforeEach(async() => {
-        const service: MapBuilderService = TestBed.get(MapBuilderService);
-        mapGrid = service.getMapGrid(character, enemies);
+        const service: MapLoaderService = TestBed.get(MapLoaderService);
+        mapGrid = new MapGrid([]);
+        service.loadMapGrid(mapGrid, character, enemies);
         const mapRequest = httpMock.expectOne('assets/maps/1.map');
         mapRequest.flush('  \nX \nB \nT \nE ');
       });
@@ -76,7 +77,7 @@ describe('MapBuilderService', () => {
     });
   });
 
-  describe('MapBuilderService integrated with map files', () => {
+  describe('integrated with map files', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -84,13 +85,14 @@ describe('MapBuilderService', () => {
       });
     });
 
-    it('should import 1.map', (done) => {
-      const service: MapBuilderService = TestBed.get(MapBuilderService);
-      const assertionFunction = function(mapGrid) {
-        expect(mapGrid.rows[0].cells[0].occupier).toEqual(jasmine.any(Wall));
-        done();
-      };
-      service.getMapGrid(null, [], assertionFunction);
+    it('should load 1.map', (done) => {
+      const service: MapLoaderService = TestBed.get(MapLoaderService);
+      const mapGrid: MapGrid = new MapGrid([]);
+      service.loadMapGrid(mapGrid, null, [])
+        .then(() => {
+          expect(mapGrid.rows[0].cells[0].occupier).toEqual(jasmine.any(Wall));
+          done();
+        });
     });
   });
 });

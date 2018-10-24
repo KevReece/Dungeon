@@ -107,7 +107,7 @@ describe('Cell', () => {
             const mapGrid = new MapGrid([new Row([cell]), new Row([otherCell])]);
 
             const angle = cell.getAngleFromUpTo(otherCell);
-            console.log('angle again' + angle);
+
             expect(angle).toEqual(Math.PI);
         });
 

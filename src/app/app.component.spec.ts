@@ -1,23 +1,21 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture, fakeAsync, flush, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { MapBuilderService } from './services/map-builder.service';
-import { MapGrid } from './model/map-grid.model';
+import { MapLoaderService } from './services/map-loader.service';
 import { Direction } from './model/direction.model';
 import { UserConsoleService } from './services/user-console.service';
 import { EnemySorterService } from './services/enemy-sorter.service';
 
 describe('AppComponent', () => {
-  const mockMapGrid = new MapGrid([]);
-  const mockMapBuilderService  = { getMapGrid: {} };
+  const mockMapLoaderService  = { loadMapGrid: {} };
   const mockUserConsoleService  = { writeWelcome: {} };
   const mockEnemySorterService = { sort: {} };
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
 
   beforeEach(async(() => {
-    spyOn(mockMapBuilderService, 'getMapGrid').and.returnValue(mockMapGrid);
+    spyOn(mockMapLoaderService, 'loadMapGrid').and.returnValue(new Promise(() => {}));
     spyOn(mockUserConsoleService, 'writeWelcome');
     spyOn(mockEnemySorterService, 'sort');
     TestBed.configureTestingModule({
@@ -28,7 +26,7 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
-        {provide: MapBuilderService, useValue: mockMapBuilderService},
+        {provide: MapLoaderService, useValue: mockMapLoaderService},
         {provide: UserConsoleService, useValue: mockUserConsoleService},
         {provide: EnemySorterService, useValue: mockEnemySorterService}
       ],
@@ -66,12 +64,8 @@ describe('AppComponent', () => {
     expect(mockUserConsoleService.writeWelcome).toHaveBeenCalled();
   });
 
-  it('should have built map grid', () => {
-    expect(component.mapGrid).toBe(mockMapGrid);
-  });
-
-  it('should pass character and enemies to grid builder', () => {
-    expect(mockMapBuilderService.getMapGrid).toHaveBeenCalledWith(component.character, component.enemies, jasmine.any(Function));
+  it('should have loaded map grid', () => {
+    expect(mockMapLoaderService.loadMapGrid).toHaveBeenCalledWith(component.mapGrid, component.character, component.enemies);
   });
 
   it('should move character', () => {
@@ -82,16 +76,17 @@ describe('AppComponent', () => {
     expect(component.character.act).toHaveBeenCalledWith(Direction.Left);
   });
 
-  // TODO: refactor async map grid callback to test these:
-  // it('should sort enemies', () => {
-  //   expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.character); //must be async
+  // TODO: I hate promises
+  // it('should sort enemies', (done) => {
+  //   component.mapLoadPromise.then(() => {
+  //     expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.character);
+  //     done();
+  //   });
   // });
 
-  // it('should sort enemies after actions', () => {
-  //   expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.character);
-  //   spyOn(component.character, 'act');
-  //   component.actionHandler(Direction.Left);
-  //   expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.character); //check this second one works
-  // });
-
+  it('should sort enemies after actions', () => {
+    spyOn(component.character, 'act');
+    component.actionHandler(Direction.Left);
+    expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.character);
+  });
 });

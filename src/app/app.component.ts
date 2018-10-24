@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Character } from './model/celloccupiers/character.model';
 import { MapGrid } from './model/map-grid.model';
-import { MapBuilderService } from './services/map-builder.service';
+import { MapLoaderService } from './services/map-loader.service';
 import { Direction } from './model/direction.model';
 import { FactoryService } from './services/factory.service';
 import { UserConsoleService } from './services/user-console.service';
@@ -15,9 +15,10 @@ import { EnemySorterService } from './services/enemy-sorter.service';
 })
 export class AppComponent {
   title = 'Dungeon';
-  mapGrid: MapGrid;
+  mapGrid: MapGrid = new MapGrid([]);
   character: Character;
   enemies: Enemy[] = [];
+  mapLoadPromise: Promise<void>;
 
   actionHandler(direction: Direction) {
     this.character.act(direction);
@@ -25,15 +26,13 @@ export class AppComponent {
   }
 
   constructor(
-      private mapBuilderService: MapBuilderService,
+      private mapLoaderService: MapLoaderService,
       private factoryService: FactoryService,
       private userConsoleService: UserConsoleService,
       private enemySorterService: EnemySorterService) {
     this.character = factoryService.createCharacter();
-    const sortEnemiesFunction = function(mapGrid: MapGrid): void {
-      enemySorterService.sort(this.enemies, this.character);
-    };
-    this.mapGrid = mapBuilderService.getMapGrid(this.character, this.enemies, sortEnemiesFunction);
+    this.mapLoadPromise = mapLoaderService.loadMapGrid(this.mapGrid, this.character, this.enemies)
+      .then(() => {console.log('here'); enemySorterService.sort(this.enemies, this.character); });
 
     userConsoleService.writeWelcome();
   }
