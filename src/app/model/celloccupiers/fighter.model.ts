@@ -20,5 +20,6 @@ export abstract class Fighter extends CellOccupier {
         }
     }
 
-    die(): void {}
+    die(): void { }
+    killedOpponent(fighter: Fighter): void { }
 }
