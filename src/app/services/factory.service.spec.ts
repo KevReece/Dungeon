@@ -6,6 +6,7 @@ import { Cell } from '../model/cell.model';
 import { Character } from '../model/celloccupiers/character.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
+import { TestFactory } from '../testhelpers/test-factory';
 
 describe('FactoryService', () => {
   let service: FactoryService;
@@ -34,11 +35,11 @@ describe('FactoryService', () => {
   });
 
   it('should create a character', () => {
-    expect(service.createCharacter()).toEqual(jasmine.any(Character));
+    expect(service.createCharacter(null)).toEqual(jasmine.any(Character));
   });
 
   it('should create a cell occupied by something', () => {
-    const character = new Character(null);
+    const character = TestFactory.createCharacter();
     const cell = service.createCellOccupiedBy(character);
     expect(cell).toEqual(jasmine.any(Cell));
     expect(cell.occupier).toEqual(jasmine.any(Character));
@@ -56,5 +57,9 @@ describe('FactoryService', () => {
 
   it('should create an enemy', () => {
     expect(service.createEnemy()).toEqual(jasmine.any(Enemy));
+  });
+
+  it('should create a random number', () => {
+    expect(service.createRandomNumber(1, 2)).toEqual(jasmine.any(Number));
   });
 });

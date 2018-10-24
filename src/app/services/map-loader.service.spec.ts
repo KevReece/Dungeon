@@ -10,6 +10,7 @@ import { Character } from '../model/celloccupiers/character.model';
 import { CellOccupier } from '../model/celloccupiers/cell-occupier.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
+import { TestFactory } from '../testhelpers/test-factory';
 
 describe('MapLoadderService', () => {
 
@@ -30,7 +31,7 @@ describe('MapLoadderService', () => {
 
     describe('getMapGrid', () => {
       let mapGrid: MapGrid;
-      const character: Character = new Character(null);
+      const character: Character = TestFactory.createCharacter();
       const enemies: Enemy[] = [];
 
       beforeEach(async() => {

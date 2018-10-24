@@ -3,6 +3,7 @@ import { Character } from './celloccupiers/character.model';
 import { Wall } from './celloccupiers/wall.model';
 import { MapGrid } from './map-grid.model';
 import { Row } from './row.model';
+import { TestFactory } from '../testhelpers/test-factory';
 
 describe('Cell', () => {
     describe('constructor', () => {
@@ -11,7 +12,7 @@ describe('Cell', () => {
         });
 
         it('should call set occupier', () => {
-            const character = new Character(null);
+            const character = TestFactory.createCharacter();
 
             const cell = new Cell(character);
 
@@ -22,7 +23,7 @@ describe('Cell', () => {
     describe('setOccupier', () => {
 
         it('should set cell occupier', () => {
-            const character = new Character(null);
+            const character = TestFactory.createCharacter();
 
             const cell = new Cell(character);
 
@@ -30,7 +31,7 @@ describe('Cell', () => {
         });
 
         it('should initialize the cell occupier', () => {
-            const character = new Character(null);
+            const character = TestFactory.createCharacter();
             spyOn(character, 'initializeToCell');
 
             const cell = new Cell(character);
@@ -39,7 +40,7 @@ describe('Cell', () => {
         });
 
         it('should clear previous cell of occupier', () => {
-            const character = new Character(null);
+            const character = TestFactory.createCharacter();
             const previousCell = new Cell(character);
 
             const newCell = new Cell(character);

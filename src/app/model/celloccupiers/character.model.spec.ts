@@ -8,15 +8,18 @@ import { TreasureChest } from './treasure-chest.model';
 import { Gold } from '../cellitems/gold.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { Enemy } from './enemy.model';
+import { FightService } from 'src/app/services/fight.service';
 
 describe('Character', () => {
     let character: Character;
     let mockUserConsoleService: UserConsoleService;
+    let mockFightService: FightService;
 
     beforeEach(() => {
         mockUserConsoleService = new UserConsoleService();
+        mockFightService = new FightService(null, null);
         spyOn(mockUserConsoleService, 'writeItemsCollected');
-        character = new Character(mockUserConsoleService);
+        character = new Character(mockUserConsoleService, mockFightService);
     });
 
     describe('initializeToCell', () => {
@@ -95,6 +98,16 @@ describe('Character', () => {
             character.act(Direction.Right);
 
             expect(mockUserConsoleService.writeItemsCollected).not.toHaveBeenCalled();
+        });
+
+        it('should fight enemy', () => {
+            const enemy = new Enemy();
+            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(enemy)])]);
+            spyOn(mockFightService, 'attack');
+
+            character.act(Direction.Right);
+
+            expect(mockFightService.attack).toHaveBeenCalledWith(character, enemy);
         });
     });
 });

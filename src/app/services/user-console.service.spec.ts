@@ -33,4 +33,15 @@ describe('UserConsoleService', () => {
     expect(service.lines[service.lines.length - 1]).toContain('collected');
     expect(service.lines[service.lines.length - 1]).toContain('gold');
   });
+
+  it('should write attack succeeded message', () => {
+    service.writeAttackSucceeded(5);
+    expect(service.lines[service.lines.length - 1]).toContain('succeeded');
+    expect(service.lines[service.lines.length - 1]).toContain('5');
+  });
+
+  it('should write attack failed message', () => {
+    service.writeAttackFailed();
+    expect(service.lines[service.lines.length - 1]).toContain('failed');
+  });
 });

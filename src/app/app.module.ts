@@ -12,6 +12,8 @@ import { ControllerComponent } from './controller/controller.component';
 import { FactoryService } from './services/factory.service';
 import { UserConsoleService } from './services/user-console.service';
 import { EnemiesComponent } from './enemies/enemies.component';
+import { EnemySorterService } from './services/enemy-sorter.service';
+import { FightService } from './services/fight.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { EnemiesComponent } from './enemies/enemies.component';
   providers: [
     MapLoaderService,
     FactoryService,
-    UserConsoleService
+    UserConsoleService,
+    EnemySorterService,
+    FightService
   ],
   bootstrap: [AppComponent]
 })

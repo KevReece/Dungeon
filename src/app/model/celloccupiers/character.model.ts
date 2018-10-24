@@ -4,10 +4,12 @@ import { TreasureChest } from './treasure-chest.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { Cell } from '../cell.model';
 import { Gold } from '../cellitems/gold.model';
+import { FightService } from 'src/app/services/fight.service';
+import { Enemy } from './enemy.model';
 
 export class Character extends CellOccupier {
 
-    constructor(private userConsoleService: UserConsoleService) {
+    constructor(private userConsoleService: UserConsoleService, private fightService: FightService) {
         super();
     }
 
@@ -26,6 +28,8 @@ export class Character extends CellOccupier {
                 this.collectItems(adjacentCell);
             } else if (adjacentCell.occupier instanceof TreasureChest) {
                 (<TreasureChest>adjacentCell.occupier).open();
+            } else if (adjacentCell.occupier instanceof Enemy) {
+                this.fightService.attack(this, adjacentCell.occupier);
             }
         }
     }

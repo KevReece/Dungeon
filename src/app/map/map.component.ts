@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MapGrid } from '../model/map-grid.model';
 import { Cell } from '../model/cell.model';
 import { Character } from '../model/celloccupiers/character.model';
@@ -11,14 +11,9 @@ import { Enemy } from '../model/celloccupiers/enemy.model';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.sass']
 })
-export class MapComponent implements OnInit {
+export class MapComponent {
 
   @Input() mapGrid: MapGrid;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   showCell(cell: Cell) {
     if (cell.occupier instanceof Character) {

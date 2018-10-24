@@ -9,6 +9,7 @@ import { Character } from '../model/celloccupiers/character.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Gold } from '../model/cellitems/gold.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
+import { TestFactory } from '../testhelpers/test-factory';
 
 describe('MapComponent', () => {
   let component: MapComponent;
@@ -26,7 +27,7 @@ describe('MapComponent', () => {
     const multipleWallRow = new Row([new Cell(new Wall()), new Cell(new Wall())]);
     const floorRow = new Row([new Cell()]);
     const mixedRow = new Row([new Cell(), new Cell(new Wall()), new Cell(), new Cell(new Wall())]);
-    const characterRow = new Row([new Cell(new Character(null))]);
+    const characterRow = new Row([new Cell(TestFactory.createCharacter())]);
     const treasureChestRow = new Row([new Cell(new TreasureChest(null))]);
     const goldRow = new Row([new Cell()]);
     goldRow.cells[0].items.push(new Gold());

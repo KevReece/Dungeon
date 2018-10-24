@@ -34,6 +34,7 @@ describe('AppComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.debugElement.componentInstance;
+    fixture.detectChanges();
   }));
 
   it('should create the app', () => {
@@ -45,7 +46,6 @@ describe('AppComponent', () => {
   });
 
   it('should render title in a h1 tag', () => {
-    fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to the Dungeon!');
   });
