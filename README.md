@@ -33,7 +33,6 @@ Save the new user AWS key/secret into CircleCI project AWS permissions
 Ensure config.yml has correct bucket name
 
 ## Todo
-- kill enemies (remove from enemy list and from grid)
 - level up character (stats too)
 - enemies move (store last direction, initialy random)(random based on ratio 4:forward; 2:left; 2:right; 1:stay; 1:reverse)(don't block for items)
 - disable controller buttons (when enemy turn/action in direction is blocked)

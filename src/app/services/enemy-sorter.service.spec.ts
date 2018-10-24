@@ -15,12 +15,43 @@ describe('EnemySorterService', () => {
   });
 
   it('should return for empty enemies', () => {
-    new EnemySorterService().sort([], null);
+    const enemies = [];
+
+    new EnemySorterService().sort(enemies, null);
+
+    expect(enemies.length).toEqual(0);
   });
 
   it('should return for single enemies', () => {
-    new EnemySorterService().sort([new Enemy()], null);
+    const enemies = [new Enemy()];
+
+    new EnemySorterService().sort(enemies, null);
+
+    expect(enemies.length).toEqual(1);
   });
+
+  it('should remove dead enemies', () => {
+    const enemies = [new Enemy()];
+    enemies[0].health = 0;
+
+    new EnemySorterService().sort(enemies, null);
+
+    expect(enemies.length).toEqual(0);
+  });
+
+  it('should remove several dead enemies', () => {
+    const enemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy()];
+    enemies[0].health = 0;
+    const livingEnemy = enemies[1];
+    enemies[2].health = 0;
+    enemies[3].health = 0;
+
+    new EnemySorterService().sort(enemies, null);
+
+    expect(enemies.length).toEqual(1);
+    expect(enemies[0]).toEqual(livingEnemy);
+  });
+
 
   it('should not sort enemies if correct already', () => {
     const enemyA = <Enemy>new Cell(new Enemy()).occupier;

@@ -8,7 +8,16 @@ import { Cell } from '../model/cell.model';
 })
 export class EnemySorterService {
   sort(enemies: Enemy[], character: Character): void {
+    this.removeDeadEnemies(enemies);
     enemies.sort((a, b) => this.compareTargetDistanceThenAngleFromTarget(a.cell, b.cell, character.cell));
+  }
+
+  private removeDeadEnemies(enemies: Enemy[]) {
+    for (let index = enemies.length - 1; index >= 0; index--) {
+      if (!enemies[index].isAlive()) {
+        enemies.splice(index, 1);
+      }
+    }
   }
 
   private compareTargetDistanceThenAngleFromTarget(cellA: Cell, cellB: Cell, targetCell: Cell): number {
