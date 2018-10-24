@@ -63,11 +63,6 @@ describe('AppComponent', () => {
 
   it('should have initial character', () => {
     const character = component.character;
-    expect(character.attack).toBe(1);
-    expect(character.defence).toBe(1);
-    expect(character.experience).toBe(0);
-    expect(character.gold).toBe(0);
-    expect(character.health).toBe(10);
     expect(character.level).toBe(1);
   });
 

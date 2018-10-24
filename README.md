@@ -33,7 +33,6 @@ Save the new user AWS key/secret into CircleCI project AWS permissions
 Ensure config.yml has correct bucket name
 
 ## Todo
-- damage multiplier for health taken (add damage stat)(health lost = character.damage * random[0.5:1.5].roundup())
 - kill enemies (gives xp)
 - level up character (stats too)
 - enemies move (store last direction, initialy random)(random based on ratio 4:forward; 2:left; 2:right; 1:stay; 1:reverse)(don't block for items)

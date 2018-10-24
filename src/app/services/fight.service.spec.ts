@@ -5,6 +5,7 @@ import { Character } from '../model/celloccupiers/character.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 import { UserConsoleService } from './user-console.service';
 import { FactoryService } from './factory.service';
+import { SpyExtensions } from '../testhelpers/spy-extensions';
 
 describe('FightService', () => {
   let service: FightService;
@@ -36,7 +37,8 @@ describe('FightService', () => {
     it('should damage defender', () => {
       character.attack = 2;
       enemy.defence = 1;
-      spyOn(mockFactoryService, 'createRandomNumber').and.returnValue(0);
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([0, 1]));
 
       service.attack(character, enemy);
 
@@ -46,7 +48,8 @@ describe('FightService', () => {
     it('should send success message to user console', () => {
       character.attack = 2;
       enemy.defence = 1;
-      spyOn(mockFactoryService, 'createRandomNumber').and.returnValue(0);
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([0, 1]));
 
       service.attack(character, enemy);
 
@@ -56,7 +59,8 @@ describe('FightService', () => {
     it('should not damage defender when attack is not quite strong enough', () => {
       character.attack = 1;
       enemy.defence = 1;
-      spyOn(mockFactoryService, 'createRandomNumber').and.returnValue(0);
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([0, 1]));
 
       service.attack(character, enemy);
 
@@ -66,7 +70,8 @@ describe('FightService', () => {
     it('should send failed message to user console', () => {
       character.attack = 1;
       enemy.defence = 1;
-      spyOn(mockFactoryService, 'createRandomNumber').and.returnValue(0);
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([0, 1]));
 
       service.attack(character, enemy);
 
@@ -76,18 +81,20 @@ describe('FightService', () => {
     it('should damage defender when attack is not quite strong enough but luck assists', () => {
       character.attack = 1;
       enemy.defence = 1;
-      spyOn(mockFactoryService, 'createRandomNumber').and.returnValue(1);
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([1, 1]));
 
       service.attack(character, enemy);
 
       expect(enemy.health).toEqual(1);
-      expect(mockFactoryService.createRandomNumber).toHaveBeenCalledWith(-3, 4);
+      expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(-3, 4);
     });
 
     it('should not damage defender when attack is not strong enough even with full luck', () => {
       character.attack = 1;
       enemy.defence = 5;
-      spyOn(mockFactoryService, 'createRandomNumber').and.returnValue(4);
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([4, 1]));
 
       service.attack(character, enemy);
 
@@ -97,7 +104,8 @@ describe('FightService', () => {
     it('should damage defender when attack is strong enough only with full luck', () => {
       character.attack = 1;
       enemy.defence = 4;
-      spyOn(mockFactoryService, 'createRandomNumber').and.returnValue(4);
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([4, 1]));
 
       service.attack(character, enemy);
 
@@ -107,7 +115,9 @@ describe('FightService', () => {
     it('should not damage defender when attack is very strong enough but full bad luck just stops it', () => {
       character.attack = 4;
       enemy.defence = 1;
-      spyOn(mockFactoryService, 'createRandomNumber').and.returnValue(-3);
+      const fakeIndex = 0;
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([-5, 1]));
 
       service.attack(character, enemy);
 
@@ -117,11 +127,68 @@ describe('FightService', () => {
     it('should damage defender when attack is just strong enough to overcome full bad luck', () => {
       character.attack = 5;
       enemy.defence = 1;
-      spyOn(mockFactoryService, 'createRandomNumber').and.returnValue(-3);
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([-3, 1]));
 
       service.attack(character, enemy);
 
       expect(enemy.health).toEqual(1);
+    });
+
+    it('should cause damage with luck multiplier', () => {
+      character.attack = 2;
+      character.damage = 10;
+      enemy.health = 100;
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([0, 15]));
+
+      service.attack(character, enemy);
+
+      expect(enemy.health).toEqual(85);
+      expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(-3, 4);
+      expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(5, 15);
+    });
+
+    it('should cause damage with bad luck multiplier', () => {
+      character.attack = 2;
+      character.damage = 10;
+      enemy.health = 100;
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([0, 5]));
+
+      service.attack(character, enemy);
+
+      expect(enemy.health).toEqual(95);
+      expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(-3, 4);
+      expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(5, 15);
+    });
+
+    it('should cause damage with tiny good luck multiplier', () => {
+      character.attack = 2;
+      character.damage = 1;
+      enemy.health = 10;
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([0, 2]));
+
+      service.attack(character, enemy);
+
+      expect(enemy.health).toEqual(8);
+      expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(-3, 4);
+      expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(1, 2);
+    });
+
+    it('should cause damage with tiny bad luck multiplier', () => {
+      character.attack = 2;
+      character.damage = 1;
+      enemy.health = 10;
+      spyOn(mockFactoryService, 'createRandomInteger')
+        .and.callFake(SpyExtensions.returnValuesAs([0, 1]));
+
+      service.attack(character, enemy);
+
+      expect(enemy.health).toEqual(9);
+      expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(-3, 4);
+      expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(1, 2);
     });
   });
 });

@@ -44,7 +44,7 @@ export class FactoryService {
   createEnemy(): Enemy {
     return new Enemy();
   }
-  createRandomNumber(min, max): number {
+  createRandomInteger(min, max): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   createGold(): Gold {

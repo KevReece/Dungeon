@@ -19,6 +19,7 @@ export class Character extends CellOccupier {
     health = 10;
     attack = 1;
     defence = 1;
+    damage = 1;
 
     act(direction: Direction) {
         const adjacentCell = this.cell.getAdjacentCell(direction);

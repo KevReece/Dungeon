@@ -3,7 +3,7 @@ import { Cell } from '../cell.model';
 import { Gold } from '../cellitems/gold.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { FactoryService } from 'src/app/services/factory.service';
-import { TestFactory } from 'src/app/testhelpers/test-factory.spec';
+import { TestFactory } from 'src/app/testhelpers/test-factory';
 
 describe('TresureChest', () => {
     let mockUserConsoleService: UserConsoleService;

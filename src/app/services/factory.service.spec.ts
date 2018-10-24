@@ -6,7 +6,7 @@ import { Cell } from '../model/cell.model';
 import { Character } from '../model/celloccupiers/character.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
-import { TestFactory } from '../testhelpers/test-factory.spec';
+import { TestFactory } from '../testhelpers/test-factory';
 import { Gold } from '../model/cellitems/gold.model';
 
 describe('FactoryService', () => {
@@ -60,8 +60,10 @@ describe('FactoryService', () => {
     expect(service.createEnemy()).toEqual(jasmine.any(Enemy));
   });
 
-  it('should create a random number', () => {
-    expect(service.createRandomNumber(1, 2)).toEqual(jasmine.any(Number));
+  it('should create a random integer', () => {
+    const randomNumber = service.createRandomInteger(1, 2);
+    expect(randomNumber).toBeGreaterThanOrEqual(1);
+    expect(randomNumber).toBeLessThanOrEqual(2);
   });
 
   it('should create gold', () => {

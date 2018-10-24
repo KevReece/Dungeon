@@ -5,4 +5,5 @@ export class Enemy extends CellOccupier {
     health = 2;
     attack = 1;
     defence = 1;
+    damage = 1;
  }

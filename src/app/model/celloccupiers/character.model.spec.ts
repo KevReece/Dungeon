@@ -9,7 +9,7 @@ import { Gold } from '../cellitems/gold.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { Enemy } from './enemy.model';
 import { FightService } from 'src/app/services/fight.service';
-import { TestFactory } from 'src/app/testhelpers/test-factory.spec';
+import { TestFactory } from 'src/app/testhelpers/test-factory';
 
 describe('Character', () => {
     let character: Character;
@@ -21,6 +21,18 @@ describe('Character', () => {
         mockFightService = new FightService(null, null);
         spyOn(mockUserConsoleService, 'writeItemsCollected');
         character = new Character(mockUserConsoleService, mockFightService);
+    });
+
+    describe('constructor', () => {
+        it('should setup defaults', () => {
+            expect(character.attack).toBe(1);
+            expect(character.defence).toBe(1);
+            expect(character.experience).toBe(0);
+            expect(character.gold).toBe(0);
+            expect(character.health).toBe(10);
+            expect(character.level).toBe(1);
+            expect(character.damage).toBe(1);
+        });
     });
 
     describe('initializeToCell', () => {

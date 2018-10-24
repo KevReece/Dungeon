@@ -10,7 +10,7 @@ import { Character } from '../model/celloccupiers/character.model';
 import { CellOccupier } from '../model/celloccupiers/cell-occupier.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
-import { TestFactory } from '../testhelpers/test-factory.spec';
+import { TestFactory } from '../testhelpers/test-factory';
 
 describe('MapLoadderService', () => {
 

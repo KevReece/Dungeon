@@ -6,6 +6,6 @@ export class Gold implements ICellItem {
 
     constructor(factoryService: FactoryService) {
         const quantityMultipleOf = 10;
-        this.quantity = factoryService.createRandomNumber(1, 10) * quantityMultipleOf;
+        this.quantity = factoryService.createRandomInteger(1, 10) * quantityMultipleOf;
     }
 }

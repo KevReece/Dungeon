@@ -9,7 +9,7 @@ export class TestFactory {
     }
     static createGold(): Gold {
         const mockFactoryService = new FactoryService();
-        spyOn(mockFactoryService, 'createRandomNumber').and.returnValue(1);
+        spyOn(mockFactoryService, 'createRandomInteger').and.returnValue(1);
         return new Gold(mockFactoryService);
     }
     static createTreasureChest(): TreasureChest {
