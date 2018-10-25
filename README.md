@@ -2,11 +2,11 @@
 
 ## About
 
-This is a dungeon crawler writen in AngularJS
+This is a dungeon crawler written in AngularJS
 
 ## Build
 
-Run `ng build`. The build artifacts will be stored in the `dist/` directory.
+Run `ng build`. The build artefacts will be stored in the `dist/` directory.
 
 ## Running tests
 
@@ -23,28 +23,27 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 
 ## First prod deploy
 
-Create AWS S3 bucket
-Enable the bucket propery for static website hosting
-Add bucket permissions policy as... effect:"allow", principle: "*", action: "s3:GetObject", resource: "arn:aws:s3:::bucketname/*"
-Create AWS IAM User with full s3 access
-Create CloudFront distribution to the bucket, with 'Default Root Object' as index.html
-Create CircleCI project
-Save the new user AWS key/secret into CircleCI project AWS permissions
-Ensure config.yml has correct bucket name
+- Create AWS S3 bucket
+- Enable the bucket property for static website hosting
+- Add bucket permissions policy as... effect:"allow", principle: "*", action: "s3:GetObject", resource: "arn:aws:s3:::bucketname/*"
+- Create AWS IAM User with full s3 access
+- Create CloudFront distribution to the bucket, with 'Default Root Object' as index.html
+- Create CircleCI project
+- Save the new user AWS key/secret into CircleCI project AWS permissions
+- Ensure config.yml has correct bucket name
 
 ## Todo
-- level up character (stats too)
-- enemies move (store last direction, initialy random)(random based on ratio 4:forward; 2:left; 2:right; 1:stay; 1:reverse)(don't block for items)
+- enemies move (store last direction, initially random)(random based on ratio 4:forward; 2:left; 2:right; 1:stay; 1:reverse)(don't block for items)
 - disable controller buttons (when enemy turn/action in direction is blocked)
 - show action text for controller buttons ('move'/'attack'/'open')
 - move enemies towards character (within 10 distance)(walk towards on shortest unblocked axis/ random if both axis are equal)
 - enemies attack
-- treasure chests can drop food ('F')(add max health stat)(food gives 50%)
 - kill character
 - restart/end button
 - hole to next level ('O')
 - level indicator
 - prettify
+- treasure chests can drop food ('F')(add max health stat)(food gives 50%)
 - other enemies types
 - create different levels (progressively harder enemy types)
 - loop levels or complete game?
