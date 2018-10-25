@@ -8,6 +8,7 @@ import { UserConsoleService } from './user-console.service';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 import { FightService } from './fight.service';
 import { Gold } from '../model/cellitems/gold.model';
+import { LevelUpgradeService } from './level-upgrade.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,12 @@ import { Gold } from '../model/cellitems/gold.model';
 export class FactoryService {
   userConsoleService: UserConsoleService;
   fightService: FightService;
+  levelUpgradeService: LevelUpgradeService;
 
-  setUpDependencies(userConsoleService: UserConsoleService, fightService: FightService): void {
+  setUpDependencies(userConsoleService: UserConsoleService, fightService: FightService, levelUpgradeService: LevelUpgradeService): void {
     this.userConsoleService = userConsoleService;
     this.fightService = fightService;
+    this.levelUpgradeService = levelUpgradeService;
   }
   createCellOccupiedBy(cellOccupier: CellOccupier): Cell {
     return new Cell(cellOccupier);
@@ -36,7 +39,7 @@ export class FactoryService {
     return new Wall();
   }
   createCharacter(): Character {
-    return new Character(this.userConsoleService, this.fightService);
+    return new Character(this.userConsoleService, this.fightService, this.levelUpgradeService);
   }
   createTreasureChest(): TreasureChest {
     return new TreasureChest(this.userConsoleService, this);

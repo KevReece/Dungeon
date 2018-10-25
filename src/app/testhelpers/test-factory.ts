@@ -5,7 +5,7 @@ import { FactoryService } from '../services/factory.service';
 
 export class TestFactory {
     static createCharacter(): Character {
-        return new Character(null, null);
+        return new Character(null, null, null);
     }
     static createGold(): Gold {
         const mockFactoryService = new FactoryService();

@@ -32,6 +32,10 @@ export class UserConsoleService {
     this.lines.push(experience + ' experience points gained!');
   }
 
+  writeLevelUpgraded(level: number): void {
+    this.lines.push('Congratulations you\'ve progressed your skills to level ' + level + '!');
+  }
+
   private getStringFromItem(item: ICellItem): String {
     if (item instanceof Gold) {
       return item.quantity + ' gold';

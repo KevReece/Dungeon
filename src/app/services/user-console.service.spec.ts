@@ -55,4 +55,10 @@ describe('UserConsoleService', () => {
     expect(getLastMessage()).toContain('experience');
     expect(getLastMessage()).toContain('2');
   });
+
+  it('should write level upgraded message', () => {
+    service.writeLevelUpgraded(2);
+    expect(getLastMessage()).toContain('level');
+    expect(getLastMessage()).toContain('2');
+  });
 });

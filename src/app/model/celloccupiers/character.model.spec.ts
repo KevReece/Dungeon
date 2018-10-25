@@ -4,24 +4,25 @@ import { MapGrid } from '../map-grid.model';
 import { Row } from '../row.model';
 import { Cell } from '../cell.model';
 import { Wall } from './wall.model';
-import { TreasureChest } from './treasure-chest.model';
-import { Gold } from '../cellitems/gold.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { Enemy } from './enemy.model';
 import { FightService } from 'src/app/services/fight.service';
 import { TestFactory } from 'src/app/testhelpers/test-factory';
+import { LevelUpgradeService } from 'src/app/services/level-upgrade.service';
 
 describe('Character', () => {
     let character: Character;
     let mockUserConsoleService: UserConsoleService;
     let mockFightService: FightService;
+    let mockLevelUpgradeService: LevelUpgradeService;
 
     beforeEach(() => {
         mockUserConsoleService = new UserConsoleService();
         mockFightService = new FightService(null, null);
+        mockLevelUpgradeService = new LevelUpgradeService(null);
         spyOn(mockUserConsoleService, 'writeItemsCollected');
         spyOn(mockUserConsoleService, 'writeExperienceGained');
-        character = new Character(mockUserConsoleService, mockFightService);
+        character = new Character(mockUserConsoleService, mockFightService, mockLevelUpgradeService);
     });
 
     describe('constructor', () => {
@@ -126,6 +127,8 @@ describe('Character', () => {
     });
 
     describe('killedOpponent', () => {
+        beforeEach(() => spyOn(mockLevelUpgradeService, 'check'));
+
         it('should increase experience', () => {
             character.killedOpponent(new Enemy());
 
@@ -136,6 +139,12 @@ describe('Character', () => {
             character.killedOpponent(new Enemy());
 
             expect(mockUserConsoleService.writeExperienceGained).toHaveBeenCalledWith(2);
+        });
+
+        it('should check for level upgrade', () => {
+            character.killedOpponent(new Enemy());
+
+            expect(mockLevelUpgradeService.check).toHaveBeenCalledWith(character);
         });
     });
 });

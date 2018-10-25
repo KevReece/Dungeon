@@ -8,12 +8,14 @@ import { UserConsoleService } from './services/user-console.service';
 import { EnemySorterService } from './services/enemy-sorter.service';
 import { FightService } from './services/fight.service';
 import { FactoryService } from './services/factory.service';
+import { LevelUpgradeService } from './services/level-upgrade.service';
 
 describe('AppComponent', () => {
   const mockMapLoaderService  = { loadMapGrid: {} };
   const mockUserConsoleService  = { writeWelcome: {} };
   const mockEnemySorterService = { sort: {} };
   const mockFightService = { };
+  const mockLevelUpgradeService = { initialize: {} };
   const mockFactoryService = new FactoryService();
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
@@ -23,6 +25,7 @@ describe('AppComponent', () => {
     spyOn(mockUserConsoleService, 'writeWelcome');
     spyOn(mockEnemySorterService, 'sort');
     spyOn(mockFactoryService, 'setUpDependencies');
+    spyOn(mockLevelUpgradeService, 'initialize');
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
@@ -35,6 +38,7 @@ describe('AppComponent', () => {
         {provide: UserConsoleService, useValue: mockUserConsoleService},
         {provide: EnemySorterService, useValue: mockEnemySorterService},
         {provide: FightService, useValue: mockFightService},
+        {provide: LevelUpgradeService, useValue: mockLevelUpgradeService},
         {provide: FactoryService, useValue: mockFactoryService}
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -49,7 +53,7 @@ describe('AppComponent', () => {
   });
 
   it('should setup dependencies for factory service (avoids circular dependencies)', () => {
-    expect(mockFactoryService.setUpDependencies).toHaveBeenCalledWith(mockUserConsoleService, mockFightService);
+    expect(mockFactoryService.setUpDependencies).toHaveBeenCalledWith(mockUserConsoleService, mockFightService, mockLevelUpgradeService);
   });
 
   it(`should have as title 'Dungeon'`, () => {
@@ -63,7 +67,9 @@ describe('AppComponent', () => {
 
   it('should have initial character', () => {
     const character = component.character;
-    expect(character.level).toBe(1);
+
+    expect(character.experience).toBe(0);
+    expect(mockLevelUpgradeService.initialize).toHaveBeenCalledWith(character);
   });
 
   it('should have initial console lines', () => {

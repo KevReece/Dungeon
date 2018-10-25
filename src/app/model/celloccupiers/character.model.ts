@@ -7,10 +7,14 @@ import { Gold } from '../cellitems/gold.model';
 import { FightService } from 'src/app/services/fight.service';
 import { Enemy } from './enemy.model';
 import { Fighter } from './fighter.model';
+import { LevelUpgradeService } from 'src/app/services/level-upgrade.service';
 
 export class Character extends Fighter {
 
-    constructor(private userConsoleService: UserConsoleService, private fightService: FightService) {
+    constructor(
+            private userConsoleService: UserConsoleService,
+            private fightService: FightService,
+            private levelUpgradeService: LevelUpgradeService) {
         super();
     }
 
@@ -18,6 +22,7 @@ export class Character extends Fighter {
     gold = 0;
     experience = 0;
     health = 10;
+    maxHealth = 10;
     attack = 1;
     defence = 1;
     damage = 1;
@@ -39,6 +44,7 @@ export class Character extends Fighter {
     killedOpponent(enemy: Enemy): void {
         this.userConsoleService.writeExperienceGained(enemy.experienceValue);
         this.experience += enemy.experienceValue;
+        this.levelUpgradeService.check(this);
     }
 
     private collectItems(cell: Cell): void {

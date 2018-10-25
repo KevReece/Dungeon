@@ -6,6 +6,7 @@ import { Enemy } from '../model/celloccupiers/enemy.model';
 import { UserConsoleService } from './user-console.service';
 import { FactoryService } from './factory.service';
 import { SpyExtensions } from '../testhelpers/spy-extensions';
+import { TestFactory } from '../testhelpers/test-factory';
 
 describe('FightService', () => {
   let service: FightService;
@@ -25,7 +26,7 @@ describe('FightService', () => {
     let enemy: Enemy;
 
     beforeEach(() => {
-      character = new Character(null, null);
+      character = TestFactory.createCharacter();
       enemy = new Enemy();
       mockUserConsoleService = new UserConsoleService();
       mockFactoryService = new FactoryService();

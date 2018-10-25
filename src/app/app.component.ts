@@ -8,6 +8,7 @@ import { UserConsoleService } from './services/user-console.service';
 import { Enemy } from './model/celloccupiers/enemy.model';
 import { EnemySorterService } from './services/enemy-sorter.service';
 import { FightService } from './services/fight.service';
+import { LevelUpgradeService } from './services/level-upgrade.service';
 
 @Component({
   selector: 'app-root',
@@ -26,12 +27,14 @@ export class AppComponent implements OnInit {
       private factoryService: FactoryService,
       private userConsoleService: UserConsoleService,
       private enemySorterService: EnemySorterService,
-      private fightService: FightService) {
-        this.factoryService.setUpDependencies(this.userConsoleService, this.fightService);
+      private fightService: FightService,
+      private levelUpgradeService: LevelUpgradeService) {
+        this.factoryService.setUpDependencies(this.userConsoleService, this.fightService, this.levelUpgradeService);
       }
 
   ngOnInit(): void {
     this.character = this.factoryService.createCharacter();
+    this.levelUpgradeService.initialize(this.character);
     this.mapLoadPromise = this.mapLoaderService.loadMapGrid(this.mapGrid, this.character, this.enemies)
       .then(() => this.enemySorterService.sort(this.enemies, this.character));
     this.userConsoleService.writeWelcome();
