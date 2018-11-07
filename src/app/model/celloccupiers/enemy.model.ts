@@ -2,6 +2,7 @@ import { Fighter } from './fighter.model';
 import { Direction } from '../direction.model';
 import { FactoryService } from 'src/app/services/factory.service';
 import { Cell } from '../cell.model';
+import { DirectionHelper } from '../direction-helper';
 
 export class Enemy extends Fighter {
     typeName = 'Goblin';
@@ -22,23 +23,26 @@ export class Enemy extends Fighter {
     }
 
     act(): void {
-        let cellToMoveTo: Cell;
         const randomChoice = this.factoryService.createRandomInteger(1, 10);
-
+        let directionToMoveIn: Direction = null;
         if (randomChoice <= 4) {
-            cellToMoveTo = this.cell.getAdjacentCell(Direction.Up);
+            directionToMoveIn = this.direction;
         } else if (randomChoice <= 6) {
-            cellToMoveTo = this.cell.getAdjacentCell(Direction.Right);
+            directionToMoveIn = DirectionHelper.RotateRight(this.direction);
         } else if (randomChoice <= 8) {
-            cellToMoveTo = this.cell.getAdjacentCell(Direction.Left);
+            directionToMoveIn = DirectionHelper.RotateLeft(this.direction);
         } else if (randomChoice <= 9) {
-            cellToMoveTo = this.cell.getAdjacentCell(Direction.Down);
-        } else {
-            cellToMoveTo = null;
+            directionToMoveIn = DirectionHelper.Opposite(this.direction);
+        }
+
+        let cellToMoveTo: Cell;
+        if (directionToMoveIn != null) {
+            cellToMoveTo = this.cell.getAdjacentCell(directionToMoveIn);
         }
 
         if (cellToMoveTo && !cellToMoveTo.isOccupied()) {
             cellToMoveTo.setOccupier(this);
+            this.direction = directionToMoveIn;
         }
     }
  }
