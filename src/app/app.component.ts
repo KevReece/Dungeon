@@ -9,6 +9,7 @@ import { Enemy } from './model/celloccupiers/enemy.model';
 import { EnemySorterService } from './services/enemy-sorter.service';
 import { FightService } from './services/fight.service';
 import { LevelUpgradeService } from './services/level-upgrade.service';
+import { TurnEngineService } from './services/turn-engine.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,8 @@ export class AppComponent implements OnInit {
       private userConsoleService: UserConsoleService,
       private enemySorterService: EnemySorterService,
       private fightService: FightService,
-      private levelUpgradeService: LevelUpgradeService) {
+      private levelUpgradeService: LevelUpgradeService,
+      private turnEngineService: TurnEngineService) {
         this.factoryService.setUpDependencies(this.userConsoleService, this.fightService, this.levelUpgradeService);
       }
 
@@ -37,11 +39,11 @@ export class AppComponent implements OnInit {
     this.levelUpgradeService.initialize(this.character);
     this.mapLoadPromise = this.mapLoaderService.loadMapGrid(this.mapGrid, this.character, this.enemies)
       .then(() => this.enemySorterService.sort(this.enemies, this.character));
+    this.turnEngineService.initialize(this.character, this.enemies);
     this.userConsoleService.writeWelcome();
   }
 
   actionHandler(direction: Direction) {
-    this.character.act(direction);
-    this.enemySorterService.sort(this.enemies, this.character);
+    this.turnEngineService.executeTurn(direction);
   }
 }

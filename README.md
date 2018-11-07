@@ -1,28 +1,22 @@
-# Dungeon
+Dungeon
+===
 
 ## About
-
 This is a dungeon crawler written in AngularJS
 
 ## Build
-
 Run `ng build`. The build artefacts will be stored in the `dist/` directory.
 
 ## Running tests
-
-Run `ng test`
-Run `ng e2e`
+Run `ng test` and `ng e2e`
 
 ## Local deploy
-
 Run `ng serve`. `http://localhost:4200/`
 
 ## Prod deploy
-
 Push to GitHub, then CircleCI will detect the changes, run the tests and deploy. `http://d244gfx0zgow1.cloudfront.net/`
 
 ## First prod deploy
-
 - Create AWS S3 bucket
 - Enable the bucket property for static website hosting
 - Add bucket permissions policy as... effect:"allow", principle: "*", action: "s3:GetObject", resource: "arn:aws:s3:::bucketname/*"

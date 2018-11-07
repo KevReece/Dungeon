@@ -9,6 +9,7 @@ import { EnemySorterService } from './services/enemy-sorter.service';
 import { FightService } from './services/fight.service';
 import { FactoryService } from './services/factory.service';
 import { LevelUpgradeService } from './services/level-upgrade.service';
+import { TurnEngineService } from './services/turn-engine.service';
 
 describe('AppComponent', () => {
   const mockMapLoaderService  = { loadMapGrid: {} };
@@ -16,6 +17,7 @@ describe('AppComponent', () => {
   const mockEnemySorterService = { sort: {} };
   const mockFightService = { };
   const mockLevelUpgradeService = { initialize: {} };
+  const mockTurnEngineService = { initialize: {}, executeTurn: {} };
   const mockFactoryService = new FactoryService();
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
@@ -26,6 +28,8 @@ describe('AppComponent', () => {
     spyOn(mockEnemySorterService, 'sort');
     spyOn(mockFactoryService, 'setUpDependencies');
     spyOn(mockLevelUpgradeService, 'initialize');
+    spyOn(mockTurnEngineService, 'initialize');
+    spyOn(mockTurnEngineService, 'executeTurn');
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
@@ -39,6 +43,7 @@ describe('AppComponent', () => {
         {provide: EnemySorterService, useValue: mockEnemySorterService},
         {provide: FightService, useValue: mockFightService},
         {provide: LevelUpgradeService, useValue: mockLevelUpgradeService},
+        {provide: TurnEngineService, useValue: mockTurnEngineService},
         {provide: FactoryService, useValue: mockFactoryService}
       ],
       schemas: [NO_ERRORS_SCHEMA]
@@ -54,6 +59,10 @@ describe('AppComponent', () => {
 
   it('should setup dependencies for factory service (avoids circular dependencies)', () => {
     expect(mockFactoryService.setUpDependencies).toHaveBeenCalledWith(mockUserConsoleService, mockFightService, mockLevelUpgradeService);
+  });
+
+  it('should initialize turn engine with game elements', () => {
+    expect(mockTurnEngineService.initialize).toHaveBeenCalledWith(component.character, component.enemies);
   });
 
   it(`should have as title 'Dungeon'`, () => {
@@ -80,14 +89,6 @@ describe('AppComponent', () => {
     expect(mockMapLoaderService.loadMapGrid).toHaveBeenCalledWith(component.mapGrid, component.character, component.enemies);
   });
 
-  it('should move character', () => {
-    spyOn(component.character, 'act');
-
-    component.actionHandler(Direction.Left);
-
-    expect(component.character.act).toHaveBeenCalledWith(Direction.Left);
-  });
-
   // TODO: I hate promises
   // it('should sort enemies', (done) => {
   //   component.mapLoadPromise.then(() => {
@@ -96,9 +97,9 @@ describe('AppComponent', () => {
   //   });
   // });
 
-  it('should sort enemies after actions', () => {
-    spyOn(component.character, 'act');
+  it('should executeTurn for charactor action', () => {
     component.actionHandler(Direction.Left);
-    expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.character);
+
+    expect(mockTurnEngineService.executeTurn).toHaveBeenCalledWith(Direction.Left);
   });
 });
