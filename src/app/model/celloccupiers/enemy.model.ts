@@ -10,9 +10,11 @@ export class Enemy extends Fighter {
     defence = 1;
     damage = 1;
     experienceValue = 2;
+    direction: Direction;
 
     constructor(private factoryService: FactoryService) {
         super();
+        this.direction = factoryService.createRandomInteger(Direction.Up, Direction.Left);
      }
 
     die(): void {

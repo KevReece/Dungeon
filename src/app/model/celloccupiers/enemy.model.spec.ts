@@ -3,18 +3,29 @@ import { Cell } from '../cell.model';
 import { MapGrid } from '../map-grid.model';
 import { Row } from '../row.model';
 import { FactoryService } from 'src/app/services/factory.service';
+import { Direction } from '../direction.model';
 
-describe('Fighter', () => {
+describe('Enemy', () => {
     let enemy: Enemy;
     let factoryService: FactoryService;
 
     beforeEach(() => {
         factoryService = new FactoryService();
-        enemy = new Enemy(factoryService);
+    });
+
+    describe('constructor', () => {
+        it('should set the direction', () => {
+            spyOn(factoryService, 'createRandomInteger').and.returnValue(3);
+
+            enemy = new Enemy(factoryService);
+
+            expect(enemy.direction).toBe(Direction.Left);
+        });
     });
 
     describe('die', () => {
         it('should clear the cell occupation', () => {
+            enemy = new Enemy(factoryService);
             new Cell(enemy);
             expect(enemy.cell.occupier).not.toBeNull();
 
@@ -25,6 +36,9 @@ describe('Fighter', () => {
     });
 
     describe('act', () => {
+        beforeEach(() => {
+            enemy = new Enemy(factoryService);
+        });
 
         it('should move forward', () => {
             const mapGrid = new MapGrid([new Row([new Cell()]), new Row([new Cell(enemy)])]);
