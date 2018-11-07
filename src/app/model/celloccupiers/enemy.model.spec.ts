@@ -26,7 +26,7 @@ describe('Enemy', () => {
     describe('die', () => {
         it('should clear the cell occupation', () => {
             enemy = new Enemy(factoryService);
-            new Cell(enemy);
+            const cell = new Cell(enemy);
             expect(enemy.cell.occupier).not.toBeNull();
 
             enemy.die();
