@@ -1,4 +1,5 @@
 import { Fighter } from './fighter.model';
+import { Direction } from '../direction.model';
 
 export class Enemy extends Fighter {
     typeName = 'Goblin';
@@ -10,5 +11,12 @@ export class Enemy extends Fighter {
 
     die(): void {
         this.cell.occupier = null;
+    }
+
+    act(): void {
+        const adjacentCell = this.cell.getAdjacentCell(Direction.Up);
+        if (!adjacentCell.isOccupied()) {
+            adjacentCell.setOccupier(this);
+        }
     }
  }

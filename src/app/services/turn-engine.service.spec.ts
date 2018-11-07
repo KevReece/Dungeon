@@ -19,13 +19,16 @@ describe('TurnEngineService', () => {
     let service: TurnEngineService;
     let character: Character;
     let enemies: Enemy[];
+    let enemy: Enemy;
     const mockEnemySorterService: EnemySorterService = new EnemySorterService();
 
     beforeEach(() => {
       service = new TurnEngineService(mockEnemySorterService);
       character = TestFactory.createCharacter();
-      enemies = [];
+      enemy = TestFactory.createEnemy();
+      enemies = [enemy];
       spyOn(character, 'act');
+      spyOn(enemy, 'act');
       spyOn(mockEnemySorterService, 'sort');
       service.initialize(character, enemies);
     });
@@ -34,6 +37,12 @@ describe('TurnEngineService', () => {
       service.executeTurn(Direction.Left);
 
       expect(character.act).toHaveBeenCalledWith(Direction.Left);
+    });
+
+    it('should call act for all enemies', () => {
+      service.executeTurn(Direction.Left);
+
+      expect(enemy.act).toHaveBeenCalled();
     });
 
     it('should sort enemies after actions', () => {

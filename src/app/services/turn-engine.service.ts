@@ -21,5 +21,7 @@ export class TurnEngineService {
   executeTurn(charactorActionDirection: Direction) {
     this.character.act(charactorActionDirection);
     this.enemySorterService.sort(this.enemies, this.character);
+    this.enemies.forEach(enemy => enemy.act());
+    this.enemySorterService.sort(this.enemies, this.character);
   }
 }
