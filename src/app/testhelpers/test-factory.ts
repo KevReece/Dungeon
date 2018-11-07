@@ -9,7 +9,7 @@ export class TestFactory {
         return new Character(null, null, null);
     }
     static createEnemy(): Enemy {
-        return new Enemy();
+        return new Enemy(null);
     }
     static createGold(): Gold {
         const mockFactoryService = new FactoryService();

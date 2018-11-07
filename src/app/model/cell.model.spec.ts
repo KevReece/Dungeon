@@ -1,5 +1,4 @@
 import { Cell } from './cell.model';
-import { Character } from './celloccupiers/character.model';
 import { Wall } from './celloccupiers/wall.model';
 import { MapGrid } from './map-grid.model';
 import { Row } from './row.model';

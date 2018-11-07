@@ -27,7 +27,7 @@ describe('FightService', () => {
 
     beforeEach(() => {
       character = TestFactory.createCharacter();
-      enemy = new Enemy();
+      enemy = TestFactory.createEnemy();
       mockUserConsoleService = new UserConsoleService();
       mockFactoryService = new FactoryService();
       spyOn(mockUserConsoleService, 'writeAttackSucceeded');

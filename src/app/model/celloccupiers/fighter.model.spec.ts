@@ -1,11 +1,11 @@
 import { Fighter } from './fighter.model';
-import { Enemy } from './enemy.model';
+import { TestFactory } from 'src/app/testhelpers/test-factory';
 
 describe('Fighter', () => {
     let fighter: Fighter;
 
     beforeEach(() => {
-        fighter = new Enemy();
+        fighter = TestFactory.createEnemy();
     });
 
     describe('isAlive', () => {

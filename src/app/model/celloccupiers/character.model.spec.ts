@@ -116,7 +116,7 @@ describe('Character', () => {
         });
 
         it('should fight enemy', () => {
-            const enemy = new Enemy();
+            const enemy = TestFactory.createEnemy();
             const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(enemy)])]);
             spyOn(mockFightService, 'attack');
 
@@ -130,19 +130,19 @@ describe('Character', () => {
         beforeEach(() => spyOn(mockLevelUpgradeService, 'check'));
 
         it('should increase experience', () => {
-            character.killedOpponent(new Enemy());
+            character.killedOpponent(TestFactory.createEnemy());
 
             expect(character.experience).toEqual(2);
         });
 
         it('should send experience gained message', () => {
-            character.killedOpponent(new Enemy());
+            character.killedOpponent(TestFactory.createEnemy());
 
             expect(mockUserConsoleService.writeExperienceGained).toHaveBeenCalledWith(2);
         });
 
         it('should check for level upgrade', () => {
-            character.killedOpponent(new Enemy());
+            character.killedOpponent(TestFactory.createEnemy());
 
             expect(mockLevelUpgradeService.check).toHaveBeenCalledWith(character);
         });

@@ -45,9 +45,9 @@ export class FactoryService {
     return new TreasureChest(this.userConsoleService, this);
   }
   createEnemy(): Enemy {
-    return new Enemy();
+    return new Enemy(this);
   }
-  createRandomInteger(min, max): number {
+  createRandomInteger(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   createGold(): Gold {
