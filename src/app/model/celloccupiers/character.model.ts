@@ -18,6 +18,7 @@ export class Character extends Fighter {
         super();
     }
 
+    name = 'Adventurer';
     level = 1;
     gold = 0;
     experience = 0;

@@ -57,7 +57,7 @@ describe('FightService', () => {
 
       service.attack(character, enemy);
 
-      expect(mockUserConsoleService.writeAttackSucceeded).toHaveBeenCalledWith(1);
+      expect(mockUserConsoleService.writeAttackSucceeded).toHaveBeenCalledWith(character, enemy, 1);
     });
 
     it('should not damage defender when attack is not quite strong enough', () => {
@@ -79,7 +79,7 @@ describe('FightService', () => {
 
       service.attack(character, enemy);
 
-      expect(mockUserConsoleService.writeAttackFailed).toHaveBeenCalled();
+      expect(mockUserConsoleService.writeAttackFailed).toHaveBeenCalledWith(character, enemy);
     });
 
     it('should damage defender when attack is not quite strong enough but luck assists', () => {

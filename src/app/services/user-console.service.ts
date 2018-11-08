@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Gold } from '../model/cellitems/gold.model';
 import { ICellItem } from '../model/cellitems/i-cell-item.model';
+import { Fighter } from '../model/celloccupiers/fighter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +21,12 @@ export class UserConsoleService {
     this.lines.push('You\'ve collected: ' + items.map(this.getStringFromItem).join(', '));
   }
 
-  writeAttackSucceeded(damage: Number): void {
-    this.lines.push('Attack succeeded! ' + damage + ' damage inflicted');
+  writeAttackSucceeded(attacker: Fighter, defender: Fighter, damage: Number): void {
+    this.lines.push(attacker.name + ' attack on ' + defender.name + ' succeeded! ' + damage + ' damage inflicted');
   }
 
-  writeAttackFailed(): void {
-    this.lines.push('Attack failed');
+  writeAttackFailed(attacker: Fighter, defender: Fighter): void {
+    this.lines.push(attacker.name + ' attack on ' + defender.name + ' failed');
   }
 
   writeExperienceGained(experience: number): void {

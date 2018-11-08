@@ -2,6 +2,7 @@ import { CellOccupier } from './cell-occupier.model';
 
 export abstract class Fighter extends CellOccupier {
 
+    name: string;
     health: number;
     attack: number;
     defence: number;

@@ -17,7 +17,7 @@ export class FightService {
     if (attacker.attack + attackLuck > defender.defence) {
       this.dealDamage(attacker, defender);
     } else {
-      this.userConsoleService.writeAttackFailed();
+      this.userConsoleService.writeAttackFailed(attacker, defender);
     }
   }
 
@@ -26,7 +26,7 @@ export class FightService {
     const maxDamage = Math.ceil(attacker.damage * 1.5);
     const damage = this.factoryService.createRandomInteger(minDamage, maxDamage);
     defender.takeDamage(damage);
-    this.userConsoleService.writeAttackSucceeded(damage);
+    this.userConsoleService.writeAttackSucceeded(attacker, defender, damage);
     if (!defender.isAlive()) {
       attacker.killedOpponent(defender);
     }

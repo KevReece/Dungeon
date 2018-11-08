@@ -7,7 +7,7 @@ import { Character } from './character.model';
 import { FightService } from 'src/app/services/fight.service';
 
 export class Enemy extends Fighter {
-    typeName = 'Goblin';
+    name = 'Goblin';
     health = 2;
     attack = 1;
     defence = 1;
