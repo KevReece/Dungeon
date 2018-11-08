@@ -48,7 +48,7 @@ export class Enemy extends Fighter {
         let directionToMoveIn: Direction;
         const awarenessDistance = 10;
         if (this.cell.getDistance(character.cell) <= awarenessDistance) {
-            directionToMoveIn = this.cell.getDirectionTo(character.cell);
+            directionToMoveIn = this.chaseDirection(character);
         } else {
             directionToMoveIn = this.wanderDirection();
         }
@@ -60,6 +60,27 @@ export class Enemy extends Fighter {
             cellToMoveTo.setOccupier(this);
             this.direction = directionToMoveIn;
         }
+    }
+
+    private chaseDirection(character: Character) {
+        const rowDifference = character.cell.rowIndex - this.cell.rowIndex;
+        const columnDifference = character.cell.columnIndex - this.cell.columnIndex;
+        const verticalDirection = rowDifference === 0 ? null : rowDifference > 0 ? Direction.Down : Direction.Up;
+        const horizontalDirection = columnDifference === 0 ? null : columnDifference > 0 ? Direction.Right : Direction.Left;
+        const haveVerticalOption = verticalDirection != null && !this.cell.isAdjacentCellOccupied(verticalDirection);
+        const haveHorizontalOption = horizontalDirection != null && !this.cell.isAdjacentCellOccupied(horizontalDirection);
+        if (!haveVerticalOption) {
+            return haveHorizontalOption ? horizontalDirection : null;
+        }
+        if (!haveHorizontalOption) {
+            return verticalDirection;
+        }
+        const sumDifference = Math.abs(columnDifference) + Math.abs(rowDifference);
+        const randomFromSum = this.factoryService.createRandomInteger(1, sumDifference);
+        if (randomFromSum <= Math.abs(columnDifference)) {
+            return horizontalDirection;
+        }
+        return verticalDirection;
     }
 
     private wanderDirection() {

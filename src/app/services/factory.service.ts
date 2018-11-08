@@ -25,7 +25,7 @@ export class FactoryService {
     this.levelUpgradeService = levelUpgradeService;
   }
   createCellOccupiedBy(cellOccupier: CellOccupier): Cell {
-    return new Cell(this, cellOccupier);
+    return new Cell(cellOccupier);
   }
   createTreasureChestCell(): Cell {
     return this.createCellOccupiedBy(this.createTreasureChest());
@@ -34,7 +34,7 @@ export class FactoryService {
     return this.createCellOccupiedBy(this.createWall());
   }
   createEmptyCell(): Cell {
-    return new Cell(this);
+    return new Cell();
   }
   createWall(): Wall {
     return new Wall();

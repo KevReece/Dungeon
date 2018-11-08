@@ -28,7 +28,6 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 
 ## Todo
     - messages for enemy attacks
-    - enemy chase other axis when blocked
 - kill character
 - disable controller buttons (when enemy turn/action in direction is blocked)
     - block backend first then reflect the block on ui buttons
