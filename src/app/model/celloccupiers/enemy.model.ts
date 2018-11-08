@@ -4,6 +4,7 @@ import { FactoryService } from 'src/app/services/factory.service';
 import { Cell } from '../cell.model';
 import { DirectionHelper } from '../direction-helper';
 import { Character } from './character.model';
+import { FightService } from 'src/app/services/fight.service';
 
 export class Enemy extends Fighter {
     typeName = 'Goblin';
@@ -14,7 +15,7 @@ export class Enemy extends Fighter {
     experienceValue = 2;
     direction: Direction;
 
-    constructor(private factoryService: FactoryService) {
+    constructor(private factoryService: FactoryService, private fightService: FightService) {
         super();
         this.direction = factoryService.createRandomInteger(Direction.Up, Direction.Left);
      }
@@ -36,6 +37,14 @@ export class Enemy extends Fighter {
     }
 
     act(character: Character): void {
+        if (this.cell.getDistance(character.cell) < 1.5) {
+            this.fightService.attack(this, character);
+        } else {
+            this.move(character);
+        }
+    }
+
+    private move(character: Character) {
         let directionToMoveIn: Direction;
         const awarenessDistance = 10;
         if (this.cell.getDistance(character.cell) <= awarenessDistance) {
@@ -43,12 +52,10 @@ export class Enemy extends Fighter {
         } else {
             directionToMoveIn = this.wanderDirection();
         }
-
         let cellToMoveTo: Cell;
         if (directionToMoveIn != null) {
             cellToMoveTo = this.cell.getAdjacentCell(directionToMoveIn);
         }
-
         if (cellToMoveTo && !cellToMoveTo.isOccupied()) {
             cellToMoveTo.setOccupier(this);
             this.direction = directionToMoveIn;

@@ -27,25 +27,26 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 - Ensure config.yml has correct bucket name
 
 ## Todo
-- enemies move (store last direction, initially random)(random based on ratio 4:forward; 2:left; 2:right; 1:stay; 1:reverse)(don't block for items)
-- disable controller buttons (when enemy turn/action in direction is blocked)
-- show action text for controller buttons ('move'/'attack'/'open')
-- move enemies towards character (within 10 distance)(walk towards on shortest unblocked axis/ random if both axis are equal)
-- enemies attack
+    - messages for enemy attacks
+    - enemy chase other axis when blocked
 - kill character
+- disable controller buttons (when enemy turn/action in direction is blocked)
+    - block backend first then reflect the block on ui buttons
+- show action text for controller buttons ('move'/'attack'/'open')
 - restart/end button
 - hole to next level ('O')
 - level indicator
-- prettify
+- prettify ui (layout/images)
 - treasure chests can drop food ('F')(add max health stat)(food gives 50%)
-- other enemies types
-- create different levels (progressively harder enemy types)
+- other enemies types (easy Goblin enemy 'E'/hard Orc enemy 'H')
+- create different levels (progressively harder enemy type pairs)
 - loop levels or complete game?
 - save and load state (in cookies)
 - spawn enemies (every 20 player turns)(gather free spaces into array, then random)
-- progress spawned enemies types (levels define base enemy)(spawn 3 from last level, then 3 from current, then 3 from next, etc)
+- progress spawned enemies types (levels define enemy type pair)(spawn: last level easy > last level hard > current level easy > current level hard > next level easy > next level hard > etc)
 - intro (backstory?) and gameplay explanation 
 - about page?
 - enter name at beginning, and store topscore when dead or restart/end? and show
 - keyboard arrows input?
 - random enemy modifiers for spawned enemies (veteran/huge/gigantic/leader/angry/two-headed/vicious/bloodthirsty/stony/ancient/fierce/etc/none)?
+- animate ui (animate movement/animate fight/animate enemy sort/animate character stat changes/animate enemy stat changes)(block ui for animations)
