@@ -25,8 +25,8 @@ export class FightService {
     const minDamage = Math.ceil(attacker.damage * 0.5);
     const maxDamage = Math.ceil(attacker.damage * 1.5);
     const damage = this.factoryService.createRandomInteger(minDamage, maxDamage);
-    defender.takeDamage(damage);
     this.userConsoleService.writeAttackSucceeded(attacker, defender, damage);
+    defender.takeDamage(damage);
     if (!defender.isAlive()) {
       attacker.killedOpponent(defender);
     }

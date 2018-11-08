@@ -17,8 +17,8 @@ export class Enemy extends Fighter {
     direction: Direction;
 
     constructor(
-            private factoryService: FactoryService, 
-            private fightService: FightService, 
+            private factoryService: FactoryService,
+            private fightService: FightService,
             private userConsoleService: UserConsoleService) {
         super();
         this.direction = factoryService.createRandomInteger(Direction.Up, Direction.Left);
