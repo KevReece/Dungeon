@@ -28,6 +28,10 @@ export class Character extends Fighter {
     defence = 1;
     damage = 1;
 
+    die(): void {
+        this.userConsoleService.writeCharacterDied(this);
+    }
+
     act(direction: Direction) {
         const adjacentCell = this.cell.getAdjacentCell(direction);
         if (adjacentCell) {

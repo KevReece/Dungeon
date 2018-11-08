@@ -12,17 +12,17 @@ import { LevelUpgradeService } from 'src/app/services/level-upgrade.service';
 
 describe('Character', () => {
     let character: Character;
-    let mockUserConsoleService: UserConsoleService;
+    let userConsoleService: UserConsoleService;
     let mockFightService: FightService;
     let mockLevelUpgradeService: LevelUpgradeService;
 
     beforeEach(() => {
-        mockUserConsoleService = new UserConsoleService();
+        userConsoleService = new UserConsoleService();
         mockFightService = new FightService(null, null);
         mockLevelUpgradeService = new LevelUpgradeService(null);
-        spyOn(mockUserConsoleService, 'writeItemsCollected');
-        spyOn(mockUserConsoleService, 'writeExperienceGained');
-        character = new Character(mockUserConsoleService, mockFightService, mockLevelUpgradeService);
+        spyOn(userConsoleService, 'writeItemsCollected');
+        spyOn(userConsoleService, 'writeExperienceGained');
+        character = new Character(userConsoleService, mockFightService, mockLevelUpgradeService);
     });
 
     describe('constructor', () => {
@@ -44,6 +44,16 @@ describe('Character', () => {
             character.initializeToCell(cell);
 
             expect(character.getCell()).toBe(cell);
+        });
+    });
+
+    describe('die', () => {
+        it('should write death message', () => {
+            spyOn(userConsoleService, 'writeCharacterDied');
+
+            character.die();
+
+            expect(userConsoleService.writeCharacterDied).toHaveBeenCalledWith(character);
         });
     });
 
@@ -102,7 +112,7 @@ describe('Character', () => {
 
             character.act(Direction.Right);
 
-            expect(mockUserConsoleService.writeItemsCollected).toHaveBeenCalled();
+            expect(userConsoleService.writeItemsCollected).toHaveBeenCalled();
         });
 
         it('shouldn\'t raise items collected console message for no items', () => {
@@ -112,7 +122,7 @@ describe('Character', () => {
 
             character.act(Direction.Right);
 
-            expect(mockUserConsoleService.writeItemsCollected).not.toHaveBeenCalled();
+            expect(userConsoleService.writeItemsCollected).not.toHaveBeenCalled();
         });
 
         it('should fight enemy', () => {
@@ -138,7 +148,7 @@ describe('Character', () => {
         it('should send experience gained message', () => {
             character.killedOpponent(TestFactory.createEnemy());
 
-            expect(mockUserConsoleService.writeExperienceGained).toHaveBeenCalledWith(2);
+            expect(userConsoleService.writeExperienceGained).toHaveBeenCalledWith(2);
         });
 
         it('should check for level upgrade', () => {

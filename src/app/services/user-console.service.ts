@@ -3,6 +3,7 @@ import { Gold } from '../model/cellitems/gold.model';
 import { ICellItem } from '../model/cellitems/i-cell-item.model';
 import { Fighter } from '../model/celloccupiers/fighter.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
+import { Character } from '../model/celloccupiers/character.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class UserConsoleService {
 
   writeEnemyDied(enemy: Enemy): void {
     this.lines.push(enemy.name + ' has been slain!');
+  }
+
+  writeCharacterDied(character: Character): void {
+    this.lines.push(character.name + ' has been killed escaping from the dungeon! All is lost');
   }
 
   writeExperienceGained(experience: number): void {

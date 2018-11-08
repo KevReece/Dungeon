@@ -27,8 +27,7 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 - Ensure config.yml has correct bucket name
 
 ## Todo
-- kill character
-- disable controller buttons (when enemy turn/action in direction is blocked)
+- disable controller buttons (when enemy turn/action in direction is blocked/when dead)
     - block backend first then reflect the block on ui buttons
 - show action text for controller buttons ('move'/'attack'/'open')
 - restart/end button
