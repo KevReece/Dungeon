@@ -39,7 +39,7 @@ describe('Character', () => {
 
     describe('initializeToCell', () => {
         it('should be getable', () => {
-            const cell = new Cell();
+            const cell = TestFactory.createCell();
 
             character.initializeToCell(cell);
 
@@ -49,7 +49,7 @@ describe('Character', () => {
 
     describe('act', () => {
         it('should move the character', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(character)]), new Row([new Cell()])]);
+            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character)]), new Row([TestFactory.createCell()])]);
 
             character.act(Direction.Down);
 
@@ -57,7 +57,7 @@ describe('Character', () => {
         });
 
         it('should not move the character out of bounds', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(character)])]);
+            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character)])]);
 
             character.act(Direction.Up);
 
@@ -65,7 +65,7 @@ describe('Character', () => {
         });
 
         it('should not move the character into occupied cell', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(new Wall())])]);
+            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(new Wall())])]);
 
             character.act(Direction.Right);
 
@@ -74,7 +74,7 @@ describe('Character', () => {
 
         it('should open a treasure chest', () => {
             const treasureChest = TestFactory.createTreasureChest();
-            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(treasureChest)])]);
+            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(treasureChest)])]);
             spyOn(treasureChest, 'open');
 
             character.act(Direction.Right);
@@ -84,9 +84,9 @@ describe('Character', () => {
 
         it('should collect gold', () => {
             const gold = TestFactory.createGold();
-            const newCell = new Cell();
+            const newCell = TestFactory.createCell();
             newCell.items.push(gold);
-            const mapGrid = new MapGrid([new Row([new Cell(character), newCell])]);
+            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), newCell])]);
 
             character.act(Direction.Right);
 
@@ -96,9 +96,9 @@ describe('Character', () => {
 
         it('should raise items collected console message', () => {
             const gold = TestFactory.createGold();
-            const newCell = new Cell();
+            const newCell = TestFactory.createCell();
             newCell.items.push(gold);
-            const mapGrid = new MapGrid([new Row([new Cell(character), newCell])]);
+            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), newCell])]);
 
             character.act(Direction.Right);
 
@@ -107,8 +107,8 @@ describe('Character', () => {
 
         it('shouldn\'t raise items collected console message for no items', () => {
             const gold = TestFactory.createGold();
-            const newCell = new Cell();
-            const mapGrid = new MapGrid([new Row([new Cell(character), newCell])]);
+            const newCell = TestFactory.createCell();
+            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), newCell])]);
 
             character.act(Direction.Right);
 
@@ -117,7 +117,7 @@ describe('Character', () => {
 
         it('should fight enemy', () => {
             const enemy = TestFactory.createEnemy();
-            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(enemy)])]);
+            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(enemy)])]);
             spyOn(mockFightService, 'attack');
 
             character.act(Direction.Right);

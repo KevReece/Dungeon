@@ -2,12 +2,13 @@ import { MapGrid } from './map-grid.model';
 import { Row } from './row.model';
 import { Cell } from './cell.model';
 import { Direction } from './direction.model';
+import { TestFactory } from '../testhelpers/test-factory';
 
 describe('MapGrid', () => {
     describe('constructor', () => {
         it('should call setupCells', () => {
-            const sourceCell = new Cell();
-            const rightCell = new Cell();
+            const sourceCell = TestFactory.createCell();
+            const rightCell = TestFactory.createCell();
 
             const mapGrid = new MapGrid([new Row([sourceCell, rightCell])]);
 
@@ -18,15 +19,15 @@ describe('MapGrid', () => {
     describe('setupCells', () => {
         it('should set cell directions', () => {
             const mapGrid = new MapGrid([]);
-            const sourceCell = new Cell();
-            const upCell = new Cell();
-            const rightCell = new Cell();
-            const downCell = new Cell();
-            const leftCell = new Cell();
+            const sourceCell = TestFactory.createCell();
+            const upCell = TestFactory.createCell();
+            const rightCell = TestFactory.createCell();
+            const downCell = TestFactory.createCell();
+            const leftCell = TestFactory.createCell();
             const rows = [
-                new Row([new Cell(), upCell, new Cell()]),
+                new Row([TestFactory.createCell(), upCell, TestFactory.createCell()]),
                 new Row([leftCell, sourceCell, rightCell]),
-                new Row([new Cell(), downCell, new Cell()])
+                new Row([TestFactory.createCell(), downCell, TestFactory.createCell()])
             ];
             mapGrid.rows = rows;
 
@@ -40,7 +41,7 @@ describe('MapGrid', () => {
 
         it('should leave adjacent cells as undefined when not there', () => {
             const mapGrid = new MapGrid([]);
-            const sourceCell = new Cell();
+            const sourceCell = TestFactory.createCell();
             mapGrid.rows = [new Row([sourceCell])];
 
             mapGrid.setupCells();
@@ -53,11 +54,11 @@ describe('MapGrid', () => {
 
         it('should set cell indexes', () => {
             const mapGrid = new MapGrid([]);
-            const sourceCell = new Cell();
+            const sourceCell = TestFactory.createCell();
             const rows = [
-                new Row([new Cell(), new Cell()]),
-                new Row([new Cell(), new Cell()]),
-                new Row([new Cell(), sourceCell])
+                new Row([TestFactory.createCell(), TestFactory.createCell()]),
+                new Row([TestFactory.createCell(), TestFactory.createCell()]),
+                new Row([TestFactory.createCell(), sourceCell])
             ];
             mapGrid.rows = rows;
 

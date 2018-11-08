@@ -23,15 +23,16 @@ describe('MapComponent', () => {
   }));
 
   const buildTestMapGrid = function() {
-    const wallRow = new Row([new Cell(new Wall())]);
-    const multipleWallRow = new Row([new Cell(new Wall()), new Cell(new Wall())]);
-    const floorRow = new Row([new Cell()]);
-    const mixedRow = new Row([new Cell(), new Cell(new Wall()), new Cell(), new Cell(new Wall())]);
-    const characterRow = new Row([new Cell(TestFactory.createCharacter())]);
-    const treasureChestRow = new Row([new Cell(TestFactory.createTreasureChest())]);
-    const goldRow = new Row([new Cell()]);
+    const wallRow = new Row([TestFactory.createCell(new Wall())]);
+    const multipleWallRow = new Row([TestFactory.createCell(new Wall()), TestFactory.createCell(new Wall())]);
+    const floorRow = new Row([TestFactory.createCell()]);
+    const mixedRow = new Row([TestFactory.createCell(), TestFactory.createCell(new Wall()), TestFactory.createCell(),
+      TestFactory.createCell(new Wall())]);
+    const characterRow = new Row([TestFactory.createCell(TestFactory.createCharacter())]);
+    const treasureChestRow = new Row([TestFactory.createCell(TestFactory.createTreasureChest())]);
+    const goldRow = new Row([TestFactory.createCell()]);
     goldRow.cells[0].items.push(TestFactory.createGold());
-    const enemyRow = new Row([new Cell(TestFactory.createEnemy())]);
+    const enemyRow = new Row([TestFactory.createCell(TestFactory.createEnemy())]);
     return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, characterRow, treasureChestRow, goldRow, enemyRow]);
   };
 

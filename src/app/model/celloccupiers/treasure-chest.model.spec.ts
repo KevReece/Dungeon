@@ -19,7 +19,7 @@ describe('TresureChest', () => {
     describe('open', () => {
         it('should remove itself', () => {
             const treasureChest = new TreasureChest(mockUserConsoleService, mockFactoryService);
-            const cell = new Cell(treasureChest);
+            const cell = TestFactory.createCell(treasureChest);
 
             treasureChest.open();
 
@@ -28,7 +28,7 @@ describe('TresureChest', () => {
 
         it('should drop item', () => {
             const treasureChest = new TreasureChest(mockUserConsoleService, mockFactoryService);
-            const cell = new Cell(treasureChest);
+            const cell = TestFactory.createCell(treasureChest);
 
             treasureChest.open();
 
@@ -37,7 +37,7 @@ describe('TresureChest', () => {
 
         it('should tell user console', () => {
             const treasureChest = new TreasureChest(mockUserConsoleService, mockFactoryService);
-            const cell = new Cell(treasureChest);
+            const cell = TestFactory.createCell(treasureChest);
 
             treasureChest.open();
 

@@ -23,11 +23,14 @@ export class TestFactory {
     static createTreasureChest(): TreasureChest {
         return new TreasureChest(null, null);
     }
+    static createCell(occupier?: CellOccupier): Cell {
+        return new Cell(null, occupier);
+    }
     static create9x9MapGridAround(occupier: CellOccupier): MapGrid {
         return new MapGrid([
-            new Row([new Cell(), new Cell(), new Cell()]),
-            new Row([new Cell(), new Cell(occupier), new Cell()]),
-            new Row([new Cell(), new Cell(), new Cell()])
+            new Row([this.createCell(), this.createCell(), this.createCell()]),
+            new Row([this.createCell(), this.createCell(occupier), this.createCell()]),
+            new Row([this.createCell(), this.createCell(), this.createCell()])
         ]);
     }
 }

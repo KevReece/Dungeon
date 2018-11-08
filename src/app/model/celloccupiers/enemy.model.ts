@@ -3,6 +3,7 @@ import { Direction } from '../direction.model';
 import { FactoryService } from 'src/app/services/factory.service';
 import { Cell } from '../cell.model';
 import { DirectionHelper } from '../direction-helper';
+import { Character } from './character.model';
 
 export class Enemy extends Fighter {
     typeName = 'Goblin';
@@ -34,9 +35,28 @@ export class Enemy extends Fighter {
         return DirectionHelper.opposite(this.direction);
     }
 
-    act(): void {
-        const weightedOptions = this.factoryService.createWeightedOptions();
+    act(character: Character): void {
+        let directionToMoveIn: Direction;
+        const awarenessDistance = 10;
+        if (this.cell.getDistance(character.cell) <= awarenessDistance) {
+            directionToMoveIn = this.cell.getDirectionTo(character.cell);
+        } else {
+            directionToMoveIn = this.wanderDirection();
+        }
 
+        let cellToMoveTo: Cell;
+        if (directionToMoveIn != null) {
+            cellToMoveTo = this.cell.getAdjacentCell(directionToMoveIn);
+        }
+
+        if (cellToMoveTo && !cellToMoveTo.isOccupied()) {
+            cellToMoveTo.setOccupier(this);
+            this.direction = directionToMoveIn;
+        }
+    }
+
+    private wanderDirection() {
+        const weightedOptions = this.factoryService.createWeightedOptions();
         if (!this.cell.isAdjacentCellOccupied(this.direction)) {
             weightedOptions.add(this.direction, 6);
         }
@@ -50,17 +70,6 @@ export class Enemy extends Fighter {
             weightedOptions.add(this.backDirection(), 1);
         }
         weightedOptions.add(null, 1);
-
-        const directionToMoveIn = weightedOptions.choose();
-
-        let cellToMoveTo: Cell;
-        if (directionToMoveIn != null) {
-            cellToMoveTo = this.cell.getAdjacentCell(directionToMoveIn);
-        }
-
-        if (cellToMoveTo && !cellToMoveTo.isOccupied()) {
-            cellToMoveTo.setOccupier(this);
-            this.direction = directionToMoveIn;
-        }
+        return weightedOptions.choose();
     }
 }

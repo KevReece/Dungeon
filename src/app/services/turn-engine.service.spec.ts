@@ -42,7 +42,7 @@ describe('TurnEngineService', () => {
     it('should call act for all enemies', () => {
       service.executeTurn(Direction.Left);
 
-      expect(enemy.act).toHaveBeenCalled();
+      expect(enemy.act).toHaveBeenCalledWith(character);
     });
 
     it('should sort enemies after actions', () => {

@@ -6,17 +6,21 @@ import { FactoryService } from 'src/app/services/factory.service';
 import { Direction } from '../direction.model';
 import { TestFactory } from 'src/app/testhelpers/test-factory';
 import { SpyExtensions } from 'src/app/testhelpers/spy-extensions';
+import { Character } from './character.model';
 
 describe('Enemy', () => {
     let enemy: Enemy;
     let factoryService: FactoryService;
     let createRandomIntegerResponses: number[];
+    let character: Character;
 
     beforeEach(() => {
         createRandomIntegerResponses = [0];
         factoryService = new FactoryService();
         spyOn(factoryService, 'createRandomInteger')
           .and.callFake(SpyExtensions.returnValuesAs(createRandomIntegerResponses));
+        character = TestFactory.createCharacter();
+        const characterCell = TestFactory.createCell(character);
     });
 
     describe('constructor', () => {
@@ -32,7 +36,7 @@ describe('Enemy', () => {
     describe('die', () => {
         it('should clear the cell occupation', () => {
             enemy = new Enemy(factoryService);
-            const cell = new Cell(enemy);
+            const cell = TestFactory.createCell(enemy);
             expect(enemy.cell.occupier).not.toBeNull();
 
             enemy.die();
@@ -44,6 +48,39 @@ describe('Enemy', () => {
     describe('act', () => {
         let mapGrid: MapGrid;
 
+        describe(' move towards the charactor', () => {
+            beforeEach(() => {
+                enemy = new Enemy(factoryService);
+            });
+
+            it(' should happen if near enough', () => {
+                mapGrid = TestFactory.create9x9MapGridAround(enemy);
+                const enemyCell = enemy.cell;
+                spyOn(enemyCell, 'getDistance').and.returnValue(10);
+                spyOn(enemyCell, 'getDirectionTo').and.returnValue(Direction.Down);
+
+                enemy.act(character);
+
+                expect(enemyCell.getDistance).toHaveBeenCalledWith(character.cell);
+                expect(enemyCell.getDirectionTo).toHaveBeenCalledWith(character.cell);
+                expect(enemy.getCell()).toBe(mapGrid.rows[2].cells[1]);
+                expect(enemy.direction).toBe(Direction.Down);
+            });
+
+            it(' should be blocked if way is occupied', () => {
+                const enemyCell = TestFactory.createCell(enemy);
+                spyOn(enemyCell, 'getDistance').and.returnValue(10);
+                spyOn(enemyCell, 'getDirectionTo').and.returnValue(Direction.Down);
+
+                enemy.act(character);
+
+                expect(enemyCell.getDistance).toHaveBeenCalledWith(character.cell);
+                expect(enemyCell.getDirectionTo).toHaveBeenCalledWith(character.cell);
+                expect(enemy.getCell()).toBe(enemyCell);
+                expect(enemy.direction).toBe(Direction.Up);
+            });
+        });
+
         describe(' from an upward start direction', () => {
             beforeEach(() => {
                 enemy = new Enemy(factoryService);
@@ -53,7 +90,7 @@ describe('Enemy', () => {
             it('should get random 1 to 10 for movement', () => {
                 createRandomIntegerResponses[1] = 6;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(factoryService.createRandomInteger).toHaveBeenCalledWith(1, 12);
             });
@@ -61,7 +98,7 @@ describe('Enemy', () => {
             it('should move forward', () => {
                 createRandomIntegerResponses[1] = 6;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[0].cells[1]);
                 expect(enemy.direction).toBe(Direction.Up);
@@ -70,7 +107,7 @@ describe('Enemy', () => {
             it('should turn right', () => {
                 createRandomIntegerResponses[1] = 8;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[1].cells[2]);
                 expect(enemy.direction).toBe(Direction.Right);
@@ -79,7 +116,7 @@ describe('Enemy', () => {
             it('should turn left', () => {
                 createRandomIntegerResponses[1] = 10;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[1].cells[0]);
                 expect(enemy.direction).toBe(Direction.Left);
@@ -88,7 +125,7 @@ describe('Enemy', () => {
             it('should move backwards', () => {
                 createRandomIntegerResponses[1] = 11;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[2].cells[1]);
                 expect(enemy.direction).toBe(Direction.Down);
@@ -97,7 +134,7 @@ describe('Enemy', () => {
             it('should stay still', () => {
                 createRandomIntegerResponses[1] = 12;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[1].cells[1]);
                 expect(enemy.direction).toBe(Direction.Up);
@@ -115,7 +152,7 @@ describe('Enemy', () => {
             it('should move forward', () => {
                 createRandomIntegerResponses[1] = 6;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[2].cells[1]);
                 expect(enemy.direction).toBe(Direction.Down);
@@ -124,7 +161,7 @@ describe('Enemy', () => {
             it('should turn right', () => {
                 createRandomIntegerResponses[1] = 8;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[1].cells[0]);
                 expect(enemy.direction).toBe(Direction.Left);
@@ -133,7 +170,7 @@ describe('Enemy', () => {
             it('should turn left', () => {
                 createRandomIntegerResponses[1] = 10;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[1].cells[2]);
                 expect(enemy.direction).toBe(Direction.Right);
@@ -142,7 +179,7 @@ describe('Enemy', () => {
             it('should move backwards', () => {
                 createRandomIntegerResponses[1] = 11;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[0].cells[1]);
                 expect(enemy.direction).toBe(Direction.Up);
@@ -151,7 +188,7 @@ describe('Enemy', () => {
             it('should stay still', () => {
                 createRandomIntegerResponses[1] = 12;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[1].cells[1]);
                 expect(enemy.direction).toBe(Direction.Down);
@@ -166,50 +203,50 @@ describe('Enemy', () => {
             });
 
             it('should not move when fully blocked', () => {
-                mapGrid = new MapGrid([new Row([new Cell(enemy)])]);
+                mapGrid = new MapGrid([new Row([TestFactory.createCell(enemy)])]);
                 createRandomIntegerResponses[1] = 1;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[0].cells[0]);
                 expect(factoryService.createRandomInteger).toHaveBeenCalledWith(1, 1);
             });
 
             it('should move with single option', () => {
-                mapGrid = new MapGrid([new Row([new Cell(enemy), new Cell()])]);
+                mapGrid = new MapGrid([new Row([TestFactory.createCell(enemy), TestFactory.createCell()])]);
                 createRandomIntegerResponses[1] = 6;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[0].cells[1]);
                 expect(factoryService.createRandomInteger).toHaveBeenCalledWith(1, 7);
             });
 
             it('should move back with single option', () => {
-                mapGrid = new MapGrid([new Row([new Cell(), new Cell(enemy)])]);
+                mapGrid = new MapGrid([new Row([TestFactory.createCell(), TestFactory.createCell(enemy)])]);
                 createRandomIntegerResponses[1] = 1;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[0].cells[0]);
                 expect(factoryService.createRandomInteger).toHaveBeenCalledWith(1, 2);
             });
 
             it('should stay still with single option', () => {
-                mapGrid = new MapGrid([new Row([new Cell(enemy), new Cell()])]);
+                mapGrid = new MapGrid([new Row([TestFactory.createCell(enemy), TestFactory.createCell()])]);
                 createRandomIntegerResponses[1] = 7;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[0].cells[0]);
                 expect(factoryService.createRandomInteger).toHaveBeenCalledWith(1, 7);
             });
 
             it('should move with limited options', () => {
-                mapGrid = new MapGrid([new Row([new Cell(), new Cell(enemy), new Cell()])]);
+                mapGrid = new MapGrid([new Row([TestFactory.createCell(), TestFactory.createCell(enemy), TestFactory.createCell()])]);
                 createRandomIntegerResponses[1] = 6;
 
-                enemy.act();
+                enemy.act(character);
 
                 expect(enemy.getCell()).toBe(mapGrid.rows[0].cells[2]);
                 expect(factoryService.createRandomInteger).toHaveBeenCalledWith(1, 8);
