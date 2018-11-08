@@ -3,6 +3,7 @@ import { Wall } from './celloccupiers/wall.model';
 import { MapGrid } from './map-grid.model';
 import { Row } from './row.model';
 import { TestFactory } from '../testhelpers/test-factory';
+import { Direction } from './direction.model';
 
 describe('Cell', () => {
     describe('constructor', () => {
@@ -55,6 +56,26 @@ describe('Cell', () => {
 
         it('should be occupied', () => {
             expect(new Cell(new Wall()).isOccupied()).toBeTruthy();
+        });
+    });
+
+    describe('isAdjacentCellOccupied', () => {
+        it('should be occupied when none', () => {
+            const cell = new Cell();
+            cell.adjacentCells[Direction.Right] = new Cell();
+            expect(cell.isAdjacentCellOccupied(Direction.Left)).toBeTruthy();
+        });
+
+        it('should not be occupied', () => {
+            const cell = new Cell();
+            cell.adjacentCells[Direction.Left] = new Cell();
+            expect(cell.isAdjacentCellOccupied(Direction.Left)).toBeFalsy();
+        });
+
+        it('should be occupied', () => {
+            const cell = new Cell();
+            cell.adjacentCells[Direction.Left] = new Cell(new Wall());
+            expect(cell.isAdjacentCellOccupied(Direction.Left)).toBeTruthy();
         });
     });
 

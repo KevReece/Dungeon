@@ -1,24 +1,27 @@
 import { Direction } from './direction.model';
 
 export class DirectionHelper {
-    static RotateRight(direction: Direction): Direction {
+
+    static all = [Direction.Up, Direction.Right, Direction.Down, Direction.Left];
+    static rotateRight(direction: Direction): Direction {
         if (direction === Direction.Left) {
             return Direction.Up;
         }
         return direction + 1;
     }
 
-    static RotateLeft(direction: Direction): Direction {
+    static rotateLeft(direction: Direction): Direction {
         if (direction === Direction.Up) {
             return Direction.Left;
         }
         return direction - 1;
     }
 
-    static Opposite(direction: Direction): Direction {
+    static opposite(direction: Direction): Direction {
         if (direction === Direction.Down || direction === Direction.Left) {
             return direction - 2;
         }
         return direction + 2;
     }
+
 }

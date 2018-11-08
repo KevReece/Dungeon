@@ -9,6 +9,7 @@ import { Enemy } from '../model/celloccupiers/enemy.model';
 import { FightService } from './fight.service';
 import { Gold } from '../model/cellitems/gold.model';
 import { LevelUpgradeService } from './level-upgrade.service';
+import { WeightedOptions } from '../model/weighted-options.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,8 @@ export class FactoryService {
   }
   createGold(): Gold {
     return new Gold(this);
+  }
+  createWeightedOptions(): WeightedOptions {
+    return new WeightedOptions(this);
   }
 }

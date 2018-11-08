@@ -33,6 +33,10 @@ export class Cell {
         return !!this.occupier;
     }
 
+    isAdjacentCellOccupied(direction: Direction) {
+        return !this.getAdjacentCell(direction) || this.getAdjacentCell(direction).isOccupied();
+    }
+
     getDistance(cell: Cell): number {
         return Math.sqrt(Math.pow(cell.columnIndex - this.columnIndex, 2) + Math.pow(cell.rowIndex - this.rowIndex, 2));
     }

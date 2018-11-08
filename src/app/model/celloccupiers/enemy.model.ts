@@ -22,18 +22,36 @@ export class Enemy extends Fighter {
         this.cell.occupier = null;
     }
 
+    turnRightDirection(): Direction {
+        return DirectionHelper.rotateRight(this.direction);
+    }
+
+    turnLeftDirection(): Direction {
+        return DirectionHelper.rotateLeft(this.direction);
+    }
+
+    backDirection(): Direction {
+        return DirectionHelper.opposite(this.direction);
+    }
+
     act(): void {
-        const randomChoice = this.factoryService.createRandomInteger(1, 10);
-        let directionToMoveIn: Direction = null;
-        if (randomChoice <= 4) {
-            directionToMoveIn = this.direction;
-        } else if (randomChoice <= 6) {
-            directionToMoveIn = DirectionHelper.RotateRight(this.direction);
-        } else if (randomChoice <= 8) {
-            directionToMoveIn = DirectionHelper.RotateLeft(this.direction);
-        } else if (randomChoice <= 9) {
-            directionToMoveIn = DirectionHelper.Opposite(this.direction);
+        const weightedOptions = this.factoryService.createWeightedOptions();
+
+        if (!this.cell.isAdjacentCellOccupied(this.direction)) {
+            weightedOptions.add(this.direction, 6);
         }
+        if (!this.cell.isAdjacentCellOccupied(this.turnRightDirection())) {
+            weightedOptions.add(this.turnRightDirection(), 2);
+        }
+        if (!this.cell.isAdjacentCellOccupied(this.turnLeftDirection())) {
+            weightedOptions.add(this.turnLeftDirection(), 2);
+        }
+        if (!this.cell.isAdjacentCellOccupied(this.backDirection())) {
+            weightedOptions.add(this.backDirection(), 1);
+        }
+        weightedOptions.add(null, 1);
+
+        const directionToMoveIn = weightedOptions.choose();
 
         let cellToMoveTo: Cell;
         if (directionToMoveIn != null) {
@@ -45,4 +63,4 @@ export class Enemy extends Fighter {
             this.direction = directionToMoveIn;
         }
     }
- }
+}

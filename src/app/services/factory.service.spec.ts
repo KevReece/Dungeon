@@ -8,6 +8,7 @@ import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 import { TestFactory } from '../testhelpers/test-factory';
 import { Gold } from '../model/cellitems/gold.model';
+import { WeightedOptions } from '../model/weighted-options.model';
 
 describe('FactoryService', () => {
   let service: FactoryService;
@@ -68,5 +69,9 @@ describe('FactoryService', () => {
 
   it('should create gold', () => {
     expect(service.createGold()).toEqual(jasmine.any(Gold));
+  });
+
+  it('should create weighted options', () => {
+    expect(service.createWeightedOptions()).toEqual(jasmine.any(WeightedOptions));
   });
 });
