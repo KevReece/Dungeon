@@ -9,16 +9,19 @@ import { SpyExtensions } from 'src/app/testhelpers/spy-extensions';
 import { Character } from './character.model';
 import { FightService } from 'src/app/services/fight.service';
 import { Wall } from './wall.model';
+import { UserConsoleService } from 'src/app/services/user-console.service';
 
 describe('Enemy', () => {
     let enemy: Enemy;
     let factoryService: FactoryService;
     let fightService: FightService;
+    let userConsoleService: UserConsoleService;
     let createRandomIntegerResponses: number[];
     let character: Character;
 
     beforeEach(() => {
         createRandomIntegerResponses = [0];
+        userConsoleService = new UserConsoleService();
         factoryService = new FactoryService();
         spyOn(factoryService, 'createRandomInteger')
           .and.callFake(SpyExtensions.returnValuesAs(createRandomIntegerResponses));
@@ -31,21 +34,32 @@ describe('Enemy', () => {
         it('should set the direction', () => {
             createRandomIntegerResponses[0] = 3;
 
-            enemy = new Enemy(factoryService, fightService);
+            enemy = new Enemy(factoryService, fightService, userConsoleService);
 
             expect(enemy.direction).toBe(Direction.Left);
         });
     });
 
     describe('die', () => {
+        beforeEach(() => {
+            enemy = new Enemy(factoryService, fightService, userConsoleService);
+        });
+
         it('should clear the cell occupation', () => {
-            enemy = new Enemy(factoryService, fightService);
             const cell = TestFactory.createCell(enemy);
             expect(enemy.cell.occupier).not.toBeNull();
 
             enemy.die();
 
             expect(enemy.cell.occupier).toBeNull();
+        });
+
+        it('should write death message', () => {
+            spyOn(userConsoleService, 'writeEnemyDied');
+
+            enemy.die();
+
+            expect(userConsoleService.writeEnemyDied).toHaveBeenCalledWith(enemy);
         });
     });
 
@@ -54,7 +68,7 @@ describe('Enemy', () => {
 
         describe(' fight the charactor', () => {
             beforeEach(() => {
-                enemy = new Enemy(factoryService, fightService);
+                enemy = new Enemy(factoryService, fightService, userConsoleService);
             });
 
             it(' should attack if adjacent', () => {
@@ -83,7 +97,7 @@ describe('Enemy', () => {
 
         describe(' move towards the charactor', () => {
             beforeEach(() => {
-                enemy = new Enemy(factoryService, fightService);
+                enemy = new Enemy(factoryService, fightService, userConsoleService);
             });
 
             it(' should happen if near enough', () => {
@@ -173,7 +187,7 @@ describe('Enemy', () => {
 
         describe(' from an upward start direction', () => {
             beforeEach(() => {
-                enemy = new Enemy(factoryService, fightService);
+                enemy = new Enemy(factoryService, fightService, userConsoleService);
                 mapGrid = TestFactory.create9x9MapGrid(enemy);
             });
 
@@ -235,7 +249,7 @@ describe('Enemy', () => {
 
             beforeEach(() => {
                 createRandomIntegerResponses[0] = 2;
-                enemy = new Enemy(factoryService, fightService);
+                enemy = new Enemy(factoryService, fightService, userConsoleService);
                 mapGrid = TestFactory.create9x9MapGrid(enemy);
             });
 
@@ -289,7 +303,7 @@ describe('Enemy', () => {
 
             beforeEach(() => {
                 createRandomIntegerResponses[0] = 1;
-                enemy = new Enemy(factoryService, fightService);
+                enemy = new Enemy(factoryService, fightService, userConsoleService);
             });
 
             it('should not move when fully blocked', () => {

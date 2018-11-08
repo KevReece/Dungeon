@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Gold } from '../model/cellitems/gold.model';
 import { ICellItem } from '../model/cellitems/i-cell-item.model';
 import { Fighter } from '../model/celloccupiers/fighter.model';
+import { Enemy } from '../model/celloccupiers/enemy.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,10 @@ export class UserConsoleService {
 
   writeAttackFailed(attacker: Fighter, defender: Fighter): void {
     this.lines.push(attacker.name + ' attack on ' + defender.name + ' failed');
+  }
+
+  writeEnemyDied(enemy: Enemy): void {
+    this.lines.push(enemy.name + ' has been slain!');
   }
 
   writeExperienceGained(experience: number): void {

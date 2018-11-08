@@ -5,6 +5,7 @@ import { Cell } from '../cell.model';
 import { DirectionHelper } from '../direction-helper';
 import { Character } from './character.model';
 import { FightService } from 'src/app/services/fight.service';
+import { UserConsoleService } from 'src/app/services/user-console.service';
 
 export class Enemy extends Fighter {
     name = 'Goblin';
@@ -15,13 +16,19 @@ export class Enemy extends Fighter {
     experienceValue = 2;
     direction: Direction;
 
-    constructor(private factoryService: FactoryService, private fightService: FightService) {
+    constructor(
+            private factoryService: FactoryService, 
+            private fightService: FightService, 
+            private userConsoleService: UserConsoleService) {
         super();
         this.direction = factoryService.createRandomInteger(Direction.Up, Direction.Left);
      }
 
     die(): void {
-        this.cell.occupier = null;
+        if (this.cell) {
+            this.cell.occupier = null;
+        }
+        this.userConsoleService.writeEnemyDied(this);
     }
 
     turnRightDirection(): Direction {

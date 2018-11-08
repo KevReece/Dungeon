@@ -54,6 +54,12 @@ describe('UserConsoleService', () => {
     expect(getLastMessage()).toContain('failed');
   });
 
+  it('should write attack failed message', () => {
+    service.writeEnemyDied(TestFactory.createEnemy());
+    expect(getLastMessage()).toContain(TestFactory.createEnemy().name);
+    expect(getLastMessage()).toContain('slain');
+  });
+
   it('should write experience gained message', () => {
     service.writeExperienceGained(2);
     expect(getLastMessage()).toContain('experience');
