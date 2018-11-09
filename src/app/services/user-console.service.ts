@@ -11,8 +11,8 @@ import { Character } from '../model/celloccupiers/character.model';
 export class UserConsoleService {
   lines: string[] = [];
 
-  writeWelcome(): void {
-    this.lines.push('Welcome to the Dungeon!');
+  startAndWelcome(): void {
+    this.lines = ['Welcome to the Dungeon!'];
   }
 
   writeTreasureChestOpenedAndGoldDropped(droppedGold: Gold): void {

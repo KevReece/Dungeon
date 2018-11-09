@@ -28,4 +28,8 @@ export class AppPage {
   getEnemiesComponent() {
     return element(by.id('EnemiesComponent'));
   }
+
+  getMenuComponent() {
+    return element(by.id('MenuComponent'));
+  }
 }

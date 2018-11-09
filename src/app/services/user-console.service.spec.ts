@@ -21,7 +21,7 @@ describe('UserConsoleService', () => {
   });
 
   it('should write welcome message', () => {
-    service.writeWelcome();
+    service.startAndWelcome();
     expect(getLastMessage()).toContain('Welcome');
   });
 

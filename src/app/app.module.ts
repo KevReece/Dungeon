@@ -14,6 +14,7 @@ import { UserConsoleService } from './services/user-console.service';
 import { EnemiesComponent } from './enemies/enemies.component';
 import { EnemySorterService } from './services/enemy-sorter.service';
 import { FightService } from './services/fight.service';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FightService } from './services/fight.service';
     CharacterComponent,
     MapComponent,
     ControllerComponent,
-    EnemiesComponent
+    EnemiesComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

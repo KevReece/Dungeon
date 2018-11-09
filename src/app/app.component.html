@@ -1,10 +1,10 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
     Welcome to the Dungeon!
   </h1>
 </div>
 
+<app-menu (restartEvent)="restart()" [isGameOver]="character.isDead()"></app-menu>
 <app-character [character]="character"></app-character>
 <app-controller [actionOptions]="actionOptions" (actionEvent)="actionHandler($event)"></app-controller>
 <app-map [mapGrid]="mapGrid"></app-map>

@@ -31,4 +31,8 @@ describe('workspace-project App', () => {
   it('should load enemies component', () => {
     expect(page.getEnemiesComponent().isPresent()).toBeTruthy();
   });
+
+  it('should load manu component', () => {
+    expect(page.getMenuComponent().isPresent()).toBeTruthy();
+  });
 });

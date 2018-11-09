@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   character: Character;
   enemies: Enemy[] = [];
   mapLoadPromise: Promise<void>;
-  actionOptions: ActionOption[] = [ActionOption.Move, ActionOption.Move, ActionOption.Move, ActionOption.Move];
+  actionOptions: ActionOption[] = [];
 
   constructor(
       private mapLoaderService: MapLoaderService,
@@ -37,6 +37,13 @@ export class AppComponent implements OnInit {
       }
 
   ngOnInit(): void {
+    this.restart();
+  }
+
+  restart(): void {
+    this.enemies = [];
+    this.actionOptions = [ActionOption.None, ActionOption.None, ActionOption.None, ActionOption.None];
+    this.mapGrid = new MapGrid([]);
     this.character = this.factoryService.createCharacter();
     this.levelUpgradeService.initialize(this.character);
     this.mapLoadPromise = this.mapLoaderService.loadMapGrid(this.mapGrid, this.character, this.enemies)
@@ -45,7 +52,7 @@ export class AppComponent implements OnInit {
         this.actionOptions = this.character.getActionOptions();
       });
     this.turnEngineService.initialize(this.character, this.enemies);
-    this.userConsoleService.writeWelcome();
+    this.userConsoleService.startAndWelcome();
   }
 
   actionHandler(direction: Direction) {

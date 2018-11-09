@@ -14,7 +14,7 @@ import { ActionOption } from './model/action-option';
 
 describe('AppComponent', () => {
   const mockMapLoaderService  = { loadMapGrid: {} };
-  const mockUserConsoleService  = { writeWelcome: {} };
+  const mockUserConsoleService  = { startAndWelcome: {} };
   const mockEnemySorterService = { sort: {} };
   const mockFightService = { };
   const mockLevelUpgradeService = { initialize: {} };
@@ -26,7 +26,7 @@ describe('AppComponent', () => {
 
   beforeEach(async(() => {
     spyOn(mockMapLoaderService, 'loadMapGrid').and.returnValue(new Promise(() => {}));
-    spyOn(mockUserConsoleService, 'writeWelcome');
+    spyOn(mockUserConsoleService, 'startAndWelcome');
     spyOn(mockEnemySorterService, 'sort');
     spyOn(mockFactoryService, 'setUpDependencies');
     spyOn(mockLevelUpgradeService, 'initialize');
@@ -65,7 +65,7 @@ describe('AppComponent', () => {
     });
   });
 
-  describe('ngOnInit', () => {
+  describe('ngOnInit/restart', () => {
     it('should initialize turn engine with game elements', () => {
       expect(mockTurnEngineService.initialize).toHaveBeenCalledWith(component.character, component.enemies);
     });
@@ -87,7 +87,7 @@ describe('AppComponent', () => {
     });
 
     it('should have initial console lines', () => {
-      expect(mockUserConsoleService.writeWelcome).toHaveBeenCalled();
+      expect(mockUserConsoleService.startAndWelcome).toHaveBeenCalled();
     });
 
     it('should have loaded map grid', () => {
