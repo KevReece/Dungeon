@@ -60,6 +60,16 @@ describe('Character', () => {
     });
 
     describe('act', () => {
+        it('should do nothing if dead', () => {
+            character.health = 0;
+            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character)]), new Row([TestFactory.createCell()])]);
+
+            const result = character.act(Direction.Down);
+
+            expect(character.getCell()).toBe(mapGrid.rows[0].cells[0]);
+            expect(result).toBeFalsy();
+        });
+
         it('should move the character', () => {
             const mapGrid = new MapGrid([new Row([TestFactory.createCell(character)]), new Row([TestFactory.createCell()])]);
 
@@ -204,6 +214,15 @@ describe('Character', () => {
             expect(actionOptions[1]).toBe(ActionOption.Fight);
             expect(actionOptions[2]).toBe(ActionOption.Open);
             expect(actionOptions[3]).toBe(ActionOption.None);
+        });
+
+        it('should return None when dead', () => {
+            character.health = 0;
+
+            const actionOptions = character.getActionOptions();
+
+            expect(actionOptions.length).toBe(4);
+            expect(actionOptions.every(option => option === ActionOption.None)).toBeTruthy();
         });
     });
 });

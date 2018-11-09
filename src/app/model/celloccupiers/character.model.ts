@@ -33,7 +33,14 @@ export class Character extends Fighter {
         this.userConsoleService.writeCharacterDied(this);
     }
 
+    isDead(): boolean {
+        return this.health <= 0;
+    }
+
     act(direction: Direction): boolean {
+        if (this.isDead()) {
+            return false;
+        }
         const adjacentCell = this.cell.getAdjacentCell(direction);
         if (adjacentCell) {
             if (!adjacentCell.isOccupied()) {
@@ -67,6 +74,9 @@ export class Character extends Fighter {
     }
 
     private getActionOption(direction: Direction): ActionOption {
+        if (this.isDead()) {
+            return ActionOption.None;
+        }
         if (this.cell.isAdjacentCellOccupied(direction)) {
             const adjacentCell = this.cell.getAdjacentCell(direction);
             return adjacentCell && adjacentCell.occupier instanceof Enemy ? ActionOption.Fight
