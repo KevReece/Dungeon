@@ -18,7 +18,6 @@ import { ActionOption } from './model/action-option';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
-  title = 'Dungeon';
   mapGrid: MapGrid = new MapGrid([]);
   character: Character;
   enemies: Enemy[] = [];

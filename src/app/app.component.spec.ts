@@ -70,15 +70,6 @@ describe('AppComponent', () => {
       expect(mockTurnEngineService.initialize).toHaveBeenCalledWith(component.character, component.enemies);
     });
 
-    it(`should have as title 'Dungeon'`, () => {
-      expect(component.title).toEqual('Dungeon');
-    });
-
-    it('should render title in a h1 tag', () => {
-      const compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelector('h1').textContent).toContain('Welcome to the Dungeon!');
-    });
-
     it('should have initial character', () => {
       const character = component.character;
 
