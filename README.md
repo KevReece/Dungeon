@@ -27,9 +27,9 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 - Ensure config.yml has correct bucket name
 
 ## Todo
+- prettify ui (layout/images/dialog)
 - hole to next level ('O')
 - level indicator
-- prettify ui (layout/images)
 - treasure chests can drop food ('F')(add max health stat)(food gives 50%)
 - other enemies types (easy Goblin enemy 'E'/hard Orc enemy 'H')
 - create different levels (progressively harder enemy type pairs)

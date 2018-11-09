@@ -1,13 +1,21 @@
-<div style="text-align:center">
-  <h1>
-    Welcome to the Dungeon!
-  </h1>
+<div id="Page">
+  <div class="panel">
+    <h1 class="title">Welcome to the Dungeon!</h1>
+    <app-menu class="rightButtons" (restartEvent)="restart()" [isGameOver]="character.isDead()"></app-menu>
+  </div>
+  <div class="panelContainer">
+    <div class="panel vertialPanel leftPanel25">
+        <app-character [character]="character"></app-character>
+        <app-controller [actionOptions]="actionOptions" (actionEvent)="actionHandler($event)"></app-controller>
+    </div>
+    <div class="panel vertialPanel centrePanel50">
+      <app-map [mapGrid]="mapGrid"></app-map>
+    </div>
+    <div class="panel vertialPanel rightPanel25">
+      <app-enemies [enemies]="enemies"></app-enemies>
+    </div>
+  <div >
+  <div class="panel">
+    <app-user-console></app-user-console>
+  </div>
 </div>
-
-<app-menu (restartEvent)="restart()" [isGameOver]="character.isDead()"></app-menu>
-<app-character [character]="character"></app-character>
-<app-controller [actionOptions]="actionOptions" (actionEvent)="actionHandler($event)"></app-controller>
-<app-map [mapGrid]="mapGrid"></app-map>
-<app-enemies [enemies]="enemies"></app-enemies>
-<app-user-console></app-user-console>
-<router-outlet></router-outlet>
