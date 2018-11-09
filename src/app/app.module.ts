@@ -34,7 +34,7 @@ import { ConfirmationDialogService } from './confirmation-dialog/confirmation-di
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule.forRoot()
+    NgbModule
   ],
   providers: [
     MapLoaderService,

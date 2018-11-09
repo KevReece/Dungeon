@@ -27,7 +27,6 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 - Ensure config.yml has correct bucket name
 
 ## Todo
-- restart/end button
 - hole to next level ('O')
 - level indicator
 - prettify ui (layout/images)
