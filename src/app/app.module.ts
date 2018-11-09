@@ -15,6 +15,9 @@ import { EnemiesComponent } from './enemies/enemies.component';
 import { EnemySorterService } from './services/enemy-sorter.service';
 import { FightService } from './services/fight.service';
 import { MenuComponent } from './menu/menu.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
 
 @NgModule({
   declarations: [
@@ -24,20 +27,24 @@ import { MenuComponent } from './menu/menu.component';
     MapComponent,
     ControllerComponent,
     EnemiesComponent,
-    MenuComponent
+    MenuComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot()
   ],
   providers: [
     MapLoaderService,
     FactoryService,
     UserConsoleService,
     EnemySorterService,
-    FightService
+    FightService,
+    ConfirmationDialogService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ ConfirmationDialogComponent ]
 })
 export class AppModule { }
