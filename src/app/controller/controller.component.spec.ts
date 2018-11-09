@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ControllerComponent } from './controller.component';
 import { Direction } from '../model/direction.model';
+import { ActionOption } from '../model/action-option';
 
 describe('ControllerComponent', () => {
   let component: ControllerComponent;
@@ -18,6 +19,7 @@ describe('ControllerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ControllerComponent);
     component = fixture.componentInstance;
+    component.actionOptions = [ActionOption.Move, ActionOption.Move, ActionOption.Move, ActionOption.Move];
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
   });

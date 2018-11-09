@@ -10,6 +10,7 @@ import { EnemySorterService } from './services/enemy-sorter.service';
 import { FightService } from './services/fight.service';
 import { LevelUpgradeService } from './services/level-upgrade.service';
 import { TurnEngineService } from './services/turn-engine.service';
+import { ActionOption } from './model/action-option';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
   character: Character;
   enemies: Enemy[] = [];
   mapLoadPromise: Promise<void>;
+  actionOptions: ActionOption[] = [ActionOption.Move, ActionOption.Move, ActionOption.Move, ActionOption.Move];
 
   constructor(
       private mapLoaderService: MapLoaderService,
@@ -38,12 +40,15 @@ export class AppComponent implements OnInit {
     this.character = this.factoryService.createCharacter();
     this.levelUpgradeService.initialize(this.character);
     this.mapLoadPromise = this.mapLoaderService.loadMapGrid(this.mapGrid, this.character, this.enemies)
-      .then(() => this.enemySorterService.sort(this.enemies, this.character));
+      .then(() => {
+        this.enemySorterService.sort(this.enemies, this.character);
+        this.actionOptions = this.character.getActionOptions();
+      });
     this.turnEngineService.initialize(this.character, this.enemies);
     this.userConsoleService.writeWelcome();
   }
 
   actionHandler(direction: Direction) {
-    this.turnEngineService.executeTurn(direction);
+    this.actionOptions = this.turnEngineService.executeTurn(direction);
   }
 }

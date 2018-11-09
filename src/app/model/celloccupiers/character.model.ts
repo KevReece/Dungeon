@@ -8,6 +8,7 @@ import { FightService } from 'src/app/services/fight.service';
 import { Enemy } from './enemy.model';
 import { Fighter } from './fighter.model';
 import { LevelUpgradeService } from 'src/app/services/level-upgrade.service';
+import { ActionOption } from '../action-option';
 
 export class Character extends Fighter {
 
@@ -32,24 +33,47 @@ export class Character extends Fighter {
         this.userConsoleService.writeCharacterDied(this);
     }
 
-    act(direction: Direction) {
+    act(direction: Direction): boolean {
         const adjacentCell = this.cell.getAdjacentCell(direction);
         if (adjacentCell) {
             if (!adjacentCell.isOccupied()) {
                 adjacentCell.setOccupier(this);
                 this.collectItems(adjacentCell);
+                return true;
             } else if (adjacentCell.occupier instanceof TreasureChest) {
                 (<TreasureChest>adjacentCell.occupier).open();
+                return true;
             } else if (adjacentCell.occupier instanceof Enemy) {
                 this.fightService.attack(this, adjacentCell.occupier);
+                return true;
             }
         }
+        return false;
     }
 
     killedOpponent(enemy: Enemy): void {
         this.userConsoleService.writeExperienceGained(enemy.experienceValue);
         this.experience += enemy.experienceValue;
         this.levelUpgradeService.check(this);
+    }
+
+    getActionOptions(): ActionOption[] {
+        return [
+            this.getActionOption(Direction.Up),
+            this.getActionOption(Direction.Right),
+            this.getActionOption(Direction.Down),
+            this.getActionOption(Direction.Left)
+        ];
+    }
+
+    private getActionOption(direction: Direction): ActionOption {
+        if (this.cell.isAdjacentCellOccupied(direction)) {
+            const adjacentCell = this.cell.getAdjacentCell(direction);
+            return adjacentCell && adjacentCell.occupier instanceof Enemy ? ActionOption.Fight
+                : adjacentCell && adjacentCell.occupier instanceof TreasureChest ? ActionOption.Open
+                : ActionOption.None;
+        }
+        return ActionOption.Move;
     }
 
     private collectItems(cell: Cell): void {

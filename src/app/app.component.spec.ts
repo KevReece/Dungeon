@@ -10,6 +10,7 @@ import { FightService } from './services/fight.service';
 import { FactoryService } from './services/factory.service';
 import { LevelUpgradeService } from './services/level-upgrade.service';
 import { TurnEngineService } from './services/turn-engine.service';
+import { ActionOption } from './model/action-option';
 
 describe('AppComponent', () => {
   const mockMapLoaderService  = { loadMapGrid: {} };
@@ -19,6 +20,7 @@ describe('AppComponent', () => {
   const mockLevelUpgradeService = { initialize: {} };
   const mockTurnEngineService = { initialize: {}, executeTurn: {} };
   const mockFactoryService = new FactoryService();
+  const actionOptions = [ActionOption.Move, ActionOption.Move, ActionOption.None, ActionOption.Move];
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
 
@@ -29,7 +31,7 @@ describe('AppComponent', () => {
     spyOn(mockFactoryService, 'setUpDependencies');
     spyOn(mockLevelUpgradeService, 'initialize');
     spyOn(mockTurnEngineService, 'initialize');
-    spyOn(mockTurnEngineService, 'executeTurn');
+    spyOn(mockTurnEngineService, 'executeTurn').and.returnValue(actionOptions);
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
@@ -57,49 +59,64 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should setup dependencies for factory service (avoids circular dependencies)', () => {
-    expect(mockFactoryService.setUpDependencies).toHaveBeenCalledWith(mockUserConsoleService, mockFightService, mockLevelUpgradeService);
+  describe('constructor', () => {
+    it('should setup dependencies for factory service (avoids circular dependencies)', () => {
+      expect(mockFactoryService.setUpDependencies).toHaveBeenCalledWith(mockUserConsoleService, mockFightService, mockLevelUpgradeService);
+    });
   });
 
-  it('should initialize turn engine with game elements', () => {
-    expect(mockTurnEngineService.initialize).toHaveBeenCalledWith(component.character, component.enemies);
+  describe('ngOnInit', () => {
+    it('should initialize turn engine with game elements', () => {
+      expect(mockTurnEngineService.initialize).toHaveBeenCalledWith(component.character, component.enemies);
+    });
+
+    it(`should have as title 'Dungeon'`, () => {
+      expect(component.title).toEqual('Dungeon');
+    });
+
+    it('should render title in a h1 tag', () => {
+      const compiled = fixture.debugElement.nativeElement;
+      expect(compiled.querySelector('h1').textContent).toContain('Welcome to the Dungeon!');
+    });
+
+    it('should have initial character', () => {
+      const character = component.character;
+
+      expect(character.experience).toBe(0);
+      expect(mockLevelUpgradeService.initialize).toHaveBeenCalledWith(character);
+    });
+
+    it('should have initial console lines', () => {
+      expect(mockUserConsoleService.writeWelcome).toHaveBeenCalled();
+    });
+
+    it('should have loaded map grid', () => {
+      expect(mockMapLoaderService.loadMapGrid).toHaveBeenCalledWith(component.mapGrid, component.character, component.enemies);
+    });
+
+    // TODO: I hate promises
+    // it('should sort enemies', (done) => {
+    //   component.mapLoadPromise.then(() => {
+    //     expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.character);
+    //     done();
+    //   });
+    // });
+    //
+    // it('should initialize actionOptions', (done) => {
+    //   component.mapLoadPromise.then(() => {
+    //     expect(component.character.getActionOptions).toHaveBeenCalled();
+    //     expect(component.actionOptions).toBe(actionOptions);
+    //     done();
+    //   });
+    // });
   });
 
-  it(`should have as title 'Dungeon'`, () => {
-    expect(component.title).toEqual('Dungeon');
-  });
+  describe('actionHandler', () => {
+    it('should executeTurn for charactor', () => {
+      component.actionHandler(Direction.Left);
 
-  it('should render title in a h1 tag', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to the Dungeon!');
-  });
-
-  it('should have initial character', () => {
-    const character = component.character;
-
-    expect(character.experience).toBe(0);
-    expect(mockLevelUpgradeService.initialize).toHaveBeenCalledWith(character);
-  });
-
-  it('should have initial console lines', () => {
-    expect(mockUserConsoleService.writeWelcome).toHaveBeenCalled();
-  });
-
-  it('should have loaded map grid', () => {
-    expect(mockMapLoaderService.loadMapGrid).toHaveBeenCalledWith(component.mapGrid, component.character, component.enemies);
-  });
-
-  // TODO: I hate promises
-  // it('should sort enemies', (done) => {
-  //   component.mapLoadPromise.then(() => {
-  //     expect(mockEnemySorterService.sort).toHaveBeenCalledWith(component.enemies, component.character);
-  //     done();
-  //   });
-  // });
-
-  it('should executeTurn for charactor action', () => {
-    component.actionHandler(Direction.Left);
-
-    expect(mockTurnEngineService.executeTurn).toHaveBeenCalledWith(Direction.Left);
+      expect(mockTurnEngineService.executeTurn).toHaveBeenCalledWith(Direction.Left);
+      expect(component.actionOptions).toBe(actionOptions);
+    });
   });
 });

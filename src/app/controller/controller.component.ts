@@ -1,5 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Direction } from '../model/direction.model';
+import { ActionOption } from '../model/action-option';
 
 @Component({
   selector: 'app-controller',
@@ -8,21 +9,13 @@ import { Direction } from '../model/direction.model';
 })
 export class ControllerComponent {
 
+  @Input() actionOptions: ActionOption[] = [ActionOption.None, ActionOption.None, ActionOption.None, ActionOption.None];
   @Output() actionEvent = new EventEmitter<Direction>();
 
-  upClickHandler() {
-    this.actionEvent.emit(Direction.Up);
-  }
+  direction = Direction;
+  actionOption = ActionOption;
 
-  rightClickHandler() {
-    this.actionEvent.emit(Direction.Right);
-  }
-
-  downClickHandler() {
-    this.actionEvent.emit(Direction.Down);
-  }
-
-  leftClickHandler() {
-    this.actionEvent.emit(Direction.Left);
+  clickHandler(direction: Direction) {
+    this.actionEvent.emit(direction);
   }
 }

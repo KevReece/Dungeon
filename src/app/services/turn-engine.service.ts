@@ -3,6 +3,7 @@ import { Direction } from '../model/direction.model';
 import { Character } from '../model/celloccupiers/character.model';
 import { EnemySorterService } from './enemy-sorter.service';
 import { Enemy } from '../model/celloccupiers/enemy.model';
+import { ActionOption } from '../model/action-option';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,12 @@ export class TurnEngineService {
     this.enemies = enemies;
   }
 
-  executeTurn(charactorActionDirection: Direction) {
-    this.character.act(charactorActionDirection);
-    this.enemySorterService.sort(this.enemies, this.character);
-    this.enemies.forEach(enemy => enemy.act(this.character));
-    this.enemySorterService.sort(this.enemies, this.character);
+  executeTurn(charactorActionDirection: Direction): ActionOption[] {
+    if (this.character.act(charactorActionDirection)) {
+      this.enemySorterService.sort(this.enemies, this.character);
+      this.enemies.forEach(enemy => enemy.act(this.character));
+      this.enemySorterService.sort(this.enemies, this.character);
+    }
+    return this.character.getActionOptions();
   }
 }

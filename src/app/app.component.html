@@ -6,7 +6,7 @@
 </div>
 
 <app-character [character]="character"></app-character>
-<app-controller (actionEvent)="actionHandler($event)"></app-controller>
+<app-controller [actionOptions]="actionOptions" (actionEvent)="actionHandler($event)"></app-controller>
 <app-map [mapGrid]="mapGrid"></app-map>
 <app-enemies [enemies]="enemies"></app-enemies>
 <app-user-console></app-user-console>

@@ -9,6 +9,8 @@ import { Enemy } from './enemy.model';
 import { FightService } from 'src/app/services/fight.service';
 import { TestFactory } from 'src/app/testhelpers/test-factory';
 import { LevelUpgradeService } from 'src/app/services/level-upgrade.service';
+import { ActionOption } from '../action-option';
+import { TreasureChest } from './treasure-chest.model';
 
 describe('Character', () => {
     let character: Character;
@@ -61,25 +63,28 @@ describe('Character', () => {
         it('should move the character', () => {
             const mapGrid = new MapGrid([new Row([TestFactory.createCell(character)]), new Row([TestFactory.createCell()])]);
 
-            character.act(Direction.Down);
+            const result = character.act(Direction.Down);
 
             expect(character.getCell()).toBe(mapGrid.rows[1].cells[0]);
+            expect(result).toBeTruthy();
         });
 
         it('should not move the character out of bounds', () => {
             const mapGrid = new MapGrid([new Row([TestFactory.createCell(character)])]);
 
-            character.act(Direction.Up);
+            const result = character.act(Direction.Up);
 
             expect(character.getCell()).toBe(mapGrid.rows[0].cells[0]);
+            expect(result).toBeFalsy();
         });
 
         it('should not move the character into occupied cell', () => {
             const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(new Wall())])]);
 
-            character.act(Direction.Right);
+            const result = character.act(Direction.Right);
 
             expect(character.getCell()).toBe(mapGrid.rows[0].cells[0]);
+            expect(result).toBeFalsy();
         });
 
         it('should open a treasure chest', () => {
@@ -87,9 +92,10 @@ describe('Character', () => {
             const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(treasureChest)])]);
             spyOn(treasureChest, 'open');
 
-            character.act(Direction.Right);
+            const result = character.act(Direction.Right);
 
             expect(treasureChest.open).toHaveBeenCalled();
+            expect(result).toBeTruthy();
         });
 
         it('should collect gold', () => {
@@ -98,10 +104,11 @@ describe('Character', () => {
             newCell.items.push(gold);
             const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), newCell])]);
 
-            character.act(Direction.Right);
+            const result = character.act(Direction.Right);
 
             expect(character.gold).toEqual(gold.quantity);
             expect(newCell.items.length).toEqual(0);
+            expect(result).toBeTruthy();
         });
 
         it('should raise items collected console message', () => {
@@ -130,9 +137,10 @@ describe('Character', () => {
             const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(enemy)])]);
             spyOn(mockFightService, 'attack');
 
-            character.act(Direction.Right);
+            const result = character.act(Direction.Right);
 
             expect(mockFightService.attack).toHaveBeenCalledWith(character, enemy);
+            expect(result).toBeTruthy();
         });
     });
 
@@ -155,6 +163,47 @@ describe('Character', () => {
             character.killedOpponent(TestFactory.createEnemy());
 
             expect(mockLevelUpgradeService.check).toHaveBeenCalledWith(character);
+        });
+    });
+
+    describe('getActionOptions', () => {
+        it('should return None when blocked', () => {
+            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(new Wall())])]);
+
+            expect(character.getActionOptions()[1]).toBe(ActionOption.None);
+        });
+
+        it('should return Move when not blocked', () => {
+            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell()])]);
+
+            expect(character.getActionOptions()[1]).toBe(ActionOption.Move);
+        });
+
+        it('should return Fight when blocked by enemy', () => {
+            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(TestFactory.createEnemy())])]);
+
+            expect(character.getActionOptions()[1]).toBe(ActionOption.Fight);
+        });
+
+        it('should return Open when blocked by treasure chest', () => {
+            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(TestFactory.createTreasureChest())])]);
+
+            expect(character.getActionOptions()[1]).toBe(ActionOption.Open);
+        });
+
+        it('should return all directions', () => {
+            const mapGrid = TestFactory.create9x9MapGrid(character);
+            mapGrid.rows[1].cells[2].setOccupier(TestFactory.createEnemy());
+            mapGrid.rows[2].cells[1].setOccupier(TestFactory.createTreasureChest());
+            mapGrid.rows[1].cells[0].setOccupier(new Wall());
+
+            const actionOptions = character.getActionOptions();
+
+            expect(actionOptions.length).toBe(4);
+            expect(actionOptions[0]).toBe(ActionOption.Move);
+            expect(actionOptions[1]).toBe(ActionOption.Fight);
+            expect(actionOptions[2]).toBe(ActionOption.Open);
+            expect(actionOptions[3]).toBe(ActionOption.None);
         });
     });
 });
