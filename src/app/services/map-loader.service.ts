@@ -22,14 +22,21 @@ export class MapLoaderService {
     const rows = [];
     file.split('\n').forEach(rowString => {
       const rowCells = [];
-      rowString.split('').forEach(cellChar => rowCells.push(this.buildCell(cellChar, character, enemies)));
+      rowString.split('')
+        .filter(cellChar => this.isAlphanumericOrSpace(cellChar))
+        .forEach(cellChar => rowCells.push(this.buildCell(cellChar, character, enemies)));
       rows.push(new Row(rowCells));
     });
     mapGrid.rows = rows;
     mapGrid.setupCells();
   }
 
-  private buildCell(cellChar: String, character: Character, enemies: Enemy[]) {
+  private isAlphanumericOrSpace(char: string): boolean {
+    const alphaNumericRegex = new RegExp('^[ A-Za-z0-9]$');
+    return alphaNumericRegex.test(char);
+  }
+
+  private buildCell(cellChar: string, character: Character, enemies: Enemy[]) {
     switch (cellChar) {
       case 'X': return this.factoryService.createWallCell();
       case 'T': return this.factoryService.createTreasureChestCell();

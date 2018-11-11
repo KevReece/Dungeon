@@ -92,6 +92,9 @@ describe('MapLoadderService', () => {
       service.loadMapGrid(mapGrid, null, [])
         .then(() => {
           expect(mapGrid.rows[0].cells[0].occupier).toEqual(jasmine.any(Wall));
+          expect(mapGrid.rows.length).toBe(40);
+          expect(mapGrid.rows[0].cells.length).toBe(40);
+          expect(mapGrid.rows[39].cells.length).toBe(40);
           done();
         });
     });
