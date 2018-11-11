@@ -15,6 +15,15 @@ export class ControllerComponent {
   direction = Direction;
   actionOption = ActionOption;
 
+  getActionName(direction: Direction): string {
+    const actionOption = this.actionOptions[direction];
+    const actionOptionString = ActionOption[actionOption].toLowerCase();
+    if (actionOption === ActionOption.Move) {
+      return actionOptionString + Direction[direction];
+    }
+    return actionOptionString;
+  }
+
   clickHandler(direction: Direction) {
     this.actionEvent.emit(direction);
   }

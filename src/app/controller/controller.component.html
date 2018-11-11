@@ -1,13 +1,39 @@
 <table id="ControllerComponent">
-  <tr><td></td><td>
-    <button id="UpButton" [disabled]="actionOptions[direction.Up] === actionOption.None" (click)="clickHandler(direction.Up)">{{actionOption[actionOptions[direction.Up]]}}</button>
-  </td><td></td></tr>
-  <tr><td>
-    <button id="LeftButton" [disabled]="actionOptions[direction.Left] === actionOption.None" (click)="clickHandler(direction.Left)">{{actionOption[actionOptions[direction.Left]]}}</button>
-  </td><td></td><td>
-    <button id="RightButton" [disabled]="actionOptions[direction.Right] === actionOption.None" (click)="clickHandler(direction.Right)">{{actionOption[actionOptions[direction.Right]]}}</button>
-  </td></tr>
-  <tr><td></td><td>
-    <button id="DownButton" [disabled]="actionOptions[direction.Down] === actionOption.None" (click)="clickHandler(direction.Down)">{{actionOption[actionOptions[direction.Down]]}}</button>
-  </td><td></td></tr>
+  <tr>
+    <td></td>
+    <td>
+      <img id="UpButton" class="button"
+        [class.disabled]="actionOptions[direction.Up] === actionOption.None" 
+        (click)="clickHandler(direction.Up)" 
+        src="~/../assets/images/{{getActionName(direction.Up)}}Action.png" />
+    </td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>
+      <img id="LeftButton" class="button"
+        [class.disabled]="actionOptions[direction.Left] === actionOption.None" 
+        (click)="clickHandler(direction.Left)" 
+        src="~/../assets/images/{{getActionName(direction.Left)}}Action.png" />
+    </td>
+    <td>
+        <img src="~/../assets/images/characterFace.png" />
+    </td>
+    <td>
+      <img id="RightButton" class="button"
+        [class.disabled]="actionOptions[direction.Right] === actionOption.None" 
+        (click)="clickHandler(direction.Right)" 
+        src="~/../assets/images/{{getActionName(direction.Right)}}Action.png" />
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>
+      <img id="DownButton" class="button"
+        [class.disabled]="actionOptions[direction.Down] === actionOption.None" 
+        (click)="clickHandler(direction.Down)" 
+        src="~/../assets/images/{{getActionName(direction.Down)}}Action.png" />
+    </td>
+    <td></td>
+  </tr>
 </table>
