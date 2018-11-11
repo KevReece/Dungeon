@@ -2,8 +2,8 @@
   <div class="panel panel100x7o5">
       <app-panel-background class="panelContent panelBackground" [columnCount]="'40'" [rowCount]="'3'" [imageWidthPercentage]="'2.5'"></app-panel-background>
       <div class="panelContent">
-        <h1 class="title">Welcome to the Dungeon!</h1>
-        <app-menu class="rightButtons" (restartEvent)="restart()" [isGameOver]="character.isDead()"></app-menu>
+        <img id="Title" src="~/../assets/images/title.png" />
+        <app-menu class="panelContent" (restartEvent)="restart()" [isGameOver]="character.isDead()"></app-menu>
       </div>
   </div>
   <div>
