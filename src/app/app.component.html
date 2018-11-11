@@ -1,27 +1,34 @@
 <div id="Page">
-  <div class="panel panel100x5">
+  <div class="panel panel100x7o5">
+      <app-panel-background class="panelContent panelBackground" [columnCount]="'40'" [rowCount]="'3'" [imageWidthPercentage]="'2.5'"></app-panel-background>
       <div class="panelContent">
         <h1 class="title">Welcome to the Dungeon!</h1>
         <app-menu class="rightButtons" (restartEvent)="restart()" [isGameOver]="character.isDead()"></app-menu>
       </div>
   </div>
-  <div class="panel panel25x50">
-      <div class="panelContent">
-        <app-character [character]="character"></app-character>
-        <app-controller [actionOptions]="actionOptions" (actionEvent)="actionHandler($event)"></app-controller>
-      </div>
+  <div>
+    <div class="panel panel25x50">
+        <app-panel-background class="panelContent panelBackground" [columnCount]="'10'" [rowCount]="'20'" [imageWidthPercentage]="'10'"></app-panel-background>
+        <div class="panelContent">
+          <app-character [character]="character"></app-character>
+          <app-controller [actionOptions]="actionOptions" (actionEvent)="actionHandler($event)"></app-controller>
+        </div>
+    </div>
+    <div class="panel panel50x50">
+        <app-panel-background class="panelContent panelBackground" [columnCount]="'20'" [rowCount]="'20'" [imageWidthPercentage]="'5'"></app-panel-background>
+        <div class="panelContent">
+          <app-map [mapGrid]="mapGrid"></app-map>
+        </div>
+    </div>
+    <div class="panel panel25x50">
+        <app-panel-background class="panelContent panelBackground" [columnCount]="'10'" [rowCount]="'20'" [imageWidthPercentage]="'10'"></app-panel-background>
+        <div class="panelContent">
+          <app-enemies [enemies]="enemies"></app-enemies>
+        </div>
+    </div>
   </div>
-  <div class="panel panel50x50">
-      <div class="panelContent">
-        <app-map [mapGrid]="mapGrid"></app-map>
-      </div>
-  </div>
-  <div class="panel panel25x50">
-      <div class="panelContent">
-        <app-enemies [enemies]="enemies"></app-enemies>
-      </div>
-  </div>
-  <div class="panel panel100x5">
+  <div class="panel panel100x35">
+      <app-panel-background class="panelContent panelBackground" [columnCount]="'40'" [rowCount]="'7'" [imageWidthPercentage]="'2.5'"></app-panel-background>
       <div class="panelContent">
         <app-user-console></app-user-console>
       </div>

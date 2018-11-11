@@ -18,6 +18,7 @@ import { MenuComponent } from './menu/menu.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
+import { PanelBackgroundComponent } from './panel-background/panel-background.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ConfirmationDialogService } from './confirmation-dialog/confirmation-di
     ControllerComponent,
     EnemiesComponent,
     MenuComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    PanelBackgroundComponent
   ],
   imports: [
     BrowserModule,

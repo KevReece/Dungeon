@@ -1,0 +1,15 @@
+<div class="backgroundRow">
+  <img src="~/../assets/images/backgroundCorner.png" [style.width.%]="imageWidthPercentage" />
+  <img *ngFor="let index of horizontalCountLessCornersAsList" src="~/../assets/images/backgroundEdge.png" [style.width.%]="imageWidthPercentage" />
+  <img class="flipX" src="~/../assets/images/backgroundCorner.png" [style.width.%]="imageWidthPercentage" />
+</div>
+<div *ngFor="let index of verticalCountLessCornersAsList" class="backgroundRow">
+    <img class="rotate270" src="~/../assets/images/backgroundEdge.png"[style.width.%]="imageWidthPercentage" />
+    <img *ngFor="let index of horizontalCountLessCornersAsList" src="~/../assets/images/backgroundCentre.png"[style.width.%]="imageWidthPercentage" />
+    <img class="rotate90" src="~/../assets/images/backgroundEdge.png"[style.width.%]="imageWidthPercentage" />
+</div>
+<div class="backgroundRow">
+    <img class="flipY" src="~/../assets/images/backgroundCorner.png"[style.width.%]="imageWidthPercentage" />
+    <img *ngFor="let index of horizontalCountLessCornersAsList" class="rotate180" src="~/../assets/images/backgroundEdge.png"[style.width.%]="imageWidthPercentage" />
+    <img class="flipXandY" src="~/../assets/images/backgroundCorner.png"[style.width.%]="imageWidthPercentage" />
+</div>
