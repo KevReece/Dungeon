@@ -17,17 +17,17 @@ export class MapComponent {
 
   showCell(cell: Cell) {
     if (cell.occupier instanceof Character) {
-      return 'B';
+      return 'character';
     } else if (cell.occupier instanceof Enemy) {
-      return 'E';
+      return 'goblin';
     } else if (cell.occupier instanceof Wall) {
-      return 'X';
+      return 'wall';
     } else if (cell.occupier instanceof TreasureChest) {
-      return 'T';
+      return 'treasureChest';
     } else if (cell.items.length > 0) {
-      return 'G';
+      return 'gold';
     } else {
-      return ' ';
+      return 'none';
     }
   }
 }

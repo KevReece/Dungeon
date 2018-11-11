@@ -49,41 +49,45 @@ describe('MapComponent', () => {
 
   it('should render a wall cell', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(1)').querySelector('td').textContent).toBe('X');
+    expect(compiled.querySelector('tr:nth-of-type(1)').querySelector('img').getAttribute("src")).toContain('wall');
   });
 
   it('should render multiple wall cells in row', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(2)').textContent).toBe('XX');
+    expect(compiled.querySelector('tr:nth-of-type(2)').querySelector('td:nth-of-type(1) img').getAttribute("src")).toContain('wall');
+    expect(compiled.querySelector('tr:nth-of-type(2)').querySelector('td:nth-of-type(2) img').getAttribute("src")).toContain('wall');
   });
 
   it('should render an empty floor cell', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(3)').querySelector('td').textContent).toBe(' ');
+    expect(compiled.querySelector('tr:nth-of-type(3)').querySelector('img').getAttribute("src")).toContain('none');
   });
 
   it('should render a mixed cells row', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(4)').textContent).toBe(' X X');
+    expect(compiled.querySelector('tr:nth-of-type(4)').querySelector('td:nth-of-type(1) img').getAttribute("src")).toContain('none');
+    expect(compiled.querySelector('tr:nth-of-type(4)').querySelector('td:nth-of-type(2) img').getAttribute("src")).toContain('wall');
+    expect(compiled.querySelector('tr:nth-of-type(4)').querySelector('td:nth-of-type(3) img').getAttribute("src")).toContain('none');
+    expect(compiled.querySelector('tr:nth-of-type(4)').querySelector('td:nth-of-type(4) img').getAttribute("src")).toContain('wall');
   });
 
   it('should render a character', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(5)').querySelector('td').textContent).toBe('B');
+    expect(compiled.querySelector('tr:nth-of-type(5)').querySelector('img').getAttribute("src")).toContain('character');
   });
 
   it('should render a treasure chest', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(6)').querySelector('td').textContent).toBe('T');
+    expect(compiled.querySelector('tr:nth-of-type(6)').querySelector('img').getAttribute("src")).toContain('treasureChest');
   });
 
   it('should render gold item', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(7)').querySelector('td').textContent).toBe('G');
+    expect(compiled.querySelector('tr:nth-of-type(7)').querySelector('img').getAttribute("src")).toContain('gold');
   });
 
   it('should render an enemy', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(8)').querySelector('td').textContent).toBe('E');
+    expect(compiled.querySelector('tr:nth-of-type(8)').querySelector('img').getAttribute("src")).toContain('goblin');
   });
 });

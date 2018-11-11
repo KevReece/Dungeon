@@ -28,8 +28,7 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 
 ## Todo
 - format ui
-    - map walls
-    - map others
+    - fix last map column
     - controller
     - character stats
     - enemy stats

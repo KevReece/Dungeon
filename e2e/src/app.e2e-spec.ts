@@ -9,7 +9,7 @@ describe('workspace-project App', () => {
   });
 
   it('should load app', () => {
-    expect(page.getParagraphText()).toEqual('Welcome to the Dungeon!');
+    expect(page.getPage().isPresent).toBeTruthy();
   });
 
   it('should load character component', () => {
