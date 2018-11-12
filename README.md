@@ -28,11 +28,13 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 
 ## Todo
 - format ui
-    - controller (write tests)
     - character stats
     - enemy stats
     - console
     - dialog
+    - fix on mobile
+    - make full width on smaller screens
+- message on restart
 - hole to next level ('O')
 - level indicator
 - treasure chests can drop food ('F')(add max health stat)(food gives 50%)
@@ -47,5 +49,6 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 - about page?
 - enter name at beginning, and store topscore when dead or restart/end? and show
 - keyboard arrows input?
+- change character face based on health and death
 - random enemy modifiers for spawned enemies (veteran/huge/gigantic/leader/angry/two-headed/vicious/bloodthirsty/stony/ancient/fierce/etc/none)?
 - animate ui (animate movement/animate fight/animate enemy sort/animate character stat changes/animate enemy stat changes)(block ui for animations)
