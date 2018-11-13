@@ -10,6 +10,7 @@ import { FightService } from './fight.service';
 import { Gold } from '../model/cellitems/gold.model';
 import { LevelUpgradeService } from './level-upgrade.service';
 import { WeightedOptions } from '../model/weighted-options.model';
+import { Hole } from '../model/celloccupiers/hole.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +34,17 @@ export class FactoryService {
   createWallCell(): Cell {
     return this.createCellOccupiedBy(this.createWall());
   }
+  createHoleCell(): Cell {
+    return this.createCellOccupiedBy(this.createHole());
+  }
   createEmptyCell(): Cell {
     return new Cell();
   }
   createWall(): Wall {
     return new Wall();
+  }
+  createHole(): Hole {
+    return new Hole();
   }
   createCharacter(): Character {
     return new Character(this.userConsoleService, this.fightService, this.levelUpgradeService);

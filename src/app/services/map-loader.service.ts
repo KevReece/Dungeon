@@ -46,6 +46,7 @@ export class MapLoaderService {
         return this.factoryService.createCellOccupiedBy(enemy);
       }
       case 'B': return this.factoryService.createCellOccupiedBy(character);
+      case 'O': return this.factoryService.createHoleCell();
       default: return this.factoryService.createEmptyCell();
     }
   }

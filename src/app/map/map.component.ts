@@ -5,6 +5,7 @@ import { Character } from '../model/celloccupiers/character.model';
 import { Wall } from '../model/celloccupiers/wall.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
+import { Hole } from '../model/celloccupiers/hole.model';
 
 @Component({
   selector: 'app-map',
@@ -24,6 +25,8 @@ export class MapComponent {
       return 'wall';
     } else if (cell.occupier instanceof TreasureChest) {
       return 'treasureChest';
+    } else if (cell.occupier instanceof Hole) {
+      return 'hole';
     } else if (cell.items.length > 0) {
       return 'gold';
     } else {

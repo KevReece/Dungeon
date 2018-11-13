@@ -11,6 +11,7 @@ import { CellOccupier } from '../model/celloccupiers/cell-occupier.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 import { TestFactory } from '../testhelpers/test-factory';
+import { Hole } from '../model/celloccupiers/hole.model';
 
 describe('MapLoadderService', () => {
 
@@ -39,11 +40,11 @@ describe('MapLoadderService', () => {
         mapGrid = new MapGrid([]);
         service.loadMapGrid(mapGrid, character, enemies);
         const mapRequest = httpMock.expectOne('assets/maps/1.map');
-        mapRequest.flush('  \nX \nB \nT \nE ');
+        mapRequest.flush('  \nX \nB \nT \nE \nO ');
       });
 
       it('should return all rows', () => {
-        expect(mapGrid.rows.length).toEqual(5);
+        expect(mapGrid.rows.length).toEqual(6);
       });
 
       it('should return all cells in a row', () => {
@@ -68,6 +69,11 @@ describe('MapLoadderService', () => {
         const cell = mapGrid.rows[4].cells[0];
         expect(cell.occupier).toEqual(jasmine.any(Enemy));
         expect(enemies).toContain(<Enemy>cell.occupier);
+      });
+
+      it('should return a hole cell', () => {
+        const cell = mapGrid.rows[5].cells[0];
+        expect(cell.occupier).toEqual(jasmine.any(Hole));
       });
 
       it('should assign the character to a cell', () => {

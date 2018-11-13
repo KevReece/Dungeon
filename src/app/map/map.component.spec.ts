@@ -10,6 +10,7 @@ import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Gold } from '../model/cellitems/gold.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 import { TestFactory } from '../testhelpers/test-factory';
+import { Hole } from '../model/celloccupiers/hole.model';
 
 describe('MapComponent', () => {
   let component: MapComponent;
@@ -33,7 +34,8 @@ describe('MapComponent', () => {
     const goldRow = new Row([TestFactory.createCell()]);
     goldRow.cells[0].items.push(TestFactory.createGold());
     const enemyRow = new Row([TestFactory.createCell(TestFactory.createEnemy())]);
-    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, characterRow, treasureChestRow, goldRow, enemyRow]);
+    const holeRow = new Row([TestFactory.createCell(new Hole())]);
+    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, characterRow, treasureChestRow, goldRow, enemyRow, holeRow]);
   };
 
   beforeEach(() => {
@@ -89,5 +91,10 @@ describe('MapComponent', () => {
   it('should render an enemy', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('tr:nth-of-type(8)').querySelector('img').getAttribute('src')).toContain('goblin');
+  });
+
+  it('should render a treasure chest', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('tr:nth-of-type(9)').querySelector('img').getAttribute('src')).toContain('hole');
   });
 });
