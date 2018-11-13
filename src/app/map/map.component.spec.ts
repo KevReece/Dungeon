@@ -4,11 +4,6 @@ import { MapComponent } from './map.component';
 import { MapGrid } from '../model/map-grid.model';
 import { Row } from '../model/row.model';
 import { Wall } from '../model/celloccupiers/wall.model';
-import { Cell } from '../model/cell.model';
-import { Character } from '../model/celloccupiers/character.model';
-import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
-import { Gold } from '../model/cellitems/gold.model';
-import { Enemy } from '../model/celloccupiers/enemy.model';
 import { TestFactory } from '../testhelpers/test-factory';
 import { Hole } from '../model/celloccupiers/hole.model';
 
@@ -51,50 +46,67 @@ describe('MapComponent', () => {
 
   it('should render a wall cell', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(1)').querySelector('img').getAttribute('src')).toContain('wall');
+    const row = getRow(compiled, 1);
+    expect(getCellSrcOfRow(row, 1)).toContain('wall');
   });
 
   it('should render multiple wall cells in row', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(2)').querySelector('td:nth-of-type(1) img').getAttribute('src')).toContain('wall');
-    expect(compiled.querySelector('tr:nth-of-type(2)').querySelector('td:nth-of-type(2) img').getAttribute('src')).toContain('wall');
+    const row = getRow(compiled, 2);
+    expect(getCellSrcOfRow(row, 1)).toContain('wall');
+    expect(getCellSrcOfRow(row, 2)).toContain('wall');
   });
 
   it('should render an empty floor cell', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(3)').querySelector('img').getAttribute('src')).toContain('none');
+    const row = getRow(compiled, 3);
+    expect(getCellSrcOfRow(row, 1)).toContain('none');
   });
 
   it('should render a mixed cells row', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(4)').querySelector('td:nth-of-type(1) img').getAttribute('src')).toContain('none');
-    expect(compiled.querySelector('tr:nth-of-type(4)').querySelector('td:nth-of-type(2) img').getAttribute('src')).toContain('wall');
-    expect(compiled.querySelector('tr:nth-of-type(4)').querySelector('td:nth-of-type(3) img').getAttribute('src')).toContain('none');
-    expect(compiled.querySelector('tr:nth-of-type(4)').querySelector('td:nth-of-type(4) img').getAttribute('src')).toContain('wall');
+    const row = getRow(compiled, 4);
+    expect(getCellSrcOfRow(row, 1)).toContain('none');
+    expect(getCellSrcOfRow(row, 2)).toContain('wall');
+    expect(getCellSrcOfRow(row, 3)).toContain('none');
+    expect(getCellSrcOfRow(row, 4)).toContain('wall');
   });
 
   it('should render a character', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(5)').querySelector('img').getAttribute('src')).toContain('character');
+    const row = getRow(compiled, 5);
+    expect(getCellSrcOfRow(row, 1)).toContain('character');
   });
 
   it('should render a treasure chest', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(6)').querySelector('img').getAttribute('src')).toContain('treasureChest');
+    const row = getRow(compiled, 6);
+    expect(getCellSrcOfRow(row, 1)).toContain('treasureChest');
   });
 
   it('should render gold item', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(7)').querySelector('img').getAttribute('src')).toContain('gold');
+    const row = getRow(compiled, 7);
+    expect(getRow(compiled, 7).querySelector('img').getAttribute('src')).toContain('gold');
   });
 
   it('should render an enemy', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(8)').querySelector('img').getAttribute('src')).toContain('goblin');
+    const row = getRow(compiled, 8);
+    expect(getCellSrcOfRow(row, 1)).toContain('goblin');
   });
 
   it('should render a treasure chest', () => {
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('tr:nth-of-type(9)').querySelector('img').getAttribute('src')).toContain('hole');
+    const row = getRow(compiled, 9);
+    expect(getCellSrcOfRow(row, 1)).toContain('hole');
   });
 });
+
+function getRow(compiled: any, numberOfRow: number) {
+  return compiled.querySelector('.row:nth-of-type(' + numberOfRow + ')');
+}
+
+function getCellSrcOfRow(rowElement: any, numberOfCell: number): any {
+  return rowElement.querySelector('.cell:nth-of-type(' + numberOfCell + ') img').getAttribute('src');
+}
