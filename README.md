@@ -14,7 +14,8 @@ Run `ng test` and `ng e2e`
 Run `ng serve`. `http://localhost:4200/`
 
 ## Prod deploy
-Push to GitHub, then CircleCI will detect the changes, run the tests and deploy. `http://d244gfx0zgow1.cloudfront.net/`
+Push to GitHub, then CircleCI will detect the changes, run the tests and deploy. S3: `http://welcometothedungeon.s3-website.eu-central-1.amazonaws.com`. CloudFront: `http://d244gfx0zgow1.cloudfront.net/`
+
 
 ## First prod deploy
 - Create AWS S3 bucket
