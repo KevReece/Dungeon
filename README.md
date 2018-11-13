@@ -34,8 +34,8 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
     - dialog
     - fix on mobile
     - controller on right?
-- hole to next level ('O')
-- level indicator
+- progress to next level
+    - level indicator
 - treasure chests can drop food ('F')(add max health stat)(food gives 50%)
 - other enemies types (easy Goblin enemy 'E'/hard Orc enemy 'H')
 - prettify ui (redo all images)

@@ -14,7 +14,7 @@ export class MapLoaderService {
   constructor(private httpClient: HttpClient, private factoryService: FactoryService) { }
 
   loadMapGrid(mapGrid: MapGrid, character: Character, enemies: Enemy[]): Promise<void> {
-    return this.httpClient.get('assets/maps/1.map', {responseType: 'text'}).toPromise()
+    return this.httpClient.get('assets/maps/0001.map', {responseType: 'text'}).toPromise()
       .then((response) => this.buildGridFromFile(response, mapGrid, character, enemies));
   }
 

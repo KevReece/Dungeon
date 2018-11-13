@@ -39,7 +39,7 @@ describe('MapLoadderService', () => {
         const service: MapLoaderService = TestBed.get(MapLoaderService);
         mapGrid = new MapGrid([]);
         service.loadMapGrid(mapGrid, character, enemies);
-        const mapRequest = httpMock.expectOne('assets/maps/1.map');
+        const mapRequest = httpMock.expectOne('assets/maps/0001.map');
         mapRequest.flush('  \nX \nB \nT \nE \nO ');
       });
 
@@ -92,7 +92,7 @@ describe('MapLoadderService', () => {
       });
     });
 
-    it('should load 1.map', (done) => {
+    it('should load 0001.map', (done) => {
       const service: MapLoaderService = TestBed.get(MapLoaderService);
       const mapGrid: MapGrid = new MapGrid([]);
       service.loadMapGrid(mapGrid, null, [])
