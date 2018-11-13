@@ -1,20 +1,34 @@
-img
-    vertical-align: top
+.container
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
 
-.flipX
-    transform: scaleX(-1)
-    
-.flipY
-    transform: scaleY(-1)
+.backgroundRow
+    position: relative
 
-.flipXandY
-    transform: scale(-1, -1)
+    .cell
+        display: inline-block
 
-.rotate90
-    transform: rotate(90deg)
-    
-.rotate180
-    transform: rotate(180deg)
-    
-.rotate270
-    transform: rotate(270deg)
+        img
+            vertical-align: top
+            width: 100%
+
+        .flipX
+            transform: scaleX(-1)
+            
+        .flipY
+            transform: scaleY(-1)
+
+        .flipXandY
+            transform: scale(-1, -1)
+
+        .rotate90
+            transform: rotate(90deg)
+            
+        .rotate180
+            transform: rotate(180deg)
+            
+        .rotate270
+            transform: rotate(270deg)

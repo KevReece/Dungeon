@@ -1,6 +1,6 @@
 <div id="MapComponent">
   <div class="row" *ngFor="let row of mapGrid.rows">
-    <div class="content"> 
+    <div class="container"> 
       <div class="cell" *ngFor="let cell of row.cells">
         <img src="~/../assets/images/{{showCell(cell)}}.png" />
       </div>
