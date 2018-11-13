@@ -1,22 +1,28 @@
 
 #MapComponent
     position: absolute
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    display: block
-
-tbody
-    position: absolute
     top: 3%
     right: 3%
     bottom: 3%
     left: 3%
-
-img
-    width: 100%
-
-tr
     display: block
-    height: 2.5%
+
+    .row
+        position: relative
+        display: block
+        padding-top: 2.5%
+
+        .content
+            position: absolute
+            top: 0
+            right: 0
+            bottom: 0
+            left: 0
+
+            .cell
+                position: relative
+                width: 2.5%
+                display: inline-block
+                
+                img
+                    width: 100%

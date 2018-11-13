@@ -1,7 +1,9 @@
-<table id="MapComponent">
-  <tr *ngFor="let row of mapGrid.rows">
-    <td *ngFor="let cell of row.cells">
-      <img src="~/../assets/images/{{showCell(cell)}}.png" />
-    </td>
-  </tr>
-</table>
+<div id="MapComponent">
+  <div class="row" *ngFor="let row of mapGrid.rows">
+    <div class="content"> 
+      <div class="cell" *ngFor="let cell of row.cells">
+        <img src="~/../assets/images/{{showCell(cell)}}.png" />
+      </div>
+    </div>
+  </div>
+</div>
