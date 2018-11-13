@@ -12,7 +12,8 @@ export class UserConsoleService {
   lines: string[] = [];
 
   startAndWelcome(): void {
-    this.lines = ['Welcome to the Dungeon!'];
+    this.lines.length = 0;
+    this.lines.push('Welcome to the Dungeon!');
   }
 
   writeTreasureChestOpenedAndGoldDropped(droppedGold: Gold): void {

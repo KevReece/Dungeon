@@ -36,7 +36,6 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
     - make full width on smaller screens
     - preload all images
     - controller on right?
-- message on restart
 - hole to next level ('O')
 - level indicator
 - treasure chests can drop food ('F')(add max health stat)(food gives 50%)
