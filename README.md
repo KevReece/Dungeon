@@ -28,15 +28,14 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 
 ## Todo
 - format ui
-    - character stats
-    - enemy stats
-    - console
+    - goblin face
+    - aspect scaling of fonts
+    - fix space off bottom
     - dialog
-    - fix on mobile
-    - controller on right?
-- progress to next level
+    - check on mobile
+- advance to next level
     - level indicator
-- treasure chests can drop food ('F')(add max health stat)(food gives 50%)
+- treasure chests can drop food (add max health stat)(food gives 50%)
 - other enemies types (easy Goblin enemy 'E'/hard Orc enemy 'H')
 - prettify ui (redo all images)
 - create different levels (progressively harder enemy type pairs)
