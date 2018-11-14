@@ -29,21 +29,21 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 
 ## Todo
 - format ui
-    - goblin face
     - aspect scaling of fonts
     - fix space off bottom
     - dialog
+    - move enemies and character below grid for vertical screen
     - check on mobile
 - advance to next level
     - level indicator
 - treasure chests can drop food (add max health stat)(food gives 50%)
 - other enemies types (easy Goblin enemy 'E'/hard Orc enemy 'H')
-- prettify ui (redo all images)
 - create different levels (progressively harder enemy type pairs)
-- loop levels or complete game?
 - save and load state (in cookies)
 - spawn enemies (every 20 player turns)(gather free spaces into array, then random)
 - progress spawned enemies types (levels define enemy type pair)(spawn: last level easy > last level hard > current level easy > current level hard > next level easy > next level hard > etc)
+- loop levels or complete game?
+- prettify ui (redo all images)
 - intro (backstory?) and gameplay explanation 
 - about page?
 - enter name at beginning, and store topscore when dead or restart/end? and show

@@ -1,11 +1,11 @@
 <div id="EnemiesComponent">
   <div class="enemy" *ngFor="let enemy of enemies">
       <div class="content">
-        <h3>{{enemy.name}}</h3>
-        <img src="~/../assets/images/healthStat.png" /><span>{{enemy.health}}</span>
-        <img src="~/../assets/images/attackStat.png" /><span>{{enemy.attack}}</span>
-        <img src="~/../assets/images/defenceStat.png" /><span>{{enemy.defence}}</span>
-        <img src="~/../assets/images/damageStat.png" /><span>{{enemy.damage}}</span>
+        <div class="face"><img src="~/../assets/images/goblinFace.png" /></div>
+        <div class="statImg"><img src="~/../assets/images/healthStat.png" /></div><span>{{enemy.health}}</span>
+        <div class="statImg"><img src="~/../assets/images/attackStat.png" /></div><span>{{enemy.attack}}</span>
+        <div class="statImg"><img src="~/../assets/images/defenceStat.png" /></div><span>{{enemy.defence}}</span>
+        <div class="statImg"><img src="~/../assets/images/damageStat.png" /></div><span>{{enemy.damage}}</span>
       </div>
   </div>
 </div>
