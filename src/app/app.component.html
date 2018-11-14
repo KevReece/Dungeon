@@ -6,26 +6,24 @@
         <app-menu class="panelContent" (restartEvent)="restart()" [isGameOver]="character.isDead()"></app-menu>
       </div>
   </div>
-  <div>
-    <div class="panel panel25x50">
-        <app-panel-background class="panelContent panelBackground" [columnCount]="'10'" [rowCount]="'20'" [imageWidthPercentage]="'10'"></app-panel-background>
-        <div class="panelContent">
-          <app-enemies [enemies]="enemies"></app-enemies>
-        </div>
-    </div>
-    <div class="panel panel50x50">
-        <app-panel-background class="panelContent panelBackground" [columnCount]="'20'" [rowCount]="'20'" [imageWidthPercentage]="'5'"></app-panel-background>
-        <div class="panelContent">
-          <app-map class="panelContent" [mapGrid]="mapGrid"></app-map>
-        </div>
-    </div>
-    <div class="panel panel25x50">
-        <app-panel-background class="panelContent panelBackground" [columnCount]="'10'" [rowCount]="'20'" [imageWidthPercentage]="'10'"></app-panel-background>
-        <div class="panelContent">
-          <app-character class="panelContent" [character]="character"></app-character>
-          <app-controller class="panelContent" [actionOptions]="actionOptions" (actionEvent)="actionHandler($event)"></app-controller>
-        </div>
-    </div>
+  <div class="panel panel50x50 shiftRight25OnLandscape">
+      <app-panel-background class="panelContent panelBackground" [columnCount]="'20'" [rowCount]="'20'" [imageWidthPercentage]="'5'"></app-panel-background>
+      <div class="panelContent">
+        <app-map class="panelContent" [mapGrid]="mapGrid"></app-map>
+      </div>
+  </div>
+  <div class="panel panel25x50 shiftLeft50OnLandscape">
+      <app-panel-background class="panelContent panelBackground" [columnCount]="'10'" [rowCount]="'20'" [imageWidthPercentage]="'10'"></app-panel-background>
+      <div class="panelContent">
+        <app-enemies [enemies]="enemies"></app-enemies>
+      </div>
+  </div>
+  <div class="panel panel25x50">
+      <app-panel-background class="panelContent panelBackground" [columnCount]="'10'" [rowCount]="'20'" [imageWidthPercentage]="'10'"></app-panel-background>
+      <div class="panelContent">
+        <app-character class="panelContent" [character]="character"></app-character>
+        <app-controller class="panelContent" [actionOptions]="actionOptions" (actionEvent)="actionHandler($event)"></app-controller>
+      </div>
   </div>
   <div class="panel panel100x35">
       <app-panel-background class="panelContent panelBackground" [columnCount]="'40'" [rowCount]="'7'" [imageWidthPercentage]="'2.5'"></app-panel-background>
