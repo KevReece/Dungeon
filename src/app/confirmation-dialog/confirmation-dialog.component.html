@@ -1,13 +1,17 @@
-<div class="modal-header">
-  <h4 class="modal-title">{{ title }}</h4>
-  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  {{ message }}
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-danger" (click)="decline()">{{ btnCancelText }}</button>
-  <button type="button" class="btn btn-primary" (click)="accept()">{{ btnOkText }}</button>
+<div class="modalContainer">
+  <app-panel-background class="panelContent" [columnCount]="'20'" [rowCount]="'15'" [imageWidthPercentage]="'5'"></app-panel-background>
+  <div class="panelContent">
+    <div class="dialogPadding">
+      <div class="modal-header">
+        <h4 class="modal-title">{{ title }}</h4>
+      </div>
+      <div class="modal-body">
+        {{ message }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="decline()">{{ btnCancelText }}</button>
+        <button type="button" class="btn btn-primary" (click)="accept()">{{ btnOkText }}</button>
+      </div>
+    </div>
+  </div>
 </div>
