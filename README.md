@@ -29,10 +29,7 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 
 ## Todo
 - format ui
-    - aspect scaling of fonts
-    - fix space off bottom
     - dialog
-    - move enemies and character below grid for vertical screen
     - check on mobile
 - advance to next level
     - level indicator
