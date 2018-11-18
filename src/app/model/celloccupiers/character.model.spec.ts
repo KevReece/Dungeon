@@ -7,7 +7,7 @@ import { Wall } from './wall.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { FightService } from 'src/app/services/fight.service';
 import { TestFactory } from 'src/app/testhelpers/test-factory';
-import { LevelUpgradeService } from 'src/app/services/level-upgrade.service';
+import { CharacterLevelUpgradeService } from 'src/app/services/character-level-upgrade.service';
 import { ActionOption } from '../action-option';
 import { Hole } from './hole.model';
 
@@ -15,12 +15,12 @@ describe('Character', () => {
     let character: Character;
     let userConsoleService: UserConsoleService;
     let mockFightService: FightService;
-    let mockLevelUpgradeService: LevelUpgradeService;
+    let mockLevelUpgradeService: CharacterLevelUpgradeService;
 
     beforeEach(() => {
         userConsoleService = new UserConsoleService();
         mockFightService = new FightService(null, null);
-        mockLevelUpgradeService = new LevelUpgradeService(null);
+        mockLevelUpgradeService = new CharacterLevelUpgradeService(null);
         spyOn(userConsoleService, 'writeItemsCollected');
         spyOn(userConsoleService, 'writeExperienceGained');
         character = new Character(userConsoleService, mockFightService, mockLevelUpgradeService);
@@ -153,7 +153,7 @@ describe('Character', () => {
         });
 
         it('should enter hole', () => {
-            const hole = new Hole();
+            const hole = TestFactory.createHole();
             const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(hole)])]);
             spyOn(hole, 'enter');
 
@@ -212,7 +212,7 @@ describe('Character', () => {
         });
 
         it('should return EnterHole when blocked by a hole', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(new Hole())])]);
+            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(TestFactory.createHole())])]);
 
             expect(character.getActionOptions()[1]).toBe(ActionOption.EnterHole);
         });

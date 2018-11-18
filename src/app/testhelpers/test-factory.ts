@@ -7,6 +7,7 @@ import { CellOccupier } from '../model/celloccupiers/cell-occupier.model';
 import { MapGrid } from '../model/map-grid.model';
 import { Row } from '../model/row.model';
 import { Cell } from '../model/cell.model';
+import { Hole } from '../model/celloccupiers/hole.model';
 
 export class TestFactory {
     static createCharacter(): Character {
@@ -32,5 +33,8 @@ export class TestFactory {
             new Row([this.createCell(), this.createCell(centreOccupier), this.createCell()]),
             new Row([this.createCell(), this.createCell(), this.createCell()])
         ]);
+    }
+    static createHole(): Hole {
+        return new Hole(null, 0);
     }
 }

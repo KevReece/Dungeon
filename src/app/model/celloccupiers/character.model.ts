@@ -7,7 +7,7 @@ import { Gold } from '../cellitems/gold.model';
 import { FightService } from 'src/app/services/fight.service';
 import { Enemy } from './enemy.model';
 import { Fighter } from './fighter.model';
-import { LevelUpgradeService } from 'src/app/services/level-upgrade.service';
+import { CharacterLevelUpgradeService } from 'src/app/services/character-level-upgrade.service';
 import { ActionOption } from '../action-option';
 import { Hole } from './hole.model';
 
@@ -16,7 +16,7 @@ export class Character extends Fighter {
     constructor(
             private userConsoleService: UserConsoleService,
             private fightService: FightService,
-            private levelUpgradeService: LevelUpgradeService) {
+            private levelUpgradeService: CharacterLevelUpgradeService) {
         super();
     }
 

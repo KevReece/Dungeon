@@ -8,7 +8,7 @@ import { UserConsoleService } from './services/user-console.service';
 import { Enemy } from './model/celloccupiers/enemy.model';
 import { EnemySorterService } from './services/enemy-sorter.service';
 import { FightService } from './services/fight.service';
-import { LevelUpgradeService } from './services/level-upgrade.service';
+import { CharacterLevelUpgradeService } from './services/character-level-upgrade.service';
 import { TurnEngineService } from './services/turn-engine.service';
 import { ActionOption } from './model/action-option';
 
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   enemies: Enemy[] = [];
   mapLoadPromise: Promise<void>;
   actionOptions: ActionOption[] = [];
+  mapLevelNumber: number;
 
   constructor(
       private mapLoaderService: MapLoaderService,
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit {
       private userConsoleService: UserConsoleService,
       private enemySorterService: EnemySorterService,
       private fightService: FightService,
-      private levelUpgradeService: LevelUpgradeService,
+      private levelUpgradeService: CharacterLevelUpgradeService,
       private turnEngineService: TurnEngineService) {
         this.factoryService.setUpDependencies(this.userConsoleService, this.fightService, this.levelUpgradeService);
       }
@@ -40,18 +41,23 @@ export class AppComponent implements OnInit {
   }
 
   restart(): void {
+    this.character = this.factoryService.createCharacter();
+    this.levelUpgradeService.initialize(this.character);
+    this.startMapLevel(1);
+    this.userConsoleService.startAndWelcome();
+  }
+
+  startMapLevel(levelNumber: number): void {
+    this.mapLevelNumber = levelNumber;
     this.enemies = [];
     this.actionOptions = [ActionOption.None, ActionOption.None, ActionOption.None, ActionOption.None];
     this.mapGrid = new MapGrid([]);
-    this.character = this.factoryService.createCharacter();
-    this.levelUpgradeService.initialize(this.character);
-    this.mapLoadPromise = this.mapLoaderService.loadMapGrid(this.mapGrid, this.character, this.enemies)
+    this.mapLoadPromise = this.mapLoaderService.loadMapGrid(levelNumber, this.mapGrid, this.character, this.enemies)
       .then(() => {
         this.enemySorterService.sort(this.enemies, this.character);
         this.actionOptions = this.character.getActionOptions();
       });
     this.turnEngineService.initialize(this.character, this.enemies);
-    this.userConsoleService.startAndWelcome();
   }
 
   actionHandler(direction: Direction) {

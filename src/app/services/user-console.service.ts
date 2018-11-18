@@ -48,6 +48,10 @@ export class UserConsoleService {
     this.lines.push('Congratulations you\'ve progressed your skills to level ' + level + '!');
   }
 
+  writeHoleEntered(newMapLevel: number): void {
+    this.lines.push('You\'ve decended into dungeon level ' + newMapLevel + '!');
+  }
+
   private getStringFromItem(item: ICellItem): String {
     if (item instanceof Gold) {
       return item.quantity + ' gold';

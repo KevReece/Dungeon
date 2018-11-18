@@ -8,7 +8,7 @@ import { UserConsoleService } from './user-console.service';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 import { FightService } from './fight.service';
 import { Gold } from '../model/cellitems/gold.model';
-import { LevelUpgradeService } from './level-upgrade.service';
+import { CharacterLevelUpgradeService } from './character-level-upgrade.service';
 import { WeightedOptions } from '../model/weighted-options.model';
 import { Hole } from '../model/celloccupiers/hole.model';
 
@@ -18,9 +18,12 @@ import { Hole } from '../model/celloccupiers/hole.model';
 export class FactoryService {
   userConsoleService: UserConsoleService;
   fightService: FightService;
-  levelUpgradeService: LevelUpgradeService;
+  levelUpgradeService: CharacterLevelUpgradeService;
 
-  setUpDependencies(userConsoleService: UserConsoleService, fightService: FightService, levelUpgradeService: LevelUpgradeService): void {
+  setUpDependencies(
+      userConsoleService: UserConsoleService,
+      fightService: FightService,
+      levelUpgradeService: CharacterLevelUpgradeService): void {
     this.userConsoleService = userConsoleService;
     this.fightService = fightService;
     this.levelUpgradeService = levelUpgradeService;
@@ -34,8 +37,8 @@ export class FactoryService {
   createWallCell(): Cell {
     return this.createCellOccupiedBy(this.createWall());
   }
-  createHoleCell(): Cell {
-    return this.createCellOccupiedBy(this.createHole());
+  createHoleCell(targetMapLevelNumber: number): Cell {
+    return this.createCellOccupiedBy(this.createHole(targetMapLevelNumber));
   }
   createEmptyCell(): Cell {
     return new Cell();
@@ -43,8 +46,8 @@ export class FactoryService {
   createWall(): Wall {
     return new Wall();
   }
-  createHole(): Hole {
-    return new Hole();
+  createHole(targetMapLevelNumber: number): Hole {
+    return new Hole(this.userConsoleService, targetMapLevelNumber);
   }
   createCharacter(): Character {
     return new Character(this.userConsoleService, this.fightService, this.levelUpgradeService);

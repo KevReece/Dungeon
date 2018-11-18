@@ -8,7 +8,7 @@ import { UserConsoleService } from './services/user-console.service';
 import { EnemySorterService } from './services/enemy-sorter.service';
 import { FightService } from './services/fight.service';
 import { FactoryService } from './services/factory.service';
-import { LevelUpgradeService } from './services/level-upgrade.service';
+import { CharacterLevelUpgradeService } from './services/character-level-upgrade.service';
 import { TurnEngineService } from './services/turn-engine.service';
 import { ActionOption } from './model/action-option';
 
@@ -44,7 +44,7 @@ describe('AppComponent', () => {
         {provide: UserConsoleService, useValue: mockUserConsoleService},
         {provide: EnemySorterService, useValue: mockEnemySorterService},
         {provide: FightService, useValue: mockFightService},
-        {provide: LevelUpgradeService, useValue: mockLevelUpgradeService},
+        {provide: CharacterLevelUpgradeService, useValue: mockLevelUpgradeService},
         {provide: TurnEngineService, useValue: mockTurnEngineService},
         {provide: FactoryService, useValue: mockFactoryService}
       ],
@@ -82,7 +82,8 @@ describe('AppComponent', () => {
     });
 
     it('should have loaded map grid', () => {
-      expect(mockMapLoaderService.loadMapGrid).toHaveBeenCalledWith(component.mapGrid, component.character, component.enemies);
+      expect(mockMapLoaderService.loadMapGrid).toHaveBeenCalledWith(1, component.mapGrid, component.character, component.enemies);
+      expect(component.mapLevelNumber).toBe(1);
     });
 
     // TODO: I hate promises
@@ -100,6 +101,15 @@ describe('AppComponent', () => {
     //     done();
     //   });
     // });
+  });
+
+  describe('startMapLevel', () => {
+    it('should have loaded map grid', () => {
+      component.startMapLevel(2);
+
+      expect(mockMapLoaderService.loadMapGrid).toHaveBeenCalledWith(2, component.mapGrid, component.character, component.enemies);
+      expect(component.mapLevelNumber).toBe(2);
+    });
   });
 
   describe('actionHandler', () => {

@@ -5,7 +5,7 @@ import { UserConsoleService } from './user-console.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LevelUpgradeService {
+export class CharacterLevelUpgradeService {
 
   constructor(private userConsoleService: UserConsoleService) { }
 

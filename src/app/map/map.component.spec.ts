@@ -29,7 +29,7 @@ describe('MapComponent', () => {
     const goldRow = new Row([TestFactory.createCell()]);
     goldRow.cells[0].items.push(TestFactory.createGold());
     const enemyRow = new Row([TestFactory.createCell(TestFactory.createEnemy())]);
-    const holeRow = new Row([TestFactory.createCell(new Hole())]);
+    const holeRow = new Row([TestFactory.createCell(TestFactory.createHole())]);
     return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, characterRow, treasureChestRow, goldRow, enemyRow, holeRow]);
   };
 

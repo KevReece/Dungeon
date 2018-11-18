@@ -1,28 +1,28 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LevelUpgradeService } from './level-upgrade.service';
+import { CharacterLevelUpgradeService } from './character-level-upgrade.service';
 import { Character } from '../model/celloccupiers/character.model';
 import { TestFactory } from '../testhelpers/test-factory';
 import { UserConsoleService } from './user-console.service';
 
-describe('LevelUpgradeService', () => {
+describe('CharacterLevelUpgradeService', () => {
   describe('(integrated)', () => {
     it('should be created', () => {
       TestBed.configureTestingModule({});
-      const service: LevelUpgradeService = TestBed.get(LevelUpgradeService);
+      const service: CharacterLevelUpgradeService = TestBed.get(CharacterLevelUpgradeService);
       expect(service).toBeTruthy();
     });
   });
 
   describe('(isolated)', () => {
-    let service: LevelUpgradeService;
+    let service: CharacterLevelUpgradeService;
     let character: Character;
     let mockUserConsoleService: UserConsoleService;
 
     beforeEach(() => {
       character = TestFactory.createCharacter();
       mockUserConsoleService = new UserConsoleService();
-      service = new LevelUpgradeService(mockUserConsoleService);
+      service = new CharacterLevelUpgradeService(mockUserConsoleService);
       spyOn(mockUserConsoleService, 'writeLevelUpgraded');
     });
 

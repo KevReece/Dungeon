@@ -78,4 +78,10 @@ describe('UserConsoleService', () => {
     expect(getLastMessage()).toContain('level');
     expect(getLastMessage()).toContain('2');
   });
+
+  it('should write hole entered message', () => {
+    service.writeHoleEntered(3);
+    expect(getLastMessage()).toContain('level');
+    expect(getLastMessage()).toContain('3');
+  });
 });

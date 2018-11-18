@@ -31,14 +31,15 @@ describe('MapLoadderService', () => {
     });
 
     describe('getMapGrid', () => {
+      let service: MapLoaderService;
       let mapGrid: MapGrid;
       const character: Character = TestFactory.createCharacter();
       const enemies: Enemy[] = [];
 
       beforeEach(async() => {
-        const service: MapLoaderService = TestBed.get(MapLoaderService);
+        service = TestBed.get(MapLoaderService);
         mapGrid = new MapGrid([]);
-        service.loadMapGrid(mapGrid, character, enemies);
+        service.loadMapGrid(1, mapGrid, character, enemies);
         const mapRequest = httpMock.expectOne('assets/maps/0001.map');
         mapRequest.flush('  \nX \nB \nT \nE \nO ');
       });
@@ -74,6 +75,7 @@ describe('MapLoadderService', () => {
       it('should return a hole cell', () => {
         const cell = mapGrid.rows[5].cells[0];
         expect(cell.occupier).toEqual(jasmine.any(Hole));
+        expect((<Hole>cell.occupier).targetMapLevelNumber).toBe(2);
       });
 
       it('should assign the character to a cell', () => {
@@ -95,9 +97,35 @@ describe('MapLoadderService', () => {
     it('should load 0001.map', (done) => {
       const service: MapLoaderService = TestBed.get(MapLoaderService);
       const mapGrid: MapGrid = new MapGrid([]);
-      service.loadMapGrid(mapGrid, null, [])
+      service.loadMapGrid(1, mapGrid, null, [])
         .then(() => {
           expect(mapGrid.rows[0].cells[0].occupier).toEqual(jasmine.any(Wall));
+          expect(mapGrid.rows.length).toBe(40);
+          expect(mapGrid.rows[0].cells.length).toBe(40);
+          expect(mapGrid.rows[39].cells.length).toBe(40);
+          done();
+        });
+    });
+
+    it('should load 0002.map', (done) => {
+      const service: MapLoaderService = TestBed.get(MapLoaderService);
+      const mapGrid: MapGrid = new MapGrid([]);
+      service.loadMapGrid(2, mapGrid, null, [])
+        .then(() => {
+          expect(mapGrid.rows[35].cells[24].occupier).toEqual(jasmine.any(Hole));
+          expect(mapGrid.rows.length).toBe(40);
+          expect(mapGrid.rows[0].cells.length).toBe(40);
+          expect(mapGrid.rows[39].cells.length).toBe(40);
+          done();
+        });
+    });
+
+    it('should load 0010.map', (done) => {
+      const service: MapLoaderService = TestBed.get(MapLoaderService);
+      const mapGrid: MapGrid = new MapGrid([]);
+      service.loadMapGrid(10, mapGrid, null, [])
+        .then(() => {
+          expect(mapGrid.rows[1].cells[1].occupier).toEqual(jasmine.any(Hole));
           expect(mapGrid.rows.length).toBe(40);
           expect(mapGrid.rows[0].cells.length).toBe(40);
           expect(mapGrid.rows[39].cells.length).toBe(40);

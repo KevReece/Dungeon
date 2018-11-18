@@ -40,6 +40,7 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 - loop levels or complete game?
 - dialog as lightbox (and improve scaling)
 - prettify ui (redo all images)
+- improve performance of action
 - intro (backstory?) and gameplay explanation 
 - about page?
 - enter name at beginning, and store topscore when dead or restart/end? and show
