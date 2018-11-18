@@ -9,6 +9,7 @@ import { Enemy } from './enemy.model';
 import { Fighter } from './fighter.model';
 import { LevelUpgradeService } from 'src/app/services/level-upgrade.service';
 import { ActionOption } from '../action-option';
+import { Hole } from './hole.model';
 
 export class Character extends Fighter {
 
@@ -48,10 +49,13 @@ export class Character extends Fighter {
                 this.collectItems(adjacentCell);
                 return true;
             } else if (adjacentCell.occupier instanceof TreasureChest) {
-                (<TreasureChest>adjacentCell.occupier).open();
+                adjacentCell.occupier.open();
                 return true;
             } else if (adjacentCell.occupier instanceof Enemy) {
                 this.fightService.attack(this, adjacentCell.occupier);
+                return true;
+            } else if (adjacentCell.occupier instanceof Hole) {
+                adjacentCell.occupier.enter(this);
                 return true;
             }
         }
@@ -81,6 +85,7 @@ export class Character extends Fighter {
             const adjacentCell = this.cell.getAdjacentCell(direction);
             return adjacentCell && adjacentCell.occupier instanceof Enemy ? ActionOption.Fight
                 : adjacentCell && adjacentCell.occupier instanceof TreasureChest ? ActionOption.Open
+                : adjacentCell && adjacentCell.occupier instanceof Hole ? ActionOption.EnterHole
                 : ActionOption.None;
         }
         return ActionOption.Move;

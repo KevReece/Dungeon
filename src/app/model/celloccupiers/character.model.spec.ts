@@ -5,12 +5,11 @@ import { Row } from '../row.model';
 import { Cell } from '../cell.model';
 import { Wall } from './wall.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
-import { Enemy } from './enemy.model';
 import { FightService } from 'src/app/services/fight.service';
 import { TestFactory } from 'src/app/testhelpers/test-factory';
 import { LevelUpgradeService } from 'src/app/services/level-upgrade.service';
 import { ActionOption } from '../action-option';
-import { TreasureChest } from './treasure-chest.model';
+import { Hole } from './hole.model';
 
 describe('Character', () => {
     let character: Character;
@@ -152,6 +151,17 @@ describe('Character', () => {
             expect(mockFightService.attack).toHaveBeenCalledWith(character, enemy);
             expect(result).toBeTruthy();
         });
+
+        it('should enter hole', () => {
+            const hole = new Hole();
+            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(hole)])]);
+            spyOn(hole, 'enter');
+
+            const result = character.act(Direction.Right);
+
+            expect(hole.enter).toHaveBeenCalledWith(character);
+            expect(result).toBeTruthy();
+        });
     });
 
     describe('killedOpponent', () => {
@@ -199,6 +209,12 @@ describe('Character', () => {
             const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(TestFactory.createTreasureChest())])]);
 
             expect(character.getActionOptions()[1]).toBe(ActionOption.Open);
+        });
+
+        it('should return EnterHole when blocked by a hole', () => {
+            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(new Hole())])]);
+
+            expect(character.getActionOptions()[1]).toBe(ActionOption.EnterHole);
         });
 
         it('should return all directions', () => {

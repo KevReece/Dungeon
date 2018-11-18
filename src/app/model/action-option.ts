@@ -2,5 +2,6 @@ export enum ActionOption {
     None,
     Move,
     Open,
-    Fight
+    Fight,
+    EnterHole
 }

@@ -28,18 +28,17 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 - Ensure config.yml has correct bucket name
 
 ## Todo
-- format ui
-    - dialog
-    - check on mobile
 - advance to next level
-    - level indicator
+- level indicator
 - treasure chests can drop food (add max health stat)(food gives 50%)
 - other enemies types (easy Goblin enemy 'E'/hard Orc enemy 'H')
 - create different levels (progressively harder enemy type pairs)
-- save and load state (in cookies)
 - spawn enemies (every 20 player turns)(gather free spaces into array, then random)
 - progress spawned enemies types (levels define enemy type pair)(spawn: last level easy > last level hard > current level easy > current level hard > next level easy > next level hard > etc)
+- check format on mobile
+- save and load state (in cookies)
 - loop levels or complete game?
+- dialog as lightbox (and improve scaling)
 - prettify ui (redo all images)
 - intro (backstory?) and gameplay explanation 
 - about page?
