@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
       private fightService: FightService,
       private levelUpgradeService: CharacterLevelUpgradeService,
       private turnEngineService: TurnEngineService) {
-        this.factoryService.setUpDependencies(this.userConsoleService, this.fightService, this.levelUpgradeService);
+        this.factoryService.setUpDependencies(this, this.userConsoleService, this.fightService, this.levelUpgradeService);
       }
 
   ngOnInit(): void {

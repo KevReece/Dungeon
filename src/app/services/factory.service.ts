@@ -11,6 +11,7 @@ import { Gold } from '../model/cellitems/gold.model';
 import { CharacterLevelUpgradeService } from './character-level-upgrade.service';
 import { WeightedOptions } from '../model/weighted-options.model';
 import { Hole } from '../model/celloccupiers/hole.model';
+import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,15 +20,19 @@ export class FactoryService {
   userConsoleService: UserConsoleService;
   fightService: FightService;
   levelUpgradeService: CharacterLevelUpgradeService;
+  appComponent: AppComponent;
 
   setUpDependencies(
+      appComponent: AppComponent,
       userConsoleService: UserConsoleService,
       fightService: FightService,
       levelUpgradeService: CharacterLevelUpgradeService): void {
+    this.appComponent = appComponent;
     this.userConsoleService = userConsoleService;
     this.fightService = fightService;
     this.levelUpgradeService = levelUpgradeService;
   }
+
   createCellOccupiedBy(cellOccupier: CellOccupier): Cell {
     return new Cell(cellOccupier);
   }
@@ -47,7 +52,7 @@ export class FactoryService {
     return new Wall();
   }
   createHole(targetMapLevelNumber: number): Hole {
-    return new Hole(this.userConsoleService, targetMapLevelNumber);
+    return new Hole(this.appComponent, this.userConsoleService, targetMapLevelNumber);
   }
   createCharacter(): Character {
     return new Character(this.userConsoleService, this.fightService, this.levelUpgradeService);

@@ -61,7 +61,8 @@ describe('AppComponent', () => {
 
   describe('constructor', () => {
     it('should setup dependencies for factory service (avoids circular dependencies)', () => {
-      expect(mockFactoryService.setUpDependencies).toHaveBeenCalledWith(mockUserConsoleService, mockFightService, mockLevelUpgradeService);
+      expect(mockFactoryService.setUpDependencies)
+        .toHaveBeenCalledWith(component, mockUserConsoleService, mockFightService, mockLevelUpgradeService);
     });
   });
 

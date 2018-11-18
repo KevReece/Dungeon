@@ -35,6 +35,6 @@ export class TestFactory {
         ]);
     }
     static createHole(): Hole {
-        return new Hole(null, 0);
+        return new Hole(null, null, 0);
     }
 }
