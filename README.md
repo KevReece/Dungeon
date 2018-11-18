@@ -38,6 +38,7 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 - loop levels or complete game?
 - dialog as lightbox (and improve scaling)
 - prettify ui (redo all images)
+- show in contact enemies on enemy component (with direction icon)
 - improve performance of action
 - intro (backstory?) and gameplay explanation 
 - about page?
