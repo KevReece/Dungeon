@@ -8,4 +8,5 @@ import { Character } from '../model/celloccupiers/character.model';
 })
 export class CharacterComponent {
   @Input() character: Character;
+  @Input() mapLevelNumber: number;
 }

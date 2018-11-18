@@ -21,8 +21,8 @@
   <div class="panel panel25x50">
       <app-panel-background class="panelContent panelBackground" [columnCount]="'10'" [rowCount]="'20'" [imageWidthPercentage]="'10'"></app-panel-background>
       <div class="panelContent">
-        <app-character class="panelContent" [character]="character"></app-character>
-        <app-controller class="panelContent" [actionOptions]="actionOptions" (actionEvent)="actionHandler($event)"></app-controller>
+        <app-controller class="panelContentTop50" [actionOptions]="actionOptions" (actionEvent)="actionHandler($event)"></app-controller>
+        <app-character class="panelContentBottom50" [character]="character" [mapLevelNumber]="mapLevelNumber"></app-character>
       </div>
   </div>
   <div class="panel panel100x17o5">
