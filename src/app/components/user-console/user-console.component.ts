@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserConsoleService } from '../services/user-console.service';
+import { UserConsoleService } from '../../services/user-console.service';
 
 @Component({
   selector: 'app-user-console',

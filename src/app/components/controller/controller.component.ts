@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
-import { Direction } from '../model/direction.model';
-import { ActionOption } from '../model/action-option';
+import { Direction } from '../../model/direction.model';
+import { ActionOption } from '../../model/action-option';
 
 @Component({
   selector: 'app-controller',

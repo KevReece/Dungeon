@@ -3,22 +3,22 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserConsoleComponent } from './user-console/user-console.component';
-import { CharacterComponent } from './character/character.component';
-import { MapComponent } from './map/map.component';
+import { UserConsoleComponent } from './components/user-console/user-console.component';
+import { CharacterComponent } from './components/character/character.component';
+import { MapComponent } from './components/map/map.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MapLoaderService } from './services/map-loader.service';
-import { ControllerComponent } from './controller/controller.component';
+import { ControllerComponent } from './components/controller/controller.component';
 import { FactoryService } from './services/factory.service';
 import { UserConsoleService } from './services/user-console.service';
-import { EnemiesComponent } from './enemies/enemies.component';
+import { EnemiesComponent } from './components/enemies/enemies.component';
 import { EnemySorterService } from './services/enemy-sorter.service';
 import { FightService } from './services/fight.service';
-import { MenuComponent } from './menu/menu.component';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ConfirmationDialogService } from './confirmation-dialog/confirmation-dialog.service';
-import { PanelBackgroundComponent } from './panel-background/panel-background.component';
+import { ConfirmationDialogService } from './components/confirmation-dialog/confirmation-dialog.service';
+import { PanelBackgroundComponent } from './components/panel-background/panel-background.component';
 
 @NgModule({
   declarations: [

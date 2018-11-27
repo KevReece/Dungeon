@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { MapGrid } from '../model/map-grid.model';
-import { Cell } from '../model/cell.model';
-import { Character } from '../model/celloccupiers/character.model';
-import { Wall } from '../model/celloccupiers/wall.model';
-import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
-import { Enemy } from '../model/celloccupiers/enemy.model';
-import { Hole } from '../model/celloccupiers/hole.model';
+import { MapGrid } from '../../model/map-grid.model';
+import { Cell } from '../../model/cell.model';
+import { Character } from '../../model/celloccupiers/character.model';
+import { Wall } from '../../model/celloccupiers/wall.model';
+import { TreasureChest } from '../../model/celloccupiers/treasure-chest.model';
+import { Enemy } from '../../model/celloccupiers/enemy.model';
+import { Hole } from '../../model/celloccupiers/hole.model';
 
 @Component({
   selector: 'app-map',

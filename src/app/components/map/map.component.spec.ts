@@ -1,11 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MapComponent } from './map.component';
-import { MapGrid } from '../model/map-grid.model';
-import { Row } from '../model/row.model';
-import { Wall } from '../model/celloccupiers/wall.model';
-import { TestFactory } from '../testhelpers/test-factory';
-import { Hole } from '../model/celloccupiers/hole.model';
+import { MapGrid } from '../../model/map-grid.model';
+import { Row } from '../../model/row.model';
+import { Wall } from '../../model/celloccupiers/wall.model';
+import { TestFactory } from '../../testhelpers/test-factory';
 
 describe('MapComponent', () => {
   let component: MapComponent;

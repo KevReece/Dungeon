@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ControllerComponent } from './controller.component';
-import { Direction } from '../model/direction.model';
-import { ActionOption } from '../model/action-option';
+import { Direction } from '../../model/direction.model';
+import { ActionOption } from '../../model/action-option';
 
 describe('ControllerComponent', () => {
   let component: ControllerComponent;
