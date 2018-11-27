@@ -12,6 +12,7 @@ import { CharacterLevelUpgradeService } from './character-level-upgrade.service'
 import { WeightedOptions } from '../model/weighted-options.model';
 import { Hole } from '../model/celloccupiers/hole.model';
 import { AppComponent } from '../app.component';
+import { Food } from '../model/cellitems/food.model';
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +69,9 @@ export class FactoryService {
   }
   createGold(): Gold {
     return new Gold(this);
+  }
+  createFood(): Food {
+    return new Food();
   }
   createWeightedOptions(): WeightedOptions {
     return new WeightedOptions(this);

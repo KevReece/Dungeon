@@ -96,11 +96,7 @@ export class Character extends Fighter {
             return;
         }
         this.userConsoleService.writeItemsCollected(cell.items);
-        cell.items.forEach(item => {
-            if (item instanceof Gold) {
-                this.gold += item.quantity;
-            }
-        });
+        cell.items.forEach(item => item.collect(this));
         cell.items = [];
     }
 }

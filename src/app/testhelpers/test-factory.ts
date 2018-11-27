@@ -8,6 +8,7 @@ import { MapGrid } from '../model/map-grid.model';
 import { Row } from '../model/row.model';
 import { Cell } from '../model/cell.model';
 import { Hole } from '../model/celloccupiers/hole.model';
+import { Food } from '../model/cellitems/food.model';
 
 export class TestFactory {
     static createCharacter(): Character {
@@ -20,6 +21,9 @@ export class TestFactory {
         const mockFactoryService = new FactoryService();
         spyOn(mockFactoryService, 'createRandomInteger').and.returnValue(1);
         return new Gold(mockFactoryService);
+    }
+    static createFood(): Food {
+        return new Food();
     }
     static createTreasureChest(): TreasureChest {
         return new TreasureChest(null, null);

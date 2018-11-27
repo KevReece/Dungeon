@@ -10,8 +10,14 @@ export class TreasureChest extends CellOccupier {
 
     open() {
         this.cell.occupier = null;
-        const droppedGold = this.factoryService.createGold();
-        this.cell.items.push(droppedGold);
-        this.userConsoleService.writeTreasureChestOpenedAndGoldDropped(droppedGold);
+        if (this.factoryService.createRandomInteger(1, 4) <= 3) {
+            const droppedGold = this.factoryService.createGold();
+            this.cell.items.push(droppedGold);
+            this.userConsoleService.writeTreasureChestOpenedAndGoldDropped(droppedGold);
+        } else {
+            const droppedFood = this.factoryService.createFood();
+            this.cell.items.push(droppedFood);
+            this.userConsoleService.writeTreasureChestOpenedAndFoodDropped();
+        }
     }
 }

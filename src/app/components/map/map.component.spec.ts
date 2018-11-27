@@ -25,11 +25,12 @@ describe('MapComponent', () => {
       TestFactory.createCell(new Wall())]);
     const characterRow = new Row([TestFactory.createCell(TestFactory.createCharacter())]);
     const treasureChestRow = new Row([TestFactory.createCell(TestFactory.createTreasureChest())]);
-    const goldRow = new Row([TestFactory.createCell()]);
-    goldRow.cells[0].items.push(TestFactory.createGold());
+    const itemRow = new Row([TestFactory.createCell(), TestFactory.createCell()]);
+    itemRow.cells[0].items.push(TestFactory.createGold());
+    itemRow.cells[1].items.push(TestFactory.createFood());
     const enemyRow = new Row([TestFactory.createCell(TestFactory.createEnemy())]);
     const holeRow = new Row([TestFactory.createCell(TestFactory.createHole())]);
-    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, characterRow, treasureChestRow, goldRow, enemyRow, holeRow]);
+    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, characterRow, treasureChestRow, itemRow, enemyRow, holeRow]);
   };
 
   beforeEach(() => {
@@ -86,7 +87,13 @@ describe('MapComponent', () => {
   it('should render gold item', () => {
     const compiled = fixture.debugElement.nativeElement;
     const row = getRow(compiled, 7);
-    expect(getRow(compiled, 7).querySelector('img').getAttribute('src')).toContain('gold');
+    expect(getCellSrcOfRow(row, 1)).toContain('gold');
+  });
+
+  it('should render a food item', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    const row = getRow(compiled, 7);
+    expect(getCellSrcOfRow(row, 2)).toContain('food');
   });
 
   it('should render an enemy', () => {

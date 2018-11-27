@@ -4,6 +4,7 @@ import { Gold } from '../cellitems/gold.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 import { FactoryService } from 'src/app/services/factory.service';
 import { TestFactory } from 'src/app/testhelpers/test-factory';
+import { Food } from '../cellitems/food.model';
 
 describe('TresureChest', () => {
     let mockUserConsoleService: UserConsoleService;
@@ -13,6 +14,7 @@ describe('TresureChest', () => {
         mockUserConsoleService = new UserConsoleService();
         mockFactoryService = new FactoryService();
         spyOn(mockUserConsoleService, 'writeTreasureChestOpenedAndGoldDropped');
+        spyOn(mockUserConsoleService, 'writeTreasureChestOpenedAndFoodDropped');
         spyOn(mockFactoryService, 'createGold').and.returnValue(TestFactory.createGold());
     });
 
@@ -26,22 +28,28 @@ describe('TresureChest', () => {
             expect(cell.isOccupied()).toBeFalsy();
         });
 
-        it('should drop item', () => {
+        it('should drop gold on 3 in 4 chance', () => {
             const treasureChest = new TreasureChest(mockUserConsoleService, mockFactoryService);
             const cell = TestFactory.createCell(treasureChest);
+            spyOn(mockFactoryService, 'createRandomInteger').and.returnValue(3);
 
             treasureChest.open();
 
             expect(cell.items[0]).toEqual(jasmine.any(Gold));
+            expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(1, 4);
+            expect(mockUserConsoleService.writeTreasureChestOpenedAndGoldDropped).toHaveBeenCalled();
         });
 
-        it('should tell user console', () => {
+        it('should drop food on 1 in 4 chance', () => {
             const treasureChest = new TreasureChest(mockUserConsoleService, mockFactoryService);
             const cell = TestFactory.createCell(treasureChest);
+            spyOn(mockFactoryService, 'createRandomInteger').and.returnValue(4);
 
             treasureChest.open();
 
-            expect(mockUserConsoleService.writeTreasureChestOpenedAndGoldDropped).toHaveBeenCalled();
+            expect(cell.items[0]).toEqual(jasmine.any(Food));
+            expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(1, 4);
+            expect(mockUserConsoleService.writeTreasureChestOpenedAndFoodDropped).toHaveBeenCalled();
         });
     });
 });

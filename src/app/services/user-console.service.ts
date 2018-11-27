@@ -4,6 +4,7 @@ import { ICellItem } from '../model/cellitems/i-cell-item.model';
 import { Fighter } from '../model/celloccupiers/fighter.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 import { Character } from '../model/celloccupiers/character.model';
+import { Food } from '../model/cellitems/food.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,10 @@ export class UserConsoleService {
 
   writeTreasureChestOpenedAndGoldDropped(droppedGold: Gold): void {
     this.lines.push('The opened treasure chest reveals ' + droppedGold.quantity + ' gold');
+  }
+
+  writeTreasureChestOpenedAndFoodDropped(): void {
+    this.lines.push('The opened treasure chest reveals some food');
   }
 
   writeItemsCollected(items: ICellItem[]): void {
@@ -55,8 +60,10 @@ export class UserConsoleService {
   private getStringFromItem(item: ICellItem): String {
     if (item instanceof Gold) {
       return item.quantity + ' gold';
-    } else {
-      return 'something unknown';
     }
+    if (item instanceof Food) {
+      return ' some food';
+    }
+    return 'something unknown';
   }
 }

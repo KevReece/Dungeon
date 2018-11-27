@@ -107,17 +107,18 @@ describe('Character', () => {
             expect(result).toBeTruthy();
         });
 
-        it('should collect gold', () => {
-            const gold = TestFactory.createGold();
+        it('should collect items', () => {
+            const item = TestFactory.createGold();
+            spyOn(item, 'collect');
             const newCell = TestFactory.createCell();
-            newCell.items.push(gold);
+            newCell.items.push(item);
             const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), newCell])]);
 
             const result = character.act(Direction.Right);
 
-            expect(character.gold).toEqual(gold.quantity);
             expect(newCell.items.length).toEqual(0);
             expect(result).toBeTruthy();
+            expect(item.collect).toHaveBeenCalledWith(character);
         });
 
         it('should raise items collected console message', () => {

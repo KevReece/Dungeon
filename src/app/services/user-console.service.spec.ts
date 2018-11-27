@@ -32,11 +32,16 @@ describe('UserConsoleService', () => {
     expect(getLastMessage()).toContain(gold.quantity.toString());
   });
 
+  it('should write food treasure message', () => {
+    service.writeTreasureChestOpenedAndFoodDropped();
+    expect(getLastMessage()).toContain('food');
+  });
+
   it('should write items collected message', () => {
-    const gold = TestFactory.createGold();
-    service.writeItemsCollected([gold]);
+    service.writeItemsCollected([TestFactory.createGold(), TestFactory.createFood()]);
     expect(getLastMessage()).toContain('collected');
     expect(getLastMessage()).toContain('gold');
+    expect(getLastMessage()).toContain('food');
   });
 
   it('should write attack succeeded message', () => {

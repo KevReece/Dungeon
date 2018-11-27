@@ -6,6 +6,8 @@ import { Wall } from '../../model/celloccupiers/wall.model';
 import { TreasureChest } from '../../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../../model/celloccupiers/enemy.model';
 import { Hole } from '../../model/celloccupiers/hole.model';
+import { Gold } from 'src/app/model/cellitems/gold.model';
+import { Food } from 'src/app/model/cellitems/food.model';
 
 @Component({
   selector: 'app-map',
@@ -27,8 +29,10 @@ export class MapComponent {
       return 'treasureChest';
     } else if (cell.occupier instanceof Hole) {
       return 'hole';
-    } else if (cell.items.length > 0) {
+    } else if (cell.items.length > 0 && cell.items[0] instanceof Gold) {
       return 'gold';
+    } else if (cell.items.length > 0 && cell.items[0] instanceof Food) {
+      return 'food';
     } else {
       return 'none';
     }
