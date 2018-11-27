@@ -7,14 +7,15 @@ import { Character } from './character.model';
 import { FightService } from 'src/app/services/fight.service';
 import { UserConsoleService } from 'src/app/services/user-console.service';
 
-export class Enemy extends Fighter {
-    name = 'Goblin';
-    health = 2;
-    attack = 1;
-    defence = 1;
-    damage = 1;
-    experienceValue = 2;
+export abstract class Enemy extends Fighter {
+    name: string;
+    health: number;
+    attack: number;
+    defence: number;
+    damage: number;
+    experienceValue: number;
     direction: Direction;
+    awarenessDistance: number;
 
     constructor(
             private factoryService: FactoryService,
@@ -53,8 +54,7 @@ export class Enemy extends Fighter {
 
     private move(character: Character) {
         let directionToMoveIn: Direction;
-        const awarenessDistance = 10;
-        if (this.cell.getDistance(character.cell) <= awarenessDistance) {
+        if (this.cell.getDistance(character.cell) <= this.awarenessDistance) {
             directionToMoveIn = this.chaseDirection(character);
         } else {
             directionToMoveIn = this.wanderDirection();

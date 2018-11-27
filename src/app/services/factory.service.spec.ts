@@ -57,8 +57,12 @@ describe('FactoryService', () => {
     expect(cell.occupier).toEqual(jasmine.any(TreasureChest));
   });
 
-  it('should create an enemy', () => {
-    expect(service.createEnemy()).toEqual(jasmine.any(Enemy));
+  it('should create a goblin', () => {
+    expect(service.createGoblin()).toEqual(jasmine.any(Enemy));
+  });
+
+  it('should create an orc', () => {
+    expect(service.createOrc()).toEqual(jasmine.any(Enemy));
   });
 
   it('should create a random integer', () => {

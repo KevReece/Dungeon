@@ -2,20 +2,24 @@ import { Character } from '../model/celloccupiers/character.model';
 import { Gold } from '../model/cellitems/gold.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { FactoryService } from '../services/factory.service';
-import { Enemy } from '../model/celloccupiers/enemy.model';
 import { CellOccupier } from '../model/celloccupiers/cell-occupier.model';
 import { MapGrid } from '../model/map-grid.model';
 import { Row } from '../model/row.model';
 import { Cell } from '../model/cell.model';
 import { Hole } from '../model/celloccupiers/hole.model';
 import { Food } from '../model/cellitems/food.model';
+import { Goblin } from '../model/celloccupiers/enemies/goblin.model';
+import { Orc } from '../model/celloccupiers/enemies/orc.model';
 
 export class TestFactory {
     static createCharacter(): Character {
         return new Character(null, null, null);
     }
-    static createEnemy(): Enemy {
-        return new Enemy(new FactoryService(), null, null);
+    static createGoblin(): Goblin {
+        return new Goblin(new FactoryService(), null, null);
+    }
+    static createOrc(): Orc {
+        return new Orc(new FactoryService(), null, null);
     }
     static createGold(): Gold {
         const mockFactoryService = new FactoryService();

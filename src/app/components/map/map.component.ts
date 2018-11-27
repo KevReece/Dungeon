@@ -4,10 +4,11 @@ import { Cell } from '../../model/cell.model';
 import { Character } from '../../model/celloccupiers/character.model';
 import { Wall } from '../../model/celloccupiers/wall.model';
 import { TreasureChest } from '../../model/celloccupiers/treasure-chest.model';
-import { Enemy } from '../../model/celloccupiers/enemy.model';
 import { Hole } from '../../model/celloccupiers/hole.model';
 import { Gold } from 'src/app/model/cellitems/gold.model';
 import { Food } from 'src/app/model/cellitems/food.model';
+import { Goblin } from 'src/app/model/celloccupiers/enemies/goblin.model';
+import { Orc } from 'src/app/model/celloccupiers/enemies/orc.model';
 
 @Component({
   selector: 'app-map',
@@ -21,8 +22,10 @@ export class MapComponent {
   showCell(cell: Cell) {
     if (cell.occupier instanceof Character) {
       return 'character';
-    } else if (cell.occupier instanceof Enemy) {
+    } else if (cell.occupier instanceof Goblin) {
       return 'goblin';
+    } else if (cell.occupier instanceof Orc) {
+      return 'orc';
     } else if (cell.occupier instanceof Wall) {
       return 'wall';
     } else if (cell.occupier instanceof TreasureChest) {

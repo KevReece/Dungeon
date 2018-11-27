@@ -38,3 +38,7 @@ X                                      X
 X                                      X
 X                                      X
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+{
+    "easyEnemy"="Goblin",
+    "hardEnemy"="Orc"
+}

@@ -13,6 +13,8 @@ import { WeightedOptions } from '../model/weighted-options.model';
 import { Hole } from '../model/celloccupiers/hole.model';
 import { AppComponent } from '../app.component';
 import { Food } from '../model/cellitems/food.model';
+import { Goblin } from '../model/celloccupiers/enemies/goblin.model';
+import { Orc } from '../model/celloccupiers/enemies/orc.model';
 
 @Injectable({
   providedIn: 'root'
@@ -61,8 +63,11 @@ export class FactoryService {
   createTreasureChest(): TreasureChest {
     return new TreasureChest(this.userConsoleService, this);
   }
-  createEnemy(): Enemy {
-    return new Enemy(this, this.fightService, this.userConsoleService);
+  createGoblin(): Goblin {
+    return new Goblin(this, this.fightService, this.userConsoleService);
+  }
+  createOrc(): Orc {
+    return new Orc(this, this.fightService, this.userConsoleService);
   }
   createRandomInteger(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;

@@ -28,8 +28,6 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 - Ensure config.yml has correct bucket name
 
 ## Todo
-- treasure chests can drop food (add max health stat)(food gives 50%)
-- other enemies types (easy Goblin enemy 'E'/hard Orc enemy 'H')
 - create different levels (progressively harder enemy type pairs)
 - spawn enemies (every 20 player turns)(gather free spaces into array, then random) (make enemy panel handle more enemies than space)
 - progress spawned enemies types (levels define enemy type pair)(spawn: last level easy > last level hard > current level easy > current level hard > next level easy > next level hard > etc)

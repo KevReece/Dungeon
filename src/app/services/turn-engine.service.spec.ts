@@ -27,7 +27,7 @@ describe('TurnEngineService', () => {
     beforeEach(() => {
       service = new TurnEngineService(mockEnemySorterService);
       character = TestFactory.createCharacter();
-      enemy = TestFactory.createEnemy();
+      enemy = TestFactory.createGoblin();
       enemies = [enemy];
       spyOn(enemy, 'act');
       spyOn(mockEnemySorterService, 'sort');

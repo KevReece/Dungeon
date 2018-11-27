@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Character } from '../model/celloccupiers/character.model';
 import { FactoryService } from './factory.service';
 import { Enemy } from '../model/celloccupiers/enemy.model';
+import { Cell } from '../model/cell.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class MapLoaderService {
 
   private buildGridFromFile(file: String, mapGrid: MapGrid, character: Character, enemies: Enemy[], levelNumber: number) {
     const rows = [];
-    file.split('\n').forEach(rowString => {
+    file.split('\n{')[0].split('\n').forEach(rowString => {
       const rowCells = [];
       rowString.split('')
         .filter(cellChar => this.isAlphanumericOrSpace(cellChar))
@@ -37,18 +38,20 @@ export class MapLoaderService {
     return alphaNumericRegex.test(char);
   }
 
-  private buildCell(cellChar: string, character: Character, enemies: Enemy[], levelNumber: number) {
+  private buildCell(cellChar: string, character: Character, enemies: Enemy[], levelNumber: number): Cell {
     switch (cellChar) {
       case 'X': return this.factoryService.createWallCell();
       case 'T': return this.factoryService.createTreasureChestCell();
-      case 'E': {
-        const enemy = this.factoryService.createEnemy();
-        enemies.push(enemy);
-        return this.factoryService.createCellOccupiedBy(enemy);
-      }
+      case 'E': return this.buildForEnemy(this.factoryService.createGoblin(), enemies);
+      case 'H': return this.buildForEnemy(this.factoryService.createOrc(), enemies);
       case 'B': return this.factoryService.createCellOccupiedBy(character);
       case 'O': return this.factoryService.createHoleCell(levelNumber + 1);
       default: return this.factoryService.createEmptyCell();
     }
+  }
+
+  private buildForEnemy(enemy: Enemy, enemies: Enemy[]): Cell {
+    enemies.push(enemy);
+    return this.factoryService.createCellOccupiedBy(enemy);
   }
 }

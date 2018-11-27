@@ -5,7 +5,7 @@ describe('Fighter', () => {
     let fighter: Fighter;
 
     beforeEach(() => {
-        fighter = TestFactory.createEnemy();
+        fighter = TestFactory.createGoblin();
     });
 
     describe('isAlive', () => {

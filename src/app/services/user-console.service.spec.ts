@@ -45,23 +45,23 @@ describe('UserConsoleService', () => {
   });
 
   it('should write attack succeeded message', () => {
-    service.writeAttackSucceeded(TestFactory.createEnemy(), TestFactory.createCharacter(), 5);
+    service.writeAttackSucceeded(TestFactory.createGoblin(), TestFactory.createCharacter(), 5);
     expect(getLastMessage()).toContain('succeeded');
-    expect(getLastMessage()).toContain(TestFactory.createEnemy().name);
+    expect(getLastMessage()).toContain(TestFactory.createGoblin().name);
     expect(getLastMessage()).toContain(TestFactory.createCharacter().name);
     expect(getLastMessage()).toContain('5');
   });
 
   it('should write attack failed message', () => {
-    service.writeAttackFailed(TestFactory.createEnemy(), TestFactory.createCharacter());
-    expect(getLastMessage()).toContain(TestFactory.createEnemy().name);
+    service.writeAttackFailed(TestFactory.createGoblin(), TestFactory.createCharacter());
+    expect(getLastMessage()).toContain(TestFactory.createGoblin().name);
     expect(getLastMessage()).toContain(TestFactory.createCharacter().name);
     expect(getLastMessage()).toContain('failed');
   });
 
   it('should write enemy killed message', () => {
-    service.writeEnemyDied(TestFactory.createEnemy());
-    expect(getLastMessage()).toContain(TestFactory.createEnemy().name);
+    service.writeEnemyDied(TestFactory.createGoblin());
+    expect(getLastMessage()).toContain(TestFactory.createGoblin().name);
     expect(getLastMessage()).toContain('slain');
   });
 

@@ -10,6 +10,7 @@ import { Character } from './character.model';
 import { FightService } from 'src/app/services/fight.service';
 import { Wall } from './wall.model';
 import { UserConsoleService } from 'src/app/services/user-console.service';
+import { Goblin } from './enemies/goblin.model';
 
 describe('Enemy', () => {
     let enemy: Enemy;
@@ -34,7 +35,7 @@ describe('Enemy', () => {
         it('should set the direction', () => {
             createRandomIntegerResponses[0] = 3;
 
-            enemy = new Enemy(factoryService, fightService, userConsoleService);
+            enemy = new Goblin(factoryService, fightService, userConsoleService);
 
             expect(enemy.direction).toBe(Direction.Left);
         });
@@ -42,7 +43,7 @@ describe('Enemy', () => {
 
     describe('die', () => {
         beforeEach(() => {
-            enemy = new Enemy(factoryService, fightService, userConsoleService);
+            enemy = new Goblin(factoryService, fightService, userConsoleService);
         });
 
         it('should clear the cell occupation', () => {
@@ -68,7 +69,7 @@ describe('Enemy', () => {
 
         describe(' fight the charactor', () => {
             beforeEach(() => {
-                enemy = new Enemy(factoryService, fightService, userConsoleService);
+                enemy = new Goblin(factoryService, fightService, userConsoleService);
             });
 
             it(' should attack if adjacent', () => {
@@ -97,7 +98,7 @@ describe('Enemy', () => {
 
         describe(' move towards the charactor', () => {
             beforeEach(() => {
-                enemy = new Enemy(factoryService, fightService, userConsoleService);
+                enemy = new Goblin(factoryService, fightService, userConsoleService);
             });
 
             it(' should happen if near enough', () => {
@@ -187,7 +188,7 @@ describe('Enemy', () => {
 
         describe(' from an upward start direction', () => {
             beforeEach(() => {
-                enemy = new Enemy(factoryService, fightService, userConsoleService);
+                enemy = new Goblin(factoryService, fightService, userConsoleService);
                 mapGrid = TestFactory.create9x9MapGrid(enemy);
             });
 
@@ -249,7 +250,7 @@ describe('Enemy', () => {
 
             beforeEach(() => {
                 createRandomIntegerResponses[0] = 2;
-                enemy = new Enemy(factoryService, fightService, userConsoleService);
+                enemy = new Goblin(factoryService, fightService, userConsoleService);
                 mapGrid = TestFactory.create9x9MapGrid(enemy);
             });
 
@@ -303,7 +304,7 @@ describe('Enemy', () => {
 
             beforeEach(() => {
                 createRandomIntegerResponses[0] = 1;
-                enemy = new Enemy(factoryService, fightService, userConsoleService);
+                enemy = new Goblin(factoryService, fightService, userConsoleService);
             });
 
             it('should not move when fully blocked', () => {

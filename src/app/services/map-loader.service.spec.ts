@@ -12,8 +12,10 @@ import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
 import { Enemy } from '../model/celloccupiers/enemy.model';
 import { TestFactory } from '../testhelpers/test-factory';
 import { Hole } from '../model/celloccupiers/hole.model';
+import { Goblin } from '../model/celloccupiers/enemies/goblin.model';
+import { Orc } from '../model/celloccupiers/enemies/orc.model';
 
-describe('MapLoadderService', () => {
+describe('MapLoaderService', () => {
 
   describe('isolated', () => {
     let httpMock: HttpTestingController;
@@ -41,7 +43,7 @@ describe('MapLoadderService', () => {
         mapGrid = new MapGrid([]);
         service.loadMapGrid(1, mapGrid, character, enemies);
         const mapRequest = httpMock.expectOne('assets/maps/0001.map');
-        mapRequest.flush('  \nX \nB \nT \nE \nO ');
+        mapRequest.flush('  \nX \nB \nT \nEH\nO ');
       });
 
       it('should return all rows', () => {
@@ -66,10 +68,16 @@ describe('MapLoadderService', () => {
         expect(cell.occupier).toEqual(jasmine.any(TreasureChest));
       });
 
-      it('should return an enemy cell', () => {
+      it('should return an easy enemy cell', () => {
         const cell = mapGrid.rows[4].cells[0];
         expect(cell.occupier).toEqual(jasmine.any(Enemy));
-        expect(enemies).toContain(<Enemy>cell.occupier);
+        expect(enemies).toContain(<Goblin>cell.occupier);
+      });
+
+      it('should return a hard enemy cell', () => {
+        const cell = mapGrid.rows[4].cells[1];
+        expect(cell.occupier).toEqual(jasmine.any(Enemy));
+        expect(enemies).toContain(<Orc>cell.occupier);
       });
 
       it('should return a hole cell', () => {

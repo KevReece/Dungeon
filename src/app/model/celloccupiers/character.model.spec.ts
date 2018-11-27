@@ -143,7 +143,7 @@ describe('Character', () => {
         });
 
         it('should fight enemy', () => {
-            const enemy = TestFactory.createEnemy();
+            const enemy = TestFactory.createGoblin();
             const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(enemy)])]);
             spyOn(mockFightService, 'attack');
 
@@ -169,19 +169,19 @@ describe('Character', () => {
         beforeEach(() => spyOn(mockLevelUpgradeService, 'check'));
 
         it('should increase experience', () => {
-            character.killedOpponent(TestFactory.createEnemy());
+            character.killedOpponent(TestFactory.createGoblin());
 
             expect(character.experience).toEqual(2);
         });
 
         it('should send experience gained message', () => {
-            character.killedOpponent(TestFactory.createEnemy());
+            character.killedOpponent(TestFactory.createGoblin());
 
             expect(userConsoleService.writeExperienceGained).toHaveBeenCalledWith(2);
         });
 
         it('should check for level upgrade', () => {
-            character.killedOpponent(TestFactory.createEnemy());
+            character.killedOpponent(TestFactory.createGoblin());
 
             expect(mockLevelUpgradeService.check).toHaveBeenCalledWith(character);
         });
@@ -201,7 +201,7 @@ describe('Character', () => {
         });
 
         it('should return Fight when blocked by enemy', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(TestFactory.createEnemy())])]);
+            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(TestFactory.createGoblin())])]);
 
             expect(character.getActionOptions()[1]).toBe(ActionOption.Fight);
         });
@@ -220,7 +220,7 @@ describe('Character', () => {
 
         it('should return all directions', () => {
             const mapGrid = TestFactory.create9x9MapGrid(character);
-            mapGrid.rows[1].cells[2].setOccupier(TestFactory.createEnemy());
+            mapGrid.rows[1].cells[2].setOccupier(TestFactory.createGoblin());
             mapGrid.rows[2].cells[1].setOccupier(TestFactory.createTreasureChest());
             mapGrid.rows[1].cells[0].setOccupier(new Wall());
 
