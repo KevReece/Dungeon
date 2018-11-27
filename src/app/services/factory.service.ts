@@ -15,6 +15,7 @@ import { AppComponent } from '../app.component';
 import { Food } from '../model/cellitems/food.model';
 import { Goblin } from '../model/celloccupiers/enemies/goblin.model';
 import { Orc } from '../model/celloccupiers/enemies/orc.model';
+import { Troll } from '../model/celloccupiers/enemies/troll.model';
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +64,13 @@ export class FactoryService {
   createTreasureChest(): TreasureChest {
     return new TreasureChest(this.userConsoleService, this);
   }
-  createGoblin(): Goblin {
+  createEnemy(enemyName: string): Enemy {
+    if (enemyName === Orc.name) {
+      return new Orc(this, this.fightService, this.userConsoleService);
+    }
+    if (enemyName === Troll.name) {
+      return new Troll(this, this.fightService, this.userConsoleService);
+    }
     return new Goblin(this, this.fightService, this.userConsoleService);
   }
   createOrc(): Orc {

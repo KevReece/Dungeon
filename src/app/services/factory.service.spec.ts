@@ -5,10 +5,12 @@ import { Wall } from '../model/celloccupiers/wall.model';
 import { Cell } from '../model/cell.model';
 import { Character } from '../model/celloccupiers/character.model';
 import { TreasureChest } from '../model/celloccupiers/treasure-chest.model';
-import { Enemy } from '../model/celloccupiers/enemy.model';
 import { TestFactory } from '../testhelpers/test-factory';
 import { Gold } from '../model/cellitems/gold.model';
 import { WeightedOptions } from '../model/weighted-options.model';
+import { Goblin } from '../model/celloccupiers/enemies/goblin.model';
+import { Orc } from '../model/celloccupiers/enemies/orc.model';
+import { Troll } from '../model/celloccupiers/enemies/troll.model';
 
 describe('FactoryService', () => {
   let service: FactoryService;
@@ -58,11 +60,15 @@ describe('FactoryService', () => {
   });
 
   it('should create a goblin', () => {
-    expect(service.createGoblin()).toEqual(jasmine.any(Enemy));
+    expect(service.createEnemy('Goblin')).toEqual(jasmine.any(Goblin));
   });
 
   it('should create an orc', () => {
-    expect(service.createOrc()).toEqual(jasmine.any(Enemy));
+    expect(service.createEnemy('Orc')).toEqual(jasmine.any(Orc));
+  });
+
+  it('should create a troll', () => {
+    expect(service.createEnemy('Troll')).toEqual(jasmine.any(Troll));
   });
 
   it('should create a random integer', () => {

@@ -7,5 +7,5 @@ export class Orc extends Enemy {
     defence = 2;
     damage = 1;
     experienceValue = 3;
-    awarenessDistance = 7;
+    awarenessDistance = 8;
 }

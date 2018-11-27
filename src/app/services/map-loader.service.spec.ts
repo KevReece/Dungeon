@@ -43,7 +43,7 @@ describe('MapLoaderService', () => {
         mapGrid = new MapGrid([]);
         service.loadMapGrid(1, mapGrid, character, enemies);
         const mapRequest = httpMock.expectOne('assets/maps/0001.map');
-        mapRequest.flush('  \nX \nB \nT \nEH\nO ');
+        mapRequest.flush('  \nX \nB \nT \nEH\nO \nmetadata: {\n  "easyEnemy": "Goblin",\n  "hardEnemy": "Orc"\n}');
       });
 
       it('should return all rows', () => {

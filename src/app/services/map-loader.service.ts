@@ -23,16 +23,17 @@ export class MapLoaderService {
   private buildGridFromFile(file: String, mapGrid: MapGrid, character: Character, enemies: Enemy[], levelNumber: number) {
     const rows = [];
     const fileSections = file.split('\nmetadata: ');
-    fileSections[0].split('\n').forEach(rowString => this.addRow(rowString, rows, character, enemies, levelNumber));
+    const metadata = JSON.parse(fileSections[1]);
+    fileSections[0].split('\n').forEach(rowString => this.addRow(rowString, rows, character, enemies, levelNumber, metadata));
     mapGrid.rows = rows;
     mapGrid.setupCells();
   }
 
-  private addRow(rowString: string, rows: Row[], character: Character, enemies: Enemy[], levelNumber: number): void {
+  private addRow(rowString: string, rows: Row[], character: Character, enemies: Enemy[], levelNumber: number, metadata: any): void {
     const rowCells = [];
     rowString.split('')
       .filter(cellChar => this.isAlphanumericOrSpace(cellChar))
-      .forEach(cellChar => rowCells.push(this.buildCell(cellChar, character, enemies, levelNumber)));
+      .forEach(cellChar => rowCells.push(this.buildCell(cellChar, character, enemies, levelNumber, metadata)));
     rows.push(new Row(rowCells));
   }
 
@@ -41,12 +42,12 @@ export class MapLoaderService {
     return alphaNumericRegex.test(char);
   }
 
-  private buildCell(cellChar: string, character: Character, enemies: Enemy[], levelNumber: number): Cell {
+  private buildCell(cellChar: string, character: Character, enemies: Enemy[], levelNumber: number, metadata: any): Cell {
     switch (cellChar) {
       case 'X': return this.factoryService.createWallCell();
       case 'T': return this.factoryService.createTreasureChestCell();
-      case 'E': return this.buildForEnemy(this.factoryService.createGoblin(), enemies);
-      case 'H': return this.buildForEnemy(this.factoryService.createOrc(), enemies);
+      case 'E': return this.buildForEnemy(this.factoryService.createEnemy(metadata.easyEnemy), enemies);
+      case 'H': return this.buildForEnemy(this.factoryService.createEnemy(metadata.hardEnemy), enemies);
       case 'B': return this.factoryService.createCellOccupiedBy(character);
       case 'O': return this.factoryService.createHoleCell(levelNumber + 1);
       default: return this.factoryService.createEmptyCell();
