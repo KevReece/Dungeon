@@ -1,0 +1,44 @@
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X                                      X
+X   X     X               X     X      X
+X   X  T  X               X  B  X      X
+X   XXXXXXX               XXXXXXX      X
+X                                      X
+X        X     X                       X
+X        X  E  X                       X
+X        XXXXXXX  X     X X     X      X
+X                 X  E  X X  E  X      X
+X                 XXXXXXX XXXXXXX      X
+X                                      X
+X             X     X         X     X  X
+X             X  E  X  X     XX  E  X  X
+X             XXXXXXX  X  H  XXXXXXXX  X
+X                      XXXXXXX         X
+X                                      X
+X X     X          X     X             X
+X X  H  X          X  T  X             X
+X XXXXXXX          XXXXXXX             X
+X                                      X
+X               X     X   X     X      X
+X               X  E  X   X  H  X      X
+X    X     X    XXXXXXX   XXXXXXX      X
+X    X  E  X                           X
+X    XXXXXXX                 X     X   X
+X                            X  T  X   X
+X                  X     X   XXXXXXX   X
+X                  X  E  X             X
+X                  XXXXXXX   X     X   X
+X                            X  H  X   X
+X           XXXXXXXXXXXXXXX  XXXXXXX   X
+X           X      T      X            X
+X           X   H    H    X            X
+X           X      H      X            X
+X  X     X  X   X     X   X            X
+X  X  T  X      X  O  X                X
+X  XXXXXXX      XXXXXXX                X
+X                                      X
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+metadata: {
+    "easyEnemy": "Orc",
+    "hardEnemy": "Troll"
+}

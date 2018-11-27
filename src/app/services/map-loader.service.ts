@@ -22,15 +22,18 @@ export class MapLoaderService {
 
   private buildGridFromFile(file: String, mapGrid: MapGrid, character: Character, enemies: Enemy[], levelNumber: number) {
     const rows = [];
-    file.split('\n{')[0].split('\n').forEach(rowString => {
-      const rowCells = [];
-      rowString.split('')
-        .filter(cellChar => this.isAlphanumericOrSpace(cellChar))
-        .forEach(cellChar => rowCells.push(this.buildCell(cellChar, character, enemies, levelNumber)));
-      rows.push(new Row(rowCells));
-    });
+    const fileSections = file.split('\nmetadata: ');
+    fileSections[0].split('\n').forEach(rowString => this.addRow(rowString, rows, character, enemies, levelNumber));
     mapGrid.rows = rows;
     mapGrid.setupCells();
+  }
+
+  private addRow(rowString: string, rows: Row[], character: Character, enemies: Enemy[], levelNumber: number): void {
+    const rowCells = [];
+    rowString.split('')
+      .filter(cellChar => this.isAlphanumericOrSpace(cellChar))
+      .forEach(cellChar => rowCells.push(this.buildCell(cellChar, character, enemies, levelNumber)));
+    rows.push(new Row(rowCells));
   }
 
   private isAlphanumericOrSpace(char: string): boolean {
