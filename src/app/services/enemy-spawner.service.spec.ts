@@ -7,7 +7,7 @@ import { Enemy } from '../model/celloccupiers/enemy.model';
 import { MapGrid } from '../model/map-grid.model';
 import { UserConsoleService } from './user-console.service';
 
-fdescribe('EnemySpawnerService', () => {
+describe('EnemySpawnerService', () => {
 
   it('should be created', () => {
     TestBed.configureTestingModule({});
