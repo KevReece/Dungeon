@@ -39,12 +39,12 @@ describe('EnemySpawnerService', () => {
 
   it('should spawn hard', () => {
     enemySpawnerService.initialize(mapGrid, 1);
-    
+
     const spawned = enemySpawnerService.spawnHard();
     expect(factoryService.createEnemy).toHaveBeenCalledWith('Orc');
     expect(spawned).toBe(enemy);
   });
-  
+
   it('should spawn hardest when above required level', () => {
     enemySpawnerService.initialize(mapGrid, 5);
 
@@ -62,7 +62,7 @@ describe('EnemySpawnerService', () => {
   });
 
   it('should return null when all cells occupied', () => {
-    for (let index = 0; index < 19; index++) enemySpawnerService.stepSpawnCycle();
+    for (let index = 0; index < 19; index++) { enemySpawnerService.stepSpawnCycle(); }
     spyOn(mapGrid, 'randomUnoccupiedCell').and.returnValue(null);
 
     const spawned = enemySpawnerService.stepSpawnCycle();
@@ -70,17 +70,17 @@ describe('EnemySpawnerService', () => {
   });
 
   it('should return enemy', () => {
-    for (let index = 0; index < 19; index++) enemySpawnerService.stepSpawnCycle();
+    for (let index = 0; index < 19; index++) { enemySpawnerService.stepSpawnCycle(); }
     spyOn(mapGrid, 'randomUnoccupiedCell').and.returnValue(TestFactory.createCell());
 
     const spawned = enemySpawnerService.stepSpawnCycle();
-    
+
     expect(factoryService.createEnemy).toHaveBeenCalledWith('Goblin');
     expect(spawned).toBe(enemy);
   });
-  
+
   it('should set enemy to a random cell', () => {
-    for (let index = 0; index < 19; index++) enemySpawnerService.stepSpawnCycle();
+    for (let index = 0; index < 19; index++) { enemySpawnerService.stepSpawnCycle(); }
     const cell = TestFactory.createCell();
     spyOn(mapGrid, 'randomUnoccupiedCell').and.returnValue(cell);
 
@@ -89,7 +89,7 @@ describe('EnemySpawnerService', () => {
   });
 
   it('should write enemy spawned to console', () => {
-    for (let index = 0; index < 19; index++) enemySpawnerService.stepSpawnCycle();
+    for (let index = 0; index < 19; index++) { enemySpawnerService.stepSpawnCycle(); }
     spyOn(mapGrid, 'randomUnoccupiedCell').and.returnValue(TestFactory.createCell());
     spyOn(userConsoleService, 'writeEnemySpawned');
 
@@ -98,7 +98,7 @@ describe('EnemySpawnerService', () => {
   });
 
   it('should return enemy at initial level for specified count', () => {
-    for (let index = 0; index < 59; index++) enemySpawnerService.stepSpawnCycle();
+    for (let index = 0; index < 59; index++) { enemySpawnerService.stepSpawnCycle(); }
     spyOn(mapGrid, 'randomUnoccupiedCell').and.returnValue(TestFactory.createCell());
 
     const spawned = enemySpawnerService.stepSpawnCycle();
@@ -109,10 +109,10 @@ describe('EnemySpawnerService', () => {
   });
 
   it('should return enemy at higher level for specified count', () => {
-    for (let index = 0; index < 120; index++) enemySpawnerService.stepSpawnCycle();
+    for (let index = 0; index < 120; index++) { enemySpawnerService.stepSpawnCycle(); }
     spyOn(mapGrid, 'randomUnoccupiedCell').and.returnValue(TestFactory.createCell());
     enemySpy.calls.reset();
-    for (let index = 0; index < 119; index++) enemySpawnerService.stepSpawnCycle();
+    for (let index = 0; index < 119; index++) { enemySpawnerService.stepSpawnCycle(); }
 
     const spawned = enemySpawnerService.stepSpawnCycle();
     expect(spawned).toBe(enemy);
@@ -122,10 +122,10 @@ describe('EnemySpawnerService', () => {
   });
 
   it('should return enemy at highest level when enemy name no longer defined', () => {
-    for (let index = 0; index < 240; index++) enemySpawnerService.stepSpawnCycle();
+    for (let index = 0; index < 240; index++) { enemySpawnerService.stepSpawnCycle(); }
     spyOn(mapGrid, 'randomUnoccupiedCell').and.returnValue(TestFactory.createCell());
     enemySpy.calls.reset();
-    for (let index = 0; index < 99; index++) enemySpawnerService.stepSpawnCycle();
+    for (let index = 0; index < 99; index++) { enemySpawnerService.stepSpawnCycle(); }
 
     const spawned = enemySpawnerService.stepSpawnCycle();
     expect(spawned).toBe(enemy);

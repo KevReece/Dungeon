@@ -348,7 +348,9 @@ describe('Enemy', () => {
             });
 
             it('should move with limited options', () => {
-                mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(), TestFactory.createCell(enemy), TestFactory.createCell()])]);
+                mapGrid = TestFactory.createMapGrid(
+                    [new Row([TestFactory.createCell(), TestFactory.createCell(enemy), TestFactory.createCell()])]
+                );
                 createRandomIntegerResponses[1] = 6;
 
                 enemy.act(character);

@@ -35,7 +35,7 @@ export class MapGrid {
     }
 
     randomUnoccupiedCell(): Cell {
-        let unoccupiedCells = this.getUnoccupiedCells();
+        const unoccupiedCells = this.getUnoccupiedCells();
         if (unoccupiedCells.length === 0) {
             return null;
         }
@@ -43,7 +43,7 @@ export class MapGrid {
     }
 
     private getUnoccupiedCells(): Cell[] {
-        let unoccupiedCells = []
+        const unoccupiedCells = [];
         for (let rowIndex = 0; rowIndex < this.rows.length; rowIndex++) {
             const row = this.rows[rowIndex];
             for (let columnIndex = 0; columnIndex < row.cells.length; columnIndex++) {

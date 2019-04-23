@@ -72,7 +72,7 @@ describe('MapGrid', () => {
 
     describe('randomUnoccupiedCell', () => {
         const mockFactoryService = new FactoryService();
-        
+
         it('should return null for empty grid', () => {
             const mapGrid = new MapGrid(mockFactoryService, []);
 
@@ -80,7 +80,7 @@ describe('MapGrid', () => {
 
             expect(cell).toBeNull();
         });
-        
+
         it('should return single for single cell grid', () => {
             const mapGrid = TestFactory.create1x1MapGrid(null, mockFactoryService);
             spyOn(mockFactoryService, 'createRandomInteger').and.returnValue(0);
@@ -90,7 +90,7 @@ describe('MapGrid', () => {
             expect(cell).toBe(mapGrid.rows[0].cells[0]);
             expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(0, 0);
         });
-        
+
         it('should return random from row', () => {
             const mapGrid = TestFactory.create9x9MapGrid(null, mockFactoryService);
             spyOn(mockFactoryService, 'createRandomInteger').and.returnValue(1);
@@ -100,7 +100,7 @@ describe('MapGrid', () => {
             expect(cell).toBe(mapGrid.rows[0].cells[1]);
             expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(0, 8);
         });
-        
+
         it('should return random from grid', () => {
             const mapGrid = TestFactory.create9x9MapGrid(null, mockFactoryService);
             spyOn(mockFactoryService, 'createRandomInteger').and.returnValue(4);
@@ -109,8 +109,8 @@ describe('MapGrid', () => {
 
             expect(cell).toBe(mapGrid.rows[1].cells[1]);
         });
-        
-        
+
+
         it('should return randmom as last from grid', () => {
             const mapGrid = TestFactory.create9x9MapGrid(null, mockFactoryService);
             spyOn(mockFactoryService, 'createRandomInteger').and.returnValue(8);
@@ -119,7 +119,7 @@ describe('MapGrid', () => {
 
             expect(cell).toBe(mapGrid.rows[2].cells[2]);
         });
-        
+
         it('should return null for occupied grid', () => {
             const mapGrid = TestFactory.create1x1MapGrid(TestFactory.createCharacter(), mockFactoryService);
 
@@ -127,7 +127,7 @@ describe('MapGrid', () => {
 
             expect(cell).toBeNull();
         });
-        
+
         it('should skip occupied cells', () => {
             const mapGrid = TestFactory.create9x9MapGrid(TestFactory.createCharacter(), mockFactoryService);
             spyOn(mockFactoryService, 'createRandomInteger').and.returnValue(4);
@@ -135,7 +135,7 @@ describe('MapGrid', () => {
             const cell = mapGrid.randomUnoccupiedCell();
 
             expect(cell).toBe(mapGrid.rows[1].cells[2]);
-            expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(0, 7)
+            expect(mockFactoryService.createRandomInteger).toHaveBeenCalledWith(0, 7);
         });
     });
 });

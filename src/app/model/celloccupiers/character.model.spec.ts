@@ -98,7 +98,7 @@ describe('Character', () => {
 
         it('should open a treasure chest', () => {
             const treasureChest = TestFactory.createTreasureChest();
-            const mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(treasureChest)])]);
+            TestFactory.createMapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(treasureChest)])]);
             spyOn(treasureChest, 'open');
 
             const result = character.act(Direction.Right);

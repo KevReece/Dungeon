@@ -44,7 +44,7 @@ export class EnemySpawnerService {
     }
     this.incrementCounters();
     const spawnedEnemy = this.createEnemyAtLevel(this.currentSpawnLevel);
-    const cellToSpawnIn = this.mapGrid.randomUnoccupiedCell()
+    const cellToSpawnIn = this.mapGrid.randomUnoccupiedCell();
     if (!cellToSpawnIn) {
       return null;
     }
