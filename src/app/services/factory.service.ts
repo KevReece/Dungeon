@@ -1,5 +1,7 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Character } from '../model/celloccupiers/character.model';
+import { MapGrid } from '../model/map-grid.model';
+import { Row } from '../model/row.model';
 import { Cell } from '../model/cell.model';
 import { Wall } from '../model/celloccupiers/wall.model';
 import { CellOccupier } from '../model/celloccupiers/cell-occupier.model';
@@ -37,6 +39,9 @@ export class FactoryService {
     this.levelUpgradeService = levelUpgradeService;
   }
 
+  createMapGrid(rows: Row[]): MapGrid {
+    return new MapGrid(this, rows);
+  }
   createCellOccupiedBy(cellOccupier: CellOccupier): Cell {
     return new Cell(cellOccupier);
   }

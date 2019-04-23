@@ -71,7 +71,6 @@ describe('UserConsoleService', () => {
     expect(getLastMessage()).toContain('killed');
   });
 
-
   it('should write experience gained message', () => {
     service.writeExperienceGained(2);
     expect(getLastMessage()).toContain('experience');
@@ -88,5 +87,11 @@ describe('UserConsoleService', () => {
     service.writeHoleEntered(3);
     expect(getLastMessage()).toContain('level');
     expect(getLastMessage()).toContain('3');
+  });
+
+  it('should write enemy spawned message', () => {
+    service.writeEnemySpawned(TestFactory.createGoblin());
+    expect(getLastMessage()).toContain('entered');
+    expect(getLastMessage()).toContain('goblin');
   });
 });

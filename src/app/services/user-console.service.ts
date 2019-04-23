@@ -57,6 +57,10 @@ export class UserConsoleService {
     this.lines.push('You\'ve decended into dungeon level ' + newMapLevel + '!');
   }
 
+  writeEnemySpawned(spawnedEnemy: Enemy): void {
+    this.lines.push('A ' + spawnedEnemy.name.toLowerCase() + ' has entered the dungeon.');
+  }
+
   private getStringFromItem(item: ICellItem): String {
     if (item instanceof Gold) {
       return item.quantity + ' gold';

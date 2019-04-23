@@ -10,8 +10,12 @@ import { Hole } from '../model/celloccupiers/hole.model';
 import { Food } from '../model/cellitems/food.model';
 import { Goblin } from '../model/celloccupiers/enemies/goblin.model';
 import { Orc } from '../model/celloccupiers/enemies/orc.model';
+import { AppComponent } from '../app.component';
 
 export class TestFactory {
+    static createAppComponent(): AppComponent {
+        return new AppComponent(null, new FactoryService(), null, null, null, null, null, null);
+    }
     static createCharacter(): Character {
         return new Character(null, null, null);
     }
@@ -35,12 +39,18 @@ export class TestFactory {
     static createCell(occupier?: CellOccupier): Cell {
         return new Cell(occupier);
     }
-    static create9x9MapGrid(centreOccupier?: CellOccupier): MapGrid {
-        return new MapGrid([
+    static createMapGrid(rows?: Row[], factoryService?: FactoryService): MapGrid {
+        return new MapGrid(factoryService, rows || []);
+    }
+    static create1x1MapGrid(occupier?: CellOccupier, factoryService?: FactoryService): MapGrid {
+        return this.createMapGrid([new Row([this.createCell(occupier)])], factoryService);
+    }
+    static create9x9MapGrid(centreOccupier?: CellOccupier, factoryService?: FactoryService): MapGrid {
+        return this.createMapGrid([
             new Row([this.createCell(), this.createCell(), this.createCell()]),
             new Row([this.createCell(), this.createCell(centreOccupier), this.createCell()]),
             new Row([this.createCell(), this.createCell(), this.createCell()])
-        ]);
+        ], factoryService);
     }
     static createHole(): Hole {
         return new Hole(null, null, 0);

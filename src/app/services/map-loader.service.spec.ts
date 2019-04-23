@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { MapLoaderService } from './map-loader.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { MapGrid } from '../model/map-grid.model';
@@ -14,8 +13,16 @@ import { TestFactory } from '../testhelpers/test-factory';
 import { Hole } from '../model/celloccupiers/hole.model';
 import { Goblin } from '../model/celloccupiers/enemies/goblin.model';
 import { Orc } from '../model/celloccupiers/enemies/orc.model';
+import { EnemySpawnerService } from './enemy-spawner.service';
 
 describe('MapLoaderService', () => {
+  let enemySpawnerService: EnemySpawnerService;
+
+  beforeEach(() => {
+    enemySpawnerService = new EnemySpawnerService(null, null);
+    spyOn(enemySpawnerService, 'spawnEasy').and.returnValue(TestFactory.createGoblin());
+    spyOn(enemySpawnerService, 'spawnHard').and.returnValue(TestFactory.createOrc());
+  });
 
   describe('isolated', () => {
     let httpMock: HttpTestingController;
@@ -40,10 +47,10 @@ describe('MapLoaderService', () => {
 
       beforeEach(async() => {
         service = TestBed.get(MapLoaderService);
-        mapGrid = new MapGrid([]);
-        service.loadMapGrid(1, mapGrid, character, enemies);
+        mapGrid = TestFactory.createMapGrid([]);
+        service.loadMapGrid(1, mapGrid, character, enemies, enemySpawnerService);
         const mapRequest = httpMock.expectOne('assets/maps/0001.map');
-        mapRequest.flush('  \nX \nB \nT \nEH\nO \nmetadata: {\n  "easyEnemy": "Goblin",\n  "hardEnemy": "Orc"\n}');
+        mapRequest.flush('  \nX \nB \nT \nEH\nO ');
       });
 
       it('should return all rows', () => {
@@ -104,8 +111,8 @@ describe('MapLoaderService', () => {
 
     it('should load 0001.map', (done) => {
       const service: MapLoaderService = TestBed.get(MapLoaderService);
-      const mapGrid: MapGrid = new MapGrid([]);
-      service.loadMapGrid(1, mapGrid, null, [])
+      const mapGrid: MapGrid = TestFactory.createMapGrid([]);
+      service.loadMapGrid(1, mapGrid, null, [], enemySpawnerService)
         .then(() => {
           expect(mapGrid.rows[0].cells[0].occupier).toEqual(jasmine.any(Wall));
           expect(mapGrid.rows.length).toBe(40);
@@ -117,8 +124,8 @@ describe('MapLoaderService', () => {
 
     it('should load 0002.map', (done) => {
       const service: MapLoaderService = TestBed.get(MapLoaderService);
-      const mapGrid: MapGrid = new MapGrid([]);
-      service.loadMapGrid(2, mapGrid, null, [])
+      const mapGrid: MapGrid = TestFactory.createMapGrid([]);
+      service.loadMapGrid(2, mapGrid, null, [], enemySpawnerService)
         .then(() => {
           expect(mapGrid.rows[35].cells[24].occupier).toEqual(jasmine.any(Hole));
           expect(mapGrid.rows.length).toBe(40);
@@ -130,8 +137,8 @@ describe('MapLoaderService', () => {
 
     it('should load 0010.map', (done) => {
       const service: MapLoaderService = TestBed.get(MapLoaderService);
-      const mapGrid: MapGrid = new MapGrid([]);
-      service.loadMapGrid(10, mapGrid, null, [])
+      const mapGrid: MapGrid = TestFactory.createMapGrid([]);
+      service.loadMapGrid(10, mapGrid, null, [], enemySpawnerService)
         .then(() => {
           expect(mapGrid.rows[1].cells[1].occupier).toEqual(jasmine.any(Hole));
           expect(mapGrid.rows.length).toBe(40);

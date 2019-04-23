@@ -11,6 +11,7 @@ import { FightService } from './services/fight.service';
 import { CharacterLevelUpgradeService } from './services/character-level-upgrade.service';
 import { TurnEngineService } from './services/turn-engine.service';
 import { ActionOption } from './model/action-option';
+import { EnemySpawnerService } from './services/enemy-spawner.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ import { ActionOption } from './model/action-option';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
-  mapGrid: MapGrid = new MapGrid([]);
+  mapGrid: MapGrid;
   character: Character;
   enemies: Enemy[] = [];
   mapLoadPromise: Promise<void>;
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit {
       private enemySorterService: EnemySorterService,
       private fightService: FightService,
       private levelUpgradeService: CharacterLevelUpgradeService,
-      private turnEngineService: TurnEngineService) {
+      private turnEngineService: TurnEngineService,
+      private enemySpawnerService: EnemySpawnerService) {
         this.factoryService.setUpDependencies(this, this.userConsoleService, this.fightService, this.levelUpgradeService);
       }
 
@@ -51,13 +53,15 @@ export class AppComponent implements OnInit {
     this.mapLevelNumber = levelNumber;
     this.enemies = [];
     this.actionOptions = [ActionOption.None, ActionOption.None, ActionOption.None, ActionOption.None];
-    this.mapGrid = new MapGrid([]);
-    this.mapLoadPromise = this.mapLoaderService.loadMapGrid(levelNumber, this.mapGrid, this.character, this.enemies)
+    this.mapGrid = this.factoryService.createMapGrid([]);
+    this.enemySpawnerService.initialize(this.mapGrid, levelNumber);
+    this.turnEngineService.initialize(this.character, this.enemies, this.enemySpawnerService);
+    this.mapLoadPromise = this.mapLoaderService
+      .loadMapGrid(levelNumber, this.mapGrid, this.character, this.enemies, this.enemySpawnerService)
       .then(() => {
         this.enemySorterService.sort(this.enemies, this.character);
         this.actionOptions = this.character.getActionOptions();
       });
-    this.turnEngineService.initialize(this.character, this.enemies);
   }
 
   actionHandler(direction: Direction) {

@@ -30,7 +30,7 @@ describe('MapComponent', () => {
     itemRow.cells[1].items.push(TestFactory.createFood());
     const enemyRow = new Row([TestFactory.createCell(TestFactory.createGoblin()), TestFactory.createCell(TestFactory.createOrc())]);
     const holeRow = new Row([TestFactory.createCell(TestFactory.createHole())]);
-    return new MapGrid([wallRow, multipleWallRow, floorRow, mixedRow, characterRow, treasureChestRow, itemRow, enemyRow, holeRow]);
+    return TestFactory.createMapGrid([wallRow, multipleWallRow, floorRow, mixedRow, characterRow, treasureChestRow, itemRow, enemyRow, holeRow]);
   };
 
   beforeEach(() => {

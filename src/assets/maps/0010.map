@@ -38,7 +38,3 @@ X                                      X
 X                                      X
 X                                      X
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-metadata: {
-    "easyEnemy": "Troll",
-    "hardEnemy": "Dragon"
-}

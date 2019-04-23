@@ -11,7 +11,7 @@ describe('Hole', () => {
 
     beforeEach(() => {
         userConsoleService = new UserConsoleService();
-        appComponent = new AppComponent(null, new FactoryService(), null, null, null, null, null);
+        appComponent = TestFactory.createAppComponent();
         spyOn(userConsoleService, 'writeHoleEntered');
         spyOn(appComponent, 'startMapLevel');
         hole = new Hole(appComponent, userConsoleService, 5);

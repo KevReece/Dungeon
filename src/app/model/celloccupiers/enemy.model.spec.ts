@@ -308,7 +308,7 @@ describe('Enemy', () => {
             });
 
             it('should not move when fully blocked', () => {
-                mapGrid = new MapGrid([new Row([TestFactory.createCell(enemy)])]);
+                mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(enemy)])]);
                 createRandomIntegerResponses[1] = 1;
 
                 enemy.act(character);
@@ -318,7 +318,7 @@ describe('Enemy', () => {
             });
 
             it('should move with single option', () => {
-                mapGrid = new MapGrid([new Row([TestFactory.createCell(enemy), TestFactory.createCell()])]);
+                mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(enemy), TestFactory.createCell()])]);
                 createRandomIntegerResponses[1] = 6;
 
                 enemy.act(character);
@@ -328,7 +328,7 @@ describe('Enemy', () => {
             });
 
             it('should move back with single option', () => {
-                mapGrid = new MapGrid([new Row([TestFactory.createCell(), TestFactory.createCell(enemy)])]);
+                mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(), TestFactory.createCell(enemy)])]);
                 createRandomIntegerResponses[1] = 1;
 
                 enemy.act(character);
@@ -338,7 +338,7 @@ describe('Enemy', () => {
             });
 
             it('should stay still with single option', () => {
-                mapGrid = new MapGrid([new Row([TestFactory.createCell(enemy), TestFactory.createCell()])]);
+                mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(enemy), TestFactory.createCell()])]);
                 createRandomIntegerResponses[1] = 7;
 
                 enemy.act(character);
@@ -348,7 +348,7 @@ describe('Enemy', () => {
             });
 
             it('should move with limited options', () => {
-                mapGrid = new MapGrid([new Row([TestFactory.createCell(), TestFactory.createCell(enemy), TestFactory.createCell()])]);
+                mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(), TestFactory.createCell(enemy), TestFactory.createCell()])]);
                 createRandomIntegerResponses[1] = 6;
 
                 enemy.act(character);

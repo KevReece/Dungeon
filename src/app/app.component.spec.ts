@@ -11,6 +11,7 @@ import { FactoryService } from './services/factory.service';
 import { CharacterLevelUpgradeService } from './services/character-level-upgrade.service';
 import { TurnEngineService } from './services/turn-engine.service';
 import { ActionOption } from './model/action-option';
+import { EnemySpawnerService } from './services/enemy-spawner.service';
 
 describe('AppComponent', () => {
   const mockMapLoaderService  = { loadMapGrid: {} };
@@ -20,6 +21,7 @@ describe('AppComponent', () => {
   const mockLevelUpgradeService = { initialize: {} };
   const mockTurnEngineService = { initialize: {}, executeTurn: {} };
   const mockFactoryService = new FactoryService();
+  const enemySpawnerService = new EnemySpawnerService(null, null);
   const actionOptions = [ActionOption.Move, ActionOption.Move, ActionOption.None, ActionOption.Move];
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
@@ -32,6 +34,7 @@ describe('AppComponent', () => {
     spyOn(mockLevelUpgradeService, 'initialize');
     spyOn(mockTurnEngineService, 'initialize');
     spyOn(mockTurnEngineService, 'executeTurn').and.returnValue(actionOptions);
+    spyOn(enemySpawnerService, 'initialize');
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
@@ -46,7 +49,8 @@ describe('AppComponent', () => {
         {provide: FightService, useValue: mockFightService},
         {provide: CharacterLevelUpgradeService, useValue: mockLevelUpgradeService},
         {provide: TurnEngineService, useValue: mockTurnEngineService},
-        {provide: FactoryService, useValue: mockFactoryService}
+        {provide: FactoryService, useValue: mockFactoryService},
+        {provide: EnemySpawnerService, useValue: enemySpawnerService}
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -68,7 +72,7 @@ describe('AppComponent', () => {
 
   describe('ngOnInit/restart', () => {
     it('should initialize turn engine with game elements', () => {
-      expect(mockTurnEngineService.initialize).toHaveBeenCalledWith(component.character, component.enemies);
+      expect(mockTurnEngineService.initialize).toHaveBeenCalledWith(component.character, component.enemies, enemySpawnerService);
     });
 
     it('should have initial character', () => {
@@ -82,8 +86,14 @@ describe('AppComponent', () => {
       expect(mockUserConsoleService.startAndWelcome).toHaveBeenCalled();
     });
 
+    it('should initialize enemySpawnerService for level', () => {
+      expect(enemySpawnerService.initialize).toHaveBeenCalledWith(component.mapGrid, component.mapLevelNumber);
+    });
+
+
     it('should have loaded map grid', () => {
-      expect(mockMapLoaderService.loadMapGrid).toHaveBeenCalledWith(1, component.mapGrid, component.character, component.enemies);
+      expect(mockMapLoaderService.loadMapGrid)
+        .toHaveBeenCalledWith(1, component.mapGrid, component.character, component.enemies, enemySpawnerService);
       expect(component.mapLevelNumber).toBe(1);
     });
 
@@ -108,8 +118,15 @@ describe('AppComponent', () => {
     it('should have loaded map grid', () => {
       component.startMapLevel(2);
 
-      expect(mockMapLoaderService.loadMapGrid).toHaveBeenCalledWith(2, component.mapGrid, component.character, component.enemies);
+      expect(mockMapLoaderService.loadMapGrid)
+        .toHaveBeenCalledWith(2, component.mapGrid, component.character, component.enemies, enemySpawnerService);
       expect(component.mapLevelNumber).toBe(2);
+    });
+
+    it('should initialize enemySpawnerService for new level', () => {
+      component.startMapLevel(2);
+
+      expect(enemySpawnerService.initialize).toHaveBeenCalledWith(component.mapGrid, component.mapLevelNumber);
     });
   });
 

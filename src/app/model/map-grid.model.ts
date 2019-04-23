@@ -1,15 +1,17 @@
 import { Row } from './row.model';
 import { Direction } from './direction.model';
+import { Cell } from './cell.model';
+import { FactoryService } from '../services/factory.service';
 
 export class MapGrid {
-    constructor(rows: Row[]) {
+    constructor(private factoryService: FactoryService, rows: Row[]) {
         this.rows = rows;
         this.setupCells();
     }
 
     rows: Row[];
 
-    setupCells() {
+    setupCells(): void {
         for (let rowIndex = 0; rowIndex < this.rows.length; rowIndex++) {
             const row = this.rows[rowIndex];
             for (let columnIndex = 0; columnIndex < row.cells.length; columnIndex++) {
@@ -30,5 +32,27 @@ export class MapGrid {
                 }
             }
         }
+    }
+
+    randomUnoccupiedCell(): Cell {
+        let unoccupiedCells = this.getUnoccupiedCells();
+        if (unoccupiedCells.length === 0) {
+            return null;
+        }
+        return unoccupiedCells[this.factoryService.createRandomInteger(0, unoccupiedCells.length - 1)];
+    }
+
+    private getUnoccupiedCells(): Cell[] {
+        let unoccupiedCells = []
+        for (let rowIndex = 0; rowIndex < this.rows.length; rowIndex++) {
+            const row = this.rows[rowIndex];
+            for (let columnIndex = 0; columnIndex < row.cells.length; columnIndex++) {
+                const cell = row.cells[columnIndex];
+                if (!cell.isOccupied()) {
+                    unoccupiedCells.push(cell);
+                }
+            }
+        }
+        return unoccupiedCells;
     }
 }

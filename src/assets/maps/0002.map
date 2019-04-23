@@ -38,7 +38,3 @@ X       X    X X      X   X            X
 X       X     X      X     X           X
 X                                      X
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-metadata: {
-    "easyEnemy": "Goblin",
-    "hardEnemy": "Orc"
-}

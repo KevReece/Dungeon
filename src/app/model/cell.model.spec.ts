@@ -90,7 +90,7 @@ describe('Cell', () => {
         it('should get the distance as 1 for neighbour', () => {
             const cell = new Cell();
             const otherCell = new Cell();
-            const mapGrid = new MapGrid([new Row([cell, otherCell])]);
+            TestFactory.createMapGrid([new Row([cell, otherCell])]);
 
             const distance = cell.getDistance(otherCell);
 
@@ -100,7 +100,7 @@ describe('Cell', () => {
         it('should get the distance as 1.414 for diagonal neighbour', () => {
             const cell = new Cell();
             const otherCell = new Cell();
-            const mapGrid = new MapGrid([new Row([cell, new Cell()]), new Row([new Cell(), otherCell])]);
+            TestFactory.createMapGrid([new Row([cell, new Cell()]), new Row([new Cell(), otherCell])]);
 
             const distance = cell.getDistance(otherCell);
 
@@ -112,7 +112,7 @@ describe('Cell', () => {
         it('should get the angle as zero for above', () => {
             const cell = new Cell();
             const otherCell = new Cell();
-            const mapGrid = new MapGrid([new Row([otherCell]), new Row([cell])]);
+            TestFactory.createMapGrid([new Row([otherCell]), new Row([cell])]);
 
             const angle = cell.getAngleFromUpTo(otherCell);
 
@@ -122,7 +122,7 @@ describe('Cell', () => {
         it('should get the angle as half Pi for right', () => {
             const cell = new Cell();
             const otherCell = new Cell();
-            const mapGrid = new MapGrid([new Row([cell, otherCell])]);
+            TestFactory.createMapGrid([new Row([cell, otherCell])]);
 
             const angle = cell.getAngleFromUpTo(otherCell);
 
@@ -132,7 +132,7 @@ describe('Cell', () => {
         it('should get the angle as Pi for below', () => {
             const cell = new Cell();
             const otherCell = new Cell();
-            const mapGrid = new MapGrid([new Row([cell]), new Row([otherCell])]);
+            TestFactory.createMapGrid([new Row([cell]), new Row([otherCell])]);
 
             const angle = cell.getAngleFromUpTo(otherCell);
 
@@ -142,7 +142,7 @@ describe('Cell', () => {
         it('should get the angle as 1.5 Pi for left', () => {
             const cell = new Cell();
             const otherCell = new Cell();
-            const mapGrid = new MapGrid([new Row([otherCell, cell])]);
+            TestFactory.createMapGrid([new Row([otherCell, cell])]);
 
             const angle = cell.getAngleFromUpTo(otherCell);
 

@@ -61,7 +61,7 @@ describe('Character', () => {
     describe('act', () => {
         it('should do nothing if dead', () => {
             character.health = 0;
-            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character)]), new Row([TestFactory.createCell()])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(character)]), new Row([TestFactory.createCell()])]);
 
             const result = character.act(Direction.Down);
 
@@ -70,7 +70,7 @@ describe('Character', () => {
         });
 
         it('should move the character', () => {
-            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character)]), new Row([TestFactory.createCell()])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(character)]), new Row([TestFactory.createCell()])]);
 
             const result = character.act(Direction.Down);
 
@@ -79,7 +79,7 @@ describe('Character', () => {
         });
 
         it('should not move the character out of bounds', () => {
-            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character)])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(character)])]);
 
             const result = character.act(Direction.Up);
 
@@ -88,7 +88,7 @@ describe('Character', () => {
         });
 
         it('should not move the character into occupied cell', () => {
-            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(new Wall())])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(new Wall())])]);
 
             const result = character.act(Direction.Right);
 
@@ -98,7 +98,7 @@ describe('Character', () => {
 
         it('should open a treasure chest', () => {
             const treasureChest = TestFactory.createTreasureChest();
-            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(treasureChest)])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(treasureChest)])]);
             spyOn(treasureChest, 'open');
 
             const result = character.act(Direction.Right);
@@ -112,7 +112,7 @@ describe('Character', () => {
             spyOn(item, 'collect');
             const newCell = TestFactory.createCell();
             newCell.items.push(item);
-            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), newCell])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(character), newCell])]);
 
             const result = character.act(Direction.Right);
 
@@ -125,7 +125,7 @@ describe('Character', () => {
             const gold = TestFactory.createGold();
             const newCell = TestFactory.createCell();
             newCell.items.push(gold);
-            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), newCell])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(character), newCell])]);
 
             character.act(Direction.Right);
 
@@ -135,7 +135,7 @@ describe('Character', () => {
         it('shouldn\'t raise items collected console message for no items', () => {
             const gold = TestFactory.createGold();
             const newCell = TestFactory.createCell();
-            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), newCell])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(character), newCell])]);
 
             character.act(Direction.Right);
 
@@ -144,7 +144,7 @@ describe('Character', () => {
 
         it('should fight enemy', () => {
             const enemy = TestFactory.createGoblin();
-            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(enemy)])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(enemy)])]);
             spyOn(mockFightService, 'attack');
 
             const result = character.act(Direction.Right);
@@ -155,7 +155,7 @@ describe('Character', () => {
 
         it('should enter hole', () => {
             const hole = TestFactory.createHole();
-            const mapGrid = new MapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(hole)])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([TestFactory.createCell(character), TestFactory.createCell(hole)])]);
             spyOn(hole, 'enter');
 
             const result = character.act(Direction.Right);
@@ -189,31 +189,31 @@ describe('Character', () => {
 
     describe('getActionOptions', () => {
         it('should return None when blocked', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(new Wall())])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([new Cell(character), new Cell(new Wall())])]);
 
             expect(character.getActionOptions()[1]).toBe(ActionOption.None);
         });
 
         it('should return Move when not blocked', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell()])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([new Cell(character), new Cell()])]);
 
             expect(character.getActionOptions()[1]).toBe(ActionOption.Move);
         });
 
         it('should return Fight when blocked by enemy', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(TestFactory.createGoblin())])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([new Cell(character), new Cell(TestFactory.createGoblin())])]);
 
             expect(character.getActionOptions()[1]).toBe(ActionOption.Fight);
         });
 
         it('should return Open when blocked by treasure chest', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(TestFactory.createTreasureChest())])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([new Cell(character), new Cell(TestFactory.createTreasureChest())])]);
 
             expect(character.getActionOptions()[1]).toBe(ActionOption.Open);
         });
 
         it('should return EnterHole when blocked by a hole', () => {
-            const mapGrid = new MapGrid([new Row([new Cell(character), new Cell(TestFactory.createHole())])]);
+            const mapGrid = TestFactory.createMapGrid([new Row([new Cell(character), new Cell(TestFactory.createHole())])]);
 
             expect(character.getActionOptions()[1]).toBe(ActionOption.EnterHole);
         });

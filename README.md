@@ -28,20 +28,21 @@ Push to GitHub, then CircleCI will detect the changes, run the tests and deploy.
 - Ensure config.yml has correct bucket name
 
 ## Todo
-- spawn enemies (every 20 player turns)(gather free spaces into array, then random) (make enemy panel handle more enemies than space)
-- progress spawned enemies types (levels define enemy type pair)(spawn: last level easy > last level hard > current level easy > current level hard > next level easy > next level hard > etc)
-- check format on mobile
+- make enemy panel handle more enemies than space
 - save and load state (in cookies)
-- loop levels or complete game?
 - dialog as lightbox (and improve scaling)
 - prettify ui (redo all images)
 - create more levels
-- show in contact enemies on enemy component (with direction icon)
+- complete game
+- fix format on mobile
+- tune difficulty
+- show in contact enemies on enemy component (with direction icon) (including diagonals)
+- keyboard arrows input?
 - improve performance of action
 - intro (backstory?) and gameplay explanation 
 - about page?
 - enter name at beginning, and store topscore when dead or restart/end? and show
-- keyboard arrows input?
 - change character face based on health and death
-- random enemy modifiers for spawned enemies (veteran/huge/gigantic/leader/angry/two-headed/vicious/bloodthirsty/stony/ancient/fierce/etc/none)?
 - animate ui (animate movement/animate fight/animate enemy sort/animate character stat changes/animate enemy stat changes)(block ui for animations)
+- favicon
+- wrap for android (ionic?)
